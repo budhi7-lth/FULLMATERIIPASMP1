@@ -1,0 +1,1551 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bumi dan Tata Surya - IPA SMP</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            overflow-x: hidden; /* Prevent horizontal scroll due to floating elements */
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header Section */
+        .header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            z-index: 10;
+        }
+
+        .header h1 {
+            font-family: 'Montserrat', sans-serif;
+            color: #fff;
+            font-size: 3.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.4);
+            letter-spacing: 1px;
+        }
+
+        .header p {
+            color: #e0e0e0;
+            font-size: 1.3em;
+            font-weight: 300;
+        }
+
+        /* Navigation Buttons */
+        .nav-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0 40px 0;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 10;
+        }
+
+        .nav-btn {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            color: white;
+            padding: 14px 30px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 17px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            filter: brightness(1.1);
+        }
+
+        .home-btn {
+            background: linear-gradient(45deg, #00b894, #00a085) !important;
+        }
+
+        /* Section Styling */
+        .section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            margin: 25px 0;
+            padding: 35px;
+            box-shadow: 0 12px 35px rgba(0,0,0,0.15);
+            display: none;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            position: relative;
+            z-index: 5;
+        }
+
+        .section.active {
+            display: block;
+            animation: fadeIn 0.6s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section h2 {
+            font-family: 'Montserrat', sans-serif;
+            color: #2c3e50;
+            font-size: 3em;
+            margin-bottom: 25px;
+            text-align: center;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .section h2::after {
+            content: '';
+            display: block;
+            width: 120px;
+            height: 5px;
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            margin: 15px auto 0;
+            border-radius: 3px;
+        }
+
+        .section h3 {
+            font-family: 'Montserrat', sans-serif;
+            color: #34495e;
+            font-size: 2.2em;
+            margin: 35px 0 20px 0;
+            padding-left: 20px;
+            border-left: 6px solid #3498db;
+            line-height: 1.3;
+        }
+
+        .section p {
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            color: #555;
+            text-align: justify;
+        }
+
+        /* Planet Grid */
+        .planet-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .planet-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 20px;
+            padding: 25px;
+            color: white;
+            text-align: center;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .planet-card:hover {
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.35);
+        }
+
+        .planet-card h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+
+        .planet-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: block;
+            border: 4px solid rgba(255,255,255,0.4);
+            animation: rotate 25s linear infinite;
+            background-size: cover;
+            background-position: center;
+            box-shadow: 0 0 15px rgba(255,255,255,0.5);
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Planet specific images (using background-image for better control) */
+        .mercury-img { background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Mercury_in_color_-_Prockter07_centered.jpg/250px-Mercury_in_color_-_Prockter07_centered.jpg'); }
+        .venus-img { background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/85/Venus_globe.jpg/800px-Venus_globe.jpg'); }
+        .earth-img { background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/The_Blue_Marble_%28remastered%29.jpg/250px-The_Blue_Marble_%28remastered%29.jpg'); }
+        .mars-img { background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/OSIRIS_Mars_true_color.jpg/800px-OSIRIS_Mars_true_color.jpg'); }
+        .jupiter-img { background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Jupiter_and_its_shrunken_Great_Red_Spot.jpg/800px-Jupiter_and_its_shrunken_Great_Red_Spot.jpg'); }
+        .saturn-img { background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Saturn_during_Equinox.jpg/800px-Saturn_during_Equinox.jpg'); }
+        .uranus-img { background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/3/3d/Uranus2.jpg/800px-Uranus2.jpg'); }
+        .neptune-img { background-image: url('https://www.centraldatacore.com/wp-content/uploads/PG4-Neptune-500-P-Anim.gif'); }
+        
+        .planet-info {
+            text-align: left;
+            margin-top: 20px;
+            font-size: 1.05em;
+        }
+
+        .planet-info p {
+            margin: 8px 0;
+            color: #f0f0f0;
+            line-height: 1.4;
+        }
+
+        .planet-info strong {
+            color: #ffd700;
+            font-weight: 600;
+        }
+
+        /* Solar System Simulation */
+        .solar-system {
+            width: 100%;
+            height: 650px;
+            position: relative;
+            background: radial-gradient(circle, #000 0%, #000a1a 100%);
+            border-radius: 20px;
+            overflow: hidden;
+            margin: 30px 0;
+            box-shadow: inset 0 0 50px rgba(0,0,0,0.5), 0 10px 30px rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .sun {
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle, #ffeb3b, #ff9800);
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 40px #ffeb3b, 0 0 80px #ff9800;
+            animation: pulse 2s ease-in-out infinite alternate;
+            z-index: 2;
+        }
+
+        @keyframes pulse {
+            from { box-shadow: 0 0 40px #ffeb3b, 0 0 80px #ff9800; }
+            to { box-shadow: 0 0 60px #ffeb3b, 0 0 120px #ff9800, 0 0 150px rgba(255,152,0,0.4); }
+        }
+
+        .orbit {
+            position: absolute;
+            border: 1px dashed rgba(255,255,255,0.15);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+            z-index: 1;
+        }
+
+        .planet-sim {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            position: absolute;
+            top: -7.5px;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 0 10px rgba(255,255,255,0.5);
+            transition: transform 0.05s linear; /* Smooth rotation visually */
+        }
+        
+        /* Specific Planet Colors */
+        .mercury { background: #8c7853; width: 10px; height: 10px; top: -5px; }
+        .venus { background: #ffc649; width: 18px; height: 18px; top: -9px; }
+        .earth { background: #4f94cd; width: 20px; height: 20px; top: -10px; }
+        .mars { background: #cd5c5c; width: 14px; height: 14px; top: -7px; }
+        .jupiter { background: #d2b48c; width: 40px; height: 40px; top: -20px; }
+        .saturn { background: #fad5a5; width: 35px; height: 35px; top: -17.5px; }
+        .uranus { background: #4fd0e3; width: 28px; height: 28px; top: -14px; }
+        .neptune { background: #4169e1; width: 27px; height: 27px; top: -13.5px; }
+
+        /* Orbit Sizes and Speeds */
+        .orbit1 { width: 120px; height: 120px; animation: orbitPath 10s linear infinite; } /* Mercury */
+        .orbit2 { width: 180px; height: 180px; animation: orbitPath 15s linear infinite; } /* Venus */
+        .orbit3 { width: 240px; height: 240px; animation: orbitPath 20s linear infinite; } /* Earth */
+        .orbit4 { width: 300px; height: 300px; animation: orbitPath 25s linear infinite; } /* Mars */
+        .orbit5 { width: 380px; height: 380px; animation: orbitPath 35s linear infinite; } /* Jupiter */
+        .orbit6 { width: 460px; height: 460px; animation: orbitPath 45s linear infinite; } /* Saturn */
+        .orbit7 { width: 540px; height: 540px; animation: orbitPath 60s linear infinite; } /* Uranus */
+        .orbit8 { width: 620px; height: 620px; animation: orbitPath 80s linear infinite; } /* Neptune */
+
+        @keyframes orbitPath {
+            from { transform: translate(-50%, -50%) rotate(0deg); }
+            to { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        /* Earth-Moon System Simulation */
+        .earth-moon-system {
+            width: 100%;
+            height: 450px;
+            background: #000a1a;
+            border-radius: 20px;
+            position: relative;
+            margin: 30px 0;
+            overflow: hidden;
+            box-shadow: inset 0 0 40px rgba(0,0,0,0.4), 0 8px 25px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .earth-planet-sim {
+            width: 100px;
+            height: 100px;
+            background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/The_Blue_Marble_%282002%29.png/800px-The_Blue_Marble_%282002%29.png') no-repeat center center;
+            background-size: cover;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: earthRotateSim 8s linear infinite;
+            box-shadow: 0 0 20px rgba(79, 148, 205, 0.7);
+            z-index: 2;
+        }
+
+        @keyframes earthRotateSim {
+            from { background-position: 0% center; }
+            to { background-position: 100% center; }
+        }
+
+        .moon-orbit-sim {
+            width: 200px;
+            height: 200px;
+            border: 1px dashed rgba(255,255,255,0.2);
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: orbitPath 10s linear infinite;
+            z-index: 1;
+        }
+
+        .moon-sim {
+            width: 30px;
+            height: 30px;
+            background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/FullMoon2010.jpg/800px-FullMoon2010.jpg') no-repeat center center;
+            background-size: cover;
+            border-radius: 50%;
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 0 15px rgba(192,192,192,0.7);
+        }
+
+        /* Eclipse Demonstration */
+        .eclipse-demo {
+            width: 100%;
+            height: 350px;
+            background: radial-gradient(circle, #000 0%, #001a33 100%);
+            border-radius: 20px;
+            position: relative;
+            margin: 30px 0;
+            overflow: hidden;
+            box-shadow: inset 0 0 40px rgba(0,0,0,0.4), 0 8px 25px rgba(0,0,0,0.2);
+        }
+
+        .eclipse-sun-sim {
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle, #ffeb3b, #ff9800);
+            border-radius: 50%;
+            position: absolute;
+            left: 50px;
+            top: 50%;
+            transform: translateY(-50%);
+            box-shadow: 0 0 30px #ffeb3b, 0 0 60px #ff9800;
+            z-index: 1;
+        }
+
+        .eclipse-earth-sim {
+            width: 50px;
+            height: 50px;
+            background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/c/cb/The_Blue_Marble_%282002%29.png/800px-The_Blue_Marble_%282002%29.png') no-repeat center center;
+            background-size: cover;
+            border-radius: 50%;
+            position: absolute;
+            right: 50px;
+            top: 50%;
+            transform: translateY(-50%);
+            box-shadow: 0 0 15px rgba(79, 148, 205, 0.7);
+            z-index: 1;
+        }
+
+        .eclipse-moon-sim {
+            width: 25px;
+            height: 25px;
+            background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/FullMoon2010.jpg/800px-FullMoon2010.jpg') no-repeat center center;
+            background-size: cover;
+            border-radius: 50%;
+            position: absolute;
+            top: calc(50% - 12.5px);
+            left: 50px; /* Start near sun for animation */
+            transform: translateX(-50%);
+            animation: eclipseMove 8s linear infinite;
+            z-index: 2; /* Moon should pass in front */
+            box-shadow: 0 0 10px rgba(192,192,192,0.7);
+        }
+
+        @keyframes eclipseMove {
+            0% { left: 100px; opacity: 1; }
+            40% { left: 45%; opacity: 1; }
+            50% { left: 50%; opacity: 0.8; transform: translate(-50%, -50%) scale(1.2); } /* Peak obscuration */
+            60% { left: 55%; opacity: 1; }
+            100% { left: calc(100% - 100px); opacity: 1; }
+        }
+
+        /* Info Boxes */
+        .info-box {
+            background: linear-gradient(135deg, #74b9ff, #0984e3);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 25px 0;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.25);
+            border: 1px solid rgba(255,255,255,0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .info-box::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: -20px;
+            width: 80px;
+            height: 80px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            transform: rotate(45deg);
+        }
+
+        .info-box h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.6em;
+            margin-bottom: 15px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+            position: relative;
+            z-index: 1;
+        }
+
+        .info-box p {
+            font-size: 1.05em;
+            color: #f0f0f0;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Data Tables */
+        .data-table {
+            width: 100%;
+            border-collapse: separate; /* Use separate to apply border-radius */
+            border-spacing: 0;
+            margin: 30px 0;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .data-table th,
+        .data-table td {
+            padding: 15px 20px;
+            text-align: left;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .data-table thead th {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            font-weight: 600;
+            font-size: 1.1em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .data-table tbody tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        .data-table tbody tr:hover {
+            background-color: #e3f2fd;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Video Container */
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            background: #000;
+            border-radius: 15px;
+            margin: 30px 0;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Quiz Section */
+        .quiz-section {
+            background: linear-gradient(135deg, #a8edea, #fed6e3);
+            padding: 30px;
+            border-radius: 20px;
+            margin: 25px 0;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+            border: 1px solid rgba(255,255,255,0.7);
+        }
+
+        .quiz-section h3 {
+            border-left-color: #f7797d; /* Lighter color for quiz */
+        }
+
+        .quiz-question {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 15px 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            font-size: 1.15em;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .quiz-options {
+            list-style: none;
+            padding: 0;
+            margin-top: 15px;
+        }
+
+        .quiz-option {
+            display: block;
+            margin: 10px 0;
+            padding: 12px 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s ease;
+            font-size: 1em;
+            color: #444;
+            border: 1px solid #dee2e6;
+        }
+
+        .quiz-option:hover {
+            background: #e9ecef;
+            transform: translateX(5px);
+        }
+
+        .quiz-option.correct {
+            background: #d4edda;
+            border: 2px solid #28a745;
+            color: #155724;
+            font-weight: bold;
+        }
+
+        .quiz-option.wrong {
+            background: #f8d7da;
+            border: 2px solid #dc3545;
+            color: #721c24;
+            font-weight: bold;
+        }
+
+        .quiz-result {
+            margin-top: 25px;
+            padding: 20px;
+            border-radius: 10px;
+            font-size: 1.2em;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .quiz-result.correct-answer {
+            background-color: #d4edda;
+            color: #155724;
+            border: 2px solid #28a745;
+        }
+
+        .quiz-result.wrong-answer {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 2px solid #dc3545;
+        }
+
+        .quiz-submit-btn {
+            background: linear-gradient(45deg, #28a745, #218838);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            display: block;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .quiz-submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+.quiz-option.selected {
+    background: #cce5ff; /* Warna biru muda untuk pilihan yang aktif */
+    border: 2px solid #007bff; /* Border biru untuk menyorot */
+    color: #004085;
+    transform: translateX(5px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+        /* Floating Background Elements (Stars) */
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0; /* Behind content */
+            overflow: hidden;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            opacity: 0;
+            animation: twinkle 3s ease-in-out infinite alternate, moveStar 20s linear infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.5); }
+        }
+
+        @keyframes moveStar {
+            from { transform: translateY(0) translateX(0); }
+            to { transform: translateY(100vh) translateX(100vw); } /* Move across screen */
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 4px;
+            margin: 20px 0;
+            overflow: hidden;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+            width: 0%;
+            transition: width 0.5s ease-out;
+            border-radius: 4px;
+        }
+
+        /* Achievement Badges */
+        .achievement-badge {
+            display: inline-block;
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            color: #333;
+            padding: 6px 18px;
+            border-radius: 25px;
+            font-size: 13px;
+            font-weight: 700;
+            margin: 8px;
+            box-shadow: 0 3px 12px rgba(255,215,0,0.3);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .header h1 {
+                font-size: 2.8em;
+            }
+            .section h2 {
+                font-size: 2.5em;
+            }
+            .section h3 {
+                font-size: 1.8em;
+            }
+            .planet-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+            .solar-system, .earth-moon-system, .eclipse-demo {
+                height: 500px;
+            }
+            .sun {
+                width: 70px;
+                height: 70px;
+            }
+            .planet-sim {
+                width: 10px;
+                height: 10px;
+            }
+            .orbit {
+                border-width: 0.8px;
+            }
+            .earth-planet-sim {
+                width: 80px;
+                height: 80px;
+            }
+            .moon-sim {
+                width: 25px;
+                height: 25px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            .header h1 {
+                font-size: 2.2em;
+            }
+            .header p {
+                font-size: 1em;
+            }
+            .nav-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+            }
+            .nav-btn {
+                padding: 10px 20px;
+                font-size: 15px;
+            }
+            .section {
+                padding: 25px;
+                border-radius: 15px;
+            }
+            .section h2 {
+                font-size: 2em;
+                margin-bottom: 15px;
+            }
+            .section h3 {
+                font-size: 1.5em;
+                margin: 25px 0 10px 0;
+                padding-left: 10px;
+                border-left-width: 3px;
+            }
+            .section p {
+                font-size: 0.95em;
+            }
+            .planet-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+            .planet-card {
+                padding: 20px;
+            }
+            .planet-image {
+                width: 100px;
+                height: 100px;
+            }
+            .planet-card h4 {
+                font-size: 1.5em;
+            }
+            .planet-info p {
+                font-size: 0.9em;
+            }
+            .solar-system, .earth-moon-system, .eclipse-demo {
+                height: 350px;
+            }
+            .sun {
+                width: 50px;
+                height: 50px;
+            }
+            .planet-sim {
+                width: 8px;
+                height: 8px;
+            }
+            .earth-planet-sim {
+                width: 60px;
+                height: 60px;
+            }
+            .moon-sim {
+                width: 20px;
+                height: 20px;
+            }
+            .data-table {
+                font-size: 0.85em;
+            }
+            .data-table th,
+            .data-table td {
+                padding: 10px 12px;
+            }
+            .quiz-question {
+                font-size: 1em;
+                padding: 15px;
+            }
+            .quiz-option {
+                padding: 10px;
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-elements" id="stars"></div>
+    
+    <div class="container">
+        <div class="header">
+            <h1>🌍 Bumi dan Tata Surya 🌌</h1>
+            <p>Jelajahi keajaiban alam semesta bersama kita!</p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar"></div>
+            </div>
+        </div>
+
+        <div class="nav-buttons">
+            <a href="index.html" class="nav-btn home-btn">🏠 Beranda</a>
+            <button class="nav-btn" onclick="showSection('sistem-tata-surya')">🪐 Sistem Tata Surya</button>
+            <button class="nav-btn" onclick="showSection('bumi-satelit')">🌍 Bumi dan Satelit</button>
+            <button class="nav-btn" onclick="showSection('matahari')">☀️ Mengenal Matahari</button>
+            <button class="nav-btn" onclick="showSection('quiz')">🧠 Kuis Interaktif</button>
+            <button class="nav-btn" onclick="showSection('galeri-video')">🎬 Galeri Video</button>
+        </div>
+
+        <div id="sistem-tata-surya" class="section active">
+            <h2>🪐 Sistem Tata Surya</h2>
+            
+            <div class="info-box">
+                <h4>Apa itu Tata Surya?</h4>
+                <p>Tata Surya adalah sistem gravitasi yang terdiri dari Matahari sebagai pusatnya, dan semua objek astronomi yang mengorbit di sekelilingnya. Ini termasuk delapan planet beserta satelit-satelit alami mereka, planet kerdil, asteroid, komet, serta miliaran partikel debu dan gas antarplanet. Semua objek ini terikat oleh gaya gravitasi Matahari yang sangat besar.</p>
+                <p>Sistem tata surya kita terbentuk sekitar 4,6 miliar tahun yang lalu dari awan molekul raksasa yang runtuh akibat gravitasinya sendiri. Bagian tengah awan tersebut membentuk Matahari, sedangkan materi di sekitarnya membentuk piringan protoplanet yang kemudian berkoagulasi menjadi planet-planet dan objek lainnya.</p>
+            </div>
+
+            <h3>Simulasi Pergerakan Planet di Tata Surya</h3>
+            <p>Saksikan bagaimana planet-planet mengelilingi Matahari dalam simulasi interaktif di bawah ini. Setiap planet memiliki jalur orbit dan kecepatan revolusi yang berbeda, menciptakan tarian kosmik yang harmonis.</p>
+            <div class="solar-system">
+                <div class="sun"></div>
+                <div class="orbit orbit1"><div class="planet-sim mercury"></div></div>
+                <div class="orbit orbit2"><div class="planet-sim venus"></div></div>
+                <div class="orbit orbit3"><div class="planet-sim earth"></div></div>
+                <div class="orbit orbit4"><div class="planet-sim mars"></div></div>
+                <div class="orbit orbit5"><div class="planet-sim jupiter"></div></div>
+                <div class="orbit orbit6"><div class="planet-sim saturn"></div></div>
+                <div class="orbit orbit7"><div class="planet-sim uranus"></div></div>
+                <div class="orbit orbit8"><div class="planet-sim neptune"></div></div>
+            </div>
+            <p style="text-align: center; font-style: italic; color: #666;">* Ukuran dan jarak planet dalam simulasi ini tidak proporsional, disederhanakan untuk ilustrasi pergerakan.</p>
+
+<h3>Delapan Planet dalam Tata Surya</h3>
+<p>Mari kita kenali lebih dekat delapan planet utama yang mengelilingi Matahari, beserta karakteristik uniknya masing-masing.</p>
+<div class="planet-grid">
+    <div class="planet-card">
+        <div class="planet-image mercury-img"></div> 
+        <h4>Merkurius</h4>
+        <div class="planet-info">
+            <p><strong>Massa:</strong> 3,3011 × 10²³ kg</p>
+            <p><strong>Diameter:</strong> 4.879 km</p>
+            <p><strong>Satelit:</strong> 0</p>
+            <p><strong>Atmosfer:</strong> Sangat tipis, terdiri dari atom-atom yang "tersemprot" dari permukaan akibat angin Matahari dan tumbukan mikrometeoroid (terutama oksigen, sodium, hidrogen, helium, dan kalium).</p>
+            <p><strong>Gravitasi:</strong> 3,7 m/s² (0,38 G Bumi)</p>
+            <p><strong>Suhu Permukaan:</strong> -173°C (malam) hingga 427°C (siang), variasi suhu ekstrem karena tidak ada atmosfer.</p>
+            <p><strong>Periode Rotasi:</strong> 58,6 hari Bumi</p>
+            <p><strong>Jarak dari Matahari:</strong> 57,9 juta km</p>
+            <p><strong>Periode Revolusi:</strong> 88 hari Bumi (tercepat)</p>
+        </div>
+    </div>
+
+    <div class="planet-card">
+        <div class="planet-image venus-img"></div>
+        <h4>Venus</h4>
+        <div class="planet-info">
+            <p><strong>Massa:</strong> 4,8675 × 10²⁴ kg</p>
+            <p><strong>Diameter:</strong> 12.104 km</p>
+            <p><strong>Satelit:</strong> 0</p>
+            <p><strong>Atmosfer:</strong> Sangat padat, didominasi oleh 96% Karbon Dioksida (CO₂) dan 3,5% Nitrogen (N₂), menciptakan efek rumah kaca ekstrem.</p>
+            <p><strong>Gravitasi:</strong> 8,87 m/s² (0,90 G Bumi)</p>
+            <p><strong>Suhu Permukaan:</strong> 462°C (panas ekstrem, lebih panas dari Merkurius karena efek rumah kaca).</p>
+            <p><strong>Periode Rotasi:</strong> 243 hari Bumi (berlawanan arah jarum jam, lebih lama dari periode revolusinya).</p>
+            <p><strong>Jarak dari Matahari:</strong> 108,2 juta km</p>
+            <p><strong>Periode Revolusi:</strong> 225 hari Bumi</p>
+        </div>
+    </div>
+
+    <div class="planet-card">
+        <div class="planet-image .earth-img" ></div>
+        <h4>Bumi</h4>
+        <div class="planet-info">
+            <p><strong>Massa:</strong> 5,9724 × 10²⁴ kg</p>
+            <p><strong>Diameter:</strong> 12.756 km</p>
+            <p><strong>Satelit:</strong> 1 (Bulan)</p>
+            <p><strong>Atmosfer:</strong> 78% Nitrogen (N₂), 21% Oksigen (O₂), 1% gas lain (Argon, CO₂, uap air). Mendukung kehidupan.</p>
+            <p><strong>Gravitasi:</strong> 9,8 m/s² (1 G)</p>
+            <p><strong>Suhu Permukaan:</strong> Rata-rata 15°C (-89°C hingga 58°C), memungkinkan keberadaan air cair.</p>
+            <p><strong>Periode Rotasi:</strong> 23 jam 56 menit (24 jam rata-rata)</p>
+            <p><strong>Jarak dari Matahari:</strong> 149,6 juta km</p>
+            <p><strong>Periode Revolusi:</strong> 365,25 hari (1 tahun)</p>
+        </div>
+    </div>
+
+    <div class="planet-card">
+        <div class="planet-image mars-img"></div>
+        <h4>Mars</h4>
+        <div class="planet-info">
+            <p><strong>Massa:</strong> 6,4171 × 10²³ kg</p>
+            <p><strong>Diameter:</strong> 6.792 km</p>
+            <p><strong>Satelit:</strong> 2 (Phobos dan Deimos)</p>
+            <p><strong>Atmosfer:</strong> Tipis, didominasi oleh 95% Karbon Dioksida (CO₂), 3% Nitrogen (N₂), dan 1,6% Argon (Ar).</p>
+            <p><strong>Gravitasi:</strong> 3,71 m/s² (0,38 G Bumi)</p>
+            <p><strong>Suhu Permukaan:</strong> -87°C (musim dingin) hingga -5°C (musim panas), sering di bawah titik beku air.</p>
+            <p><strong>Periode Rotasi:</strong> 24,6 jam (mirip Bumi)</p>
+            <p><strong>Jarak dari Matahari:</strong> 227,9 juta km</p>
+            <p><strong>Periode Revolusi:</strong> 687 hari Bumi (1,88 tahun Bumi)</p>
+        </div>
+    </div>
+    
+    <div class="planet-card">
+        <div class="planet-image jupiter-img"></div>
+        <h4>Jupiter</h4>
+        <div class="planet-info">
+            <p><strong>Massa:</strong> 1,8982 × 10²⁷ kg (318 kali Bumi)</p>
+            <p><strong>Diameter:</strong> 142.984 km (11 kali Bumi)</p>
+            <p><strong>Satelit:</strong> 79 (4 besar: Io, Europa, Ganymede, Callisto)</p>
+            <p><strong>Atmosfer:</strong> Terutama 89% Hidrogen (H₂) dan 10% Helium (He), dengan sejumlah kecil Metana, Amonia, dan uap air.</p>
+            <p><strong>Gravitasi:</strong> 24,79 m/s² (2,53 G Bumi)</p>
+            <p><strong>Suhu Permukaan:</strong> -108°C (di puncak awan), tidak memiliki permukaan padat.</p>
+            <p><strong>Periode Rotasi:</strong> 9,9 jam (tercepat di Tata Surya)</p>
+            <p><strong>Jarak dari Matahari:</strong> 778,5 juta km</p>
+            <p><strong>Periode Revolusi:</strong> 11,9 tahun Bumi</p>
+        </div>
+    </div>
+
+    <div class="planet-card">
+        <div class="planet-image saturn-img"></div>
+        <h4>Saturnus</h4>
+        <div class="planet-info">
+            <p><strong>Massa:</strong> 5,6834 × 10²⁶ kg (95 kali Bumi)</p>
+            <p><strong>Diameter:</strong> 120.536 km (9,5 kali Bumi)</p>
+            <p><strong>Satelit:</strong> 82 (Titan, Enceladus, Mimas, dll.)</p>
+            <p><strong>Atmosfer:</strong> Terutama 96% Hidrogen (H₂) dan 3% Helium (He), dengan jejak Metana, Amonia.</p>
+            <p><strong>Gravitasi:</strong> 10,44 m/s² (1,06 G Bumi)</p>
+            <p><strong>Suhu Permukaan:</strong> -139°C (di puncak awan), tidak memiliki permukaan padat.</p>
+            <p><strong>Periode Rotasi:</strong> 10,7 jam</p>
+            <p><strong>Jarak dari Matahari:</strong> 1,43 miliar km</p>
+            <p><strong>Periode Revolusi:</strong> 29,4 tahun Bumi</p>
+        </div>
+    </div>
+
+    <div class="planet-card">
+        <div class="planet-image uranus-img"></div>
+        <h4>Uranus</h4>
+        <div class="planet-info">
+            <p><strong>Massa:</strong> 8,6810 × 10²⁵ kg (14,5 kali Bumi)</p>
+            <p><strong>Diameter:</strong> 51.118 km (4 kali Bumi)</p>
+            <p><strong>Satelit:</strong> 27 (Miranda, Ariel, Umbriel, Titania, Oberon, dll.)</p>
+            <p><strong>Atmosfer:</strong> 83% Hidrogen (H₂), 15% Helium (He), dan sekitar 2% Metana (CH₄) yang memberinya warna biru kehijauan.</p>
+            <p><strong>Gravitasi:</strong> 8,69 m/s² (0,89 G Bumi)</p>
+            <p><strong>Suhu Permukaan:</strong> -197°C (di puncak awan), planet terdingin di Tata Surya.</p>
+            <p><strong>Periode Rotasi:</strong> 17,2 jam (berputar miring, hampir 90 derajat terhadap bidang orbitnya).</p>
+            <p><strong>Jarak dari Matahari:</strong> 2,87 miliar km</p>
+            <p><strong>Periode Revolusi:</strong> 84 tahun Bumi</p>
+        </div>
+    </div>
+
+    <div class="planet-card">
+        <div class="planet-image neptune-img"></div> 
+        <h4>Neptunus</h4>
+        <div class="planet-info">
+            <p><strong>Massa:</strong> 1,0243 × 10²⁶ kg (17 kali Bumi)</p>
+            <p><strong>Diameter:</strong> 49.528 km (3,9 kali Bumi)</p>
+            <p><strong>Satelit:</strong> 14 (Triton, Nereid, Proteus, dll.)</p>
+            <p><strong>Atmosfer:</strong> 80% Hidrogen (H₂), 19% Helium (He), dan 1% Metana (CH₄), yang memberinya warna biru tua.</p>
+            <p><strong>Gravitasi:</strong> 11,15 m/s² (1,14 G Bumi)</p>
+            <p><strong>Suhu Permukaan:</strong> -201°C (di puncak awan).</p>
+            <p><strong>Periode Rotasi:</strong> 16,1 jam</p>
+            <p><strong>Jarak dari Matahari:</strong> 4,5 miliar km</p>
+            <p><strong>Periode Revolusi:</strong> 165 tahun Bumi</p>
+        </div>
+    </div>
+</div>
+
+            <div class="info-box">
+                <h4>Fakta Menarik Tata Surya</h4>
+                <p>• Matahari mengandung 99,86% dari massa seluruh Tata Surya, dominasinya tak tertandingi.</p>
+                <p>• Satu hari di Venus (243 hari Bumi) lebih panjang dari satu tahunnya (225 hari Bumi). Ini karena rotasinya yang sangat lambat dan retrograde.</p>
+                <p>• Jupiter memiliki "Bintik Merah Besar" (Great Red Spot), sebuah badai raksasa yang sudah berlangsung selama ratusan tahun dan cukup besar untuk menelan tiga Bumi.</p>
+                <p>• Saturnus memiliki kerapatan yang lebih rendah dari air, artinya jika ada kolam yang cukup besar, Saturnus akan mengapung!</p>
+                <p>• Uranus berputar miring hampir 90 derajat, kemungkinan akibat tabrakan besar di masa lalu.</p>
+                <p>• Sabuk Asteroid, yang terletak di antara Mars dan Jupiter, berisi jutaan asteroid, namun total massanya kurang dari massa Bulan kita.</p>
+                <p>• Di luar orbit Neptunus terdapat Sabuk Kuiper dan Awan Oort, rumah bagi milyaran objek es dan komet.</p>
+            </div>
+
+            <h3>Tabel Perbandingan Planet</h3>
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Planet</th>
+                        <th>Jarak dari Matahari (juta km)</th>
+                        <th>Periode Revolusi</th>
+                        <th>Periode Rotasi</th>
+                        <th>Jumlah Satelit</th>
+                        <th>Diameter (km)</th>
+                        <th>Suhu Rata-rata (°C)</th>
+                        <th>Gravitasi (m/s²)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Merkurius</td><td>57,9</td><td>88 hari</td><td>58,6 hari</td><td>0</td><td>4.879</td><td>167</td><td>3,7</td></tr>
+                    <tr><td>Venus</td><td>108,2</td><td>225 hari</td><td>243 hari</td><td>0</td><td>12.104</td><td>462</td><td>8,87</td></tr>
+                    <tr><td>Bumi</td><td>149,6</td><td>365,25 hari</td><td>24 jam</td><td>1</td><td>12.756</td><td>15</td><td>9,8</td></tr>
+                    <tr><td>Mars</td><td>227,9</td><td>687 hari</td><td>24,6 jam</td><td>2</td><td>6.792</td><td>-63</td><td>3,71</td></tr>
+                    <tr><td>Jupiter</td><td>778,5</td><td>11,9 tahun</td><td>9,9 jam</td><td>79</td><td>142.984</td><td>-145</td><td>24,79</td></tr>
+                    <tr><td>Saturnus</td><td>1.434</td><td>29,4 tahun</td><td>10,7 jam</td><td>82</td><td>120.536</td><td>-178</td><td>10,44</td></tr>
+                    <tr><td>Uranus</td><td>2.867</td><td>84 tahun</td><td>17,2 jam</td><td>27</td><td>51.118</td><td>-216</td><td>8,69</td></tr>
+                    <tr><td>Neptunus</td><td>4.515</td><td>165 tahun</td><td>16,1 jam</td><td>14</td><td>49.528</td><td>-201</td><td>11,15</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div id="bumi-satelit" class="section">
+            <h2>🌍 Bumi dan Satelitnya</h2>
+            
+            <h3>Pergerakan Bumi dalam Sistem Tata Surya</h3>
+            <div class="info-box">
+                <h4>Rotasi Bumi</h4>
+                <p>Rotasi adalah perputaran Bumi pada porosnya. Bumi berputar dari barat ke timur (berlawanan arah jarum jam jika dilihat dari Kutub Utara) dengan kecepatan sekitar 1.670 km/jam di khatulistiwa. Satu kali rotasi membutuhkan waktu 23 jam 56 menit 4 detik, yang kita bulatkan menjadi 24 jam untuk perhitungan satu hari.</p>
+                <p>Kemiringan poros rotasi Bumi sebesar 23,5 derajat juga sangat penting, menyebabkan adanya musim.</p>
+            </div>
+
+            <div class="info-box">
+                <h4>Revolusi Bumi</h4>
+                <p>Revolusi adalah pergerakan Bumi mengelilingi Matahari dalam jalur orbit elips. Bumi menempuh jarak sekitar 940 juta km dalam satu kali revolusi dengan kecepatan rata-rata 107.000 km/jam. Satu kali revolusi membutuhkan waktu 365 hari 5 jam 48 menit 46 detik, yang kita sebut sebagai satu tahun.</p>
+                <p>Kecepatan revolusi Bumi bervariasi sepanjang tahun; Bumi bergerak lebih cepat saat dekat dengan Matahari (perihelion) dan lebih lambat saat jauh (aphelion).</p>
+            </div>
+
+            <h3>Simulasi Rotasi dan Revolusi Bumi & Bulan</h3>
+            <p>Simulasi ini menunjukkan bagaimana Bumi berputar pada porosnya sambil mengelilingi Matahari, dan bagaimana Bulan juga mengelilingi Bumi. Ini adalah interaksi gravitasi yang kompleks!</p>
+            <div class="earth-moon-system">
+                <div class="earth-planet-sim"></div>
+                <div class="moon-orbit-sim">
+                    <div class="moon-sim"></div>
+                </div>
+            </div>
+            <p style="text-align: center; font-style: italic; color: #666;">* Simulasi ini disederhanakan untuk menunjukkan konsep pergerakan.</p>
+
+            <h3>Dampak Rotasi dan Revolusi Bumi</h3>
+            <div class="planet-grid">
+                <div class="planet-card">
+                    <h4>Akibat Rotasi Bumi</h4>
+                    <div class="planet-info">
+                        <p>• <strong>Pergantian siang dan malam:</strong> Bagian Bumi yang menghadap Matahari mengalami siang, yang membelakangi mengalami malam.</p>
+                        <p>• <strong>Perbedaan waktu di berbagai belahan dunia:</strong> Karena Bumi berputar, Matahari terbit dan terbenam pada waktu yang berbeda di lokasi yang berbeda.</p>
+                        <p>• <strong>Gerak semu harian Matahari:</strong> Matahari seolah-olah bergerak dari timur ke barat setiap hari, padahal Bumi yang berputar.</p>
+                        <p>• <strong>Pembelokan arah angin dan arus laut (Efek Coriolis):</strong> Gaya semu akibat rotasi Bumi membelokkan arah benda bergerak di permukaannya.</p>
+                        <p>• <strong>Pepatan di kutub dan penggembungan di khatulistiwa:</strong> Rotasi menyebabkan Bumi tidak bulat sempurna.</p>
+                    </div>
+                </div>
+                
+                <div class="planet-card">
+                    <h4>Akibat Revolusi Bumi</h4>
+                    <div class="planet-info">
+                        <p>• <strong>Pergantian musim:</strong> Akibat kemiringan sumbu Bumi dan revolusinya mengelilingi Matahari, terjadi perbedaan intensitas cahaya Matahari yang diterima di berbagai belahan Bumi sepanjang tahun.</p>
+                        <p>• <strong>Perbedaan lamanya siang dan malam:</strong> Tergantung pada posisi Bumi di orbitnya, panjang siang dan malam akan bervariasi di lokasi tertentu.</p>
+                        <p>• <strong>Gerak semu tahunan Matahari:</strong> Matahari terlihat berpindah posisi di langit sepanjang tahun melewati berbagai rasi bintang.</p>
+                        <p>• <strong>Perubahan rasi bintang yang terlihat:</strong> Rasi bintang yang terlihat di malam hari akan berubah seiring berjalannya musim.</p>
+                        <p>• <strong>Terjadinya tahun kabisat:</strong> Setiap empat tahun sekali, ditambahkan satu hari (29 Februari) untuk mengkompensasi sisa 0,25 hari dari revolusi Bumi.</p>
+                    </div>
+                </div>
+            </div>
+
+            <h3>Bulan sebagai Satelit Bumi</h3>
+            <div class="info-box">
+                <h4>Karakteristik Bulan</h4>
+                <p>Bulan adalah satu-satunya satelit alami Bumi dan objek langit paling terang kedua setelah Matahari. Bulan tidak memiliki atmosfer, sehingga permukaannya dipenuhi kawah akibat tumbukan meteorit. Selain itu, tidak ada air cair di permukaannya, meskipun ada bukti es di kutub.</p>
+                <p><strong>Diameter:</strong> 3.474 km (sekitar 1/4 diameter Bumi)<br>
+                <strong>Massa:</strong> 7,35 × 10²² kg (sekitar 1/81 massa Bumi)<br>
+                <strong>Jarak Rata-rata dari Bumi:</strong> 384.400 km<br>
+                <strong>Periode Rotasi:</strong> 27,3 hari (sinkron dengan revolusi, sehingga sisi yang sama selalu menghadap Bumi)<br>
+                <strong>Periode Revolusi:</strong> 27,3 hari (waktu yang dibutuhkan untuk mengelilingi Bumi)<br>
+                <strong>Gravitasi Permukaan:</strong> 1,62 m/s² (sekitar 1/6 gravitasi Bumi)</p>
+            </div>
+
+            <div class="planet-grid">
+                <div class="planet-card">
+                    <h4>Fase-fase Bulan</h4>
+                    <div class="planet-info">
+                        <p>• <strong>Bulan Baru (New Moon):</strong> Bulan berada di antara Matahari dan Bumi, sisi yang menghadap Bumi tidak mendapat cahaya sehingga tidak terlihat.</p>
+                        <p>• <strong>Bulan Sabit Awal (Waxing Crescent):</strong> Bagian kecil Bulan mulai terlihat sebagai sabit tipis setelah Bulan Baru.</p>
+                        <p>• <strong>Bulan Separuh Pertama (First Quarter):</strong> Setengah sisi Bulan yang terang terlihat, membentuk setengah lingkaran (kuartal pertama).</p>
+                        <p>• <strong>Bulan Cembung Awal (Waxing Gibbous):</strong> Lebih dari setengah Bulan terlihat terang, menuju purnama.</p>
+                        <p>• <strong>Bulan Purnama (Full Moon):</strong> Seluruh sisi Bulan yang menghadap Bumi diterangi oleh Matahari, terlihat bulat penuh dan paling terang.</p>
+                        <p>• <strong>Bulan Cembung Akhir (Waning Gibbous):</strong> Bulan mulai berkurang terang, lebih dari setengah masih terlihat.</p>
+                        <p>• <strong>Bulan Separuh Akhir (Last Quarter):</strong> Setengah sisi Bulan yang terang terlihat kembali, membentuk setengah lingkaran (kuartal terakhir).</p>
+                        <p>• <strong>Bulan Sabit Akhir (Waning Crescent):</strong> Bagian kecil Bulan terlihat sebagai sabit tipis sebelum kembali ke Bulan Baru.</p>
+                    </div>
+                </div>
+                
+                <div class="planet-card">
+                    <h4>Pengaruh Bulan terhadap Bumi</h4>
+                    <div class="planet-info">
+                        <p>• <strong>Pasang Surut Air Laut:</strong> Gaya gravitasi Bulan menarik massa air di Bumi, menciptakan pasang (air naik) dan surut (air turun). Ada pasang purnama (saat Bulan Baru dan Purnama) dan pasang perbani (saat Bulan Separuh).</p>
+                        <p>• <strong>Stabilitas Rotasi Bumi:</strong> Keberadaan Bulan membantu menstabilkan kemiringan poros Bumi, mencegah goyangan ekstrem yang bisa memengaruhi iklim dan musim.</p>
+                        <p>• <strong>Penerangan Malam:</strong> Bulan memantulkan cahaya Matahari ke Bumi, memberikan penerangan alami di malam hari.</p>
+                        <p>• <strong>Siklus Biologis:</strong> Beberapa makhluk hidup, terutama di laut, memiliki siklus reproduksi yang terkait dengan fase-fase Bulan.</p>
+                        <p>• <strong>Pelambatan Rotasi Bumi:</strong> Efek pasang surut juga secara perlahan memperlambat rotasi Bumi dari waktu ke waktu.</p>
+                    </div>
+                </div>
+            </div>
+
+            <h3>Satelit Buatan Bumi</h3>
+            <div class="info-box">
+                <h4>Fungsi Satelit Buatan</h4>
+                <p>Selain Bulan sebagai satelit alami, Bumi juga memiliki ribuan satelit buatan yang telah diluncurkan oleh manusia sejak Sputnik 1 pada tahun 1957. Satelit-satelit ini mengelilingi Bumi dalam berbagai orbit dan melayani beragam tujuan penting yang menunjang kehidupan modern.</p>
+                <p>Mereka adalah mata dan telinga kita di angkasa, memungkinkan komunikasi global, navigasi presisi, pemantauan lingkungan, dan eksplorasi alam semesta.</p>
+            </div>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Jenis Satelit</th>
+                        <th>Fungsi Utama</th>
+                        <th>Contoh Satelit</th>
+                        <th>Ketinggian Orbit Umum</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Satelit Komunikasi</td><td>Telekomunikasi global, penyiaran televisi, internet, telepon</td><td>Telkom, Indosat, Starlink, Intelsat</td><td>Geostasioner (35.786 km), LEO (~500-2000 km)</td></tr>
+                    <tr><td>Satelit Navigasi</td><td>Penentuan posisi dan waktu yang akurat (GPS)</td><td>GPS (AS), GLONASS (Rusia), Galileo (Eropa), BeiDou (Tiongkok)</td><td>Medium Earth Orbit (MEO) (~20.200 km)</td></tr>
+                    <tr><td>Satelit Cuaca</td><td>Pengamatan pola cuaca, prediksi badai, iklim global</td><td>GOES (AS), Himawari (Jepang), Meteosat (Eropa)</td><td>Geostasioner (35.786 km), Polar (800-1000 km)</td></tr>
+                    <tr><td>Satelit Pengamat Bumi (Remote Sensing)</td><td>Pemetaan, monitoring lingkungan (deforestasi, perubahan iklim), sumber daya alam, bencana</td><td>Landsat (AS), Sentinel (Eropa), SPOT (Prancis)</td><td>Low Earth Orbit (LEO) (~500-1200 km)</td></tr>
+                    <tr><td>Satelit Penelitian & Ilmu Pengetahuan</td><td>Eksplorasi ruang angkasa, pengamatan alam semesta, penelitian atmosfer dan Bumi</td><td>Hubble Space Telescope, James Webb Space Telescope, ISS (International Space Station)</td><td>Beragam (LEO, MEO, GEO, hingga orbit jauh)</td></tr>
+                    <tr><td>Satelit Militer/Mata-mata</td><td>Pengawasan, intelijen, komunikasi militer</td><td>Berbagai satelit rahasia dari negara-negara maju</td><td>Beragam (LEO, GEO)</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div id="matahari" class="section">
+            <h2>☀️ Mengenal Matahari Lebih Dekat</h2>
+            
+            <h3>Karakteristik Matahari</h3>
+            <div class="info-box">
+                <h4>Matahari: Bintang Pusat Tata Surya</h4>
+                <p>Matahari adalah bintang yang menjadi pusat Tata Surya kita dan sumber utama energi bagi kehidupan di Bumi. Matahari adalah bola plasma panas raksasa yang terus-menerus melakukan reaksi fusi nuklir, mengubah hidrogen menjadi helium dan melepaskan energi dalam jumlah besar.</p>
+                <p>Meskipun tampak besar dari Bumi, Matahari adalah bintang berukuran rata-rata jika dibandingkan dengan bintang lain di alam semesta. Namun, ia adalah objek terbesar dan terberat di Tata Surya kita.</p>
+                <p><strong>Diameter:</strong> 1.392.700 km (sekitar 109 kali diameter Bumi)<br>
+                <strong>Massa:</strong> 1,989 × 10³⁰ kg (sekitar 333.000 kali massa Bumi)<br>
+                <strong>Suhu Permukaan (Fotosfer):</strong> 5.778 K (sekitar 5.505°C)<br>
+                <strong>Suhu Inti:</strong> Sekitar 15.700.000 K (15,7 juta °C)<br>
+                <strong>Komposisi Kimia:</strong> Sekitar 73% Hidrogen, 25% Helium, dan 2% unsur lain (Oksigen, Karbon, Neon, Besi, dll.)<br>
+                <strong>Umur Diperkirakan:</strong> 4,6 miliar tahun (saat ini di paruh kedua siklus hidupnya)</p>
+            </div>
+
+            <div class="planet-grid">
+                <div class="planet-card">
+                    <h4>Struktur Lapisan Matahari</h4>
+                    <div class="planet-info">
+                        <p>• <strong>Inti (Core):</strong> Bagian terdalam dan terpanas Matahari, tempat reaksi fusi nuklir terjadi, menghasilkan semua energi Matahari.</p>
+                        <p>• <strong>Zona Radiasi (Radiative Zone):</strong> Energi dari inti merambat keluar melalui proses radiasi foton, membutuhkan ratusan ribu tahun untuk melewati lapisan ini.</p>
+                        <p>• <strong>Zona Konveksi (Convective Zone):</strong> Energi dibawa ke permukaan melalui gerakan konveksi (arus panas) gas plasma yang bergejolak.</p>
+                        <p>• <strong>Fotosfer (Photosphere):</strong> Lapisan permukaan Matahari yang kita lihat. Di sinilah bintik Matahari (sunspots) terlihat.</p>
+                        <p>• <strong>Kromosfer (Chromosphere):</strong> Lapisan atmosfer tipis di atas fotosfer, hanya terlihat saat gerhana Matahari total sebagai cincin merah.</p>
+                        <p>• <strong>Korona (Corona):</strong> Lapisan terluar atmosfer Matahari, sangat panas tetapi sangat tipis, membentang jutaan kilometer ke luar angkasa dan terlihat sebagai "mahkota" saat gerhana Matahari total.</p>
+                    </div>
+                </div>
+                
+                <div class="planet-card">
+                    <h4>Aktivitas Matahari</h4>
+                    <div class="planet-info">
+                        <p>• <strong>Bintik Matahari (Sunspots):</strong> Area gelap di fotosfer yang lebih dingin akibat medan magnet yang kuat, sering muncul berpasangan.</p>
+                        <p>• <strong>Flare Matahari (Solar Flares):</strong> Ledakan energi yang sangat kuat di fotosfer dan kromosfer, melepaskan radiasi intens dan partikel berenergi tinggi.</p>
+                        <p>• <strong>Lontaran Massa Korona (Coronal Mass Ejections/CMEs):</strong> Gumpalan besar plasma dan medan magnet yang terlontar dari korona Matahari ke luar angkasa.</p>
+                        <p>• <strong>Angin Matahari (Solar Wind):</strong> Aliran partikel bermuatan (elektron dan proton) yang terus-menerus dilepaskan dari korona Matahari ke seluruh Tata Surya.</p>
+                        <p>• <strong>Siklus Aktivitas Matahari (Solar Cycle):</strong> Aktivitas Matahari, termasuk jumlah bintik Matahari dan flare, bervariasi dalam siklus sekitar 11 tahun.</p>
+                        <p>• <strong>Prominensa (Prominences):</strong> Busur besar materi panas yang melengkung keluar dari permukaan Matahari, ditahan oleh medan magnet.</p>
+                    </div>
+                </div>
+            </div>
+
+            <h3>Gerhana Matahari</h3>
+            <div class="info-box">
+                <h4>Fenomena Gerhana Matahari</h4>
+                <p>Gerhana Matahari adalah fenomena alam yang spektakuler, terjadi ketika Bulan bergerak di antara Matahari dan Bumi, sehingga bayangan Bulan jatuh ke permukaan Bumi. Akibatnya, cahaya Matahari sebagian atau seluruhnya terhalang oleh Bulan.</p>
+                <p>Meskipun Bulan jauh lebih kecil dari Matahari, jaraknya yang lebih dekat dengan Bumi membuatnya tampak seukuran Matahari di langit, memungkinkan terjadinya gerhana total.</p>
+            </div>
+
+            <h3>Simulasi Gerhana Matahari</h3>
+            <p>Saksikan bagaimana Bulan dapat menutupi Matahari dari pandangan Bumi, menciptakan gerhana. Perhatikan posisi relatif ketiga benda langit ini.</p>
+            <div class="eclipse-demo">
+                <div class="eclipse-sun-sim"></div>
+                <div class="eclipse-moon-sim"></div>
+                <div class="eclipse-earth-sim"></div>
+            </div>
+            <p style="text-align: center; font-style: italic; color: #666;">* Simulasi ini menunjukkan pergerakan relatif, bukan skala sebenarnya.</p>
+
+            <div class="planet-grid">
+                <div class="planet-card">
+                    <h4>Jenis-jenis Gerhana Matahari</h4>
+                    <div class="planet-info">
+                        <p>• <strong>Gerhana Matahari Total:</strong> Terjadi ketika Bulan menutupi Matahari sepenuhnya. Langit menjadi gelap seperti senja atau malam, dan korona Matahari yang indah terlihat.</p>
+                        <p>• <strong>Gerhana Matahari Sebagian:</strong> Hanya sebagian dari Matahari yang tertutup oleh Bulan, terlihat seperti gigitan pada cakram Matahari.</p>
+                        <p>• <strong>Gerhana Matahari Cincin (Annular Eclipse):</strong> Terjadi ketika Bulan berada pada jarak terjauhnya dari Bumi (di apoge), sehingga ukurannya tampak lebih kecil dari Matahari. Bulan menutupi bagian tengah Matahari, tetapi tepi Matahari masih terlihat membentuk "cincin api" di sekeliling Bulan.</p>
+                        <p>• <strong>Gerhana Matahari Hybrid:</strong> Merupakan kombinasi langka antara gerhana total dan gerhana cincin. Di beberapa lokasi di jalur gerhana, ia terlihat sebagai gerhana total, sementara di lokasi lain sebagai gerhana cincin.</p>
+                    </div>
+                </div>
+                
+                <div class="planet-card">
+                    <h4>Syarat Terjadinya Gerhana Matahari</h4>
+                    <div class="planet-info">
+                        <p>Agar Gerhana Matahari dapat terjadi, tiga syarat utama harus terpenuhi:</p>
+                        <p>• <strong>Fase Bulan Baru:</strong> Bulan harus berada dalam fase bulan baru, yaitu saat Bulan berada di antara Bumi dan Matahari.</p>
+                        <p>• <strong>Kesejajaran (Syzygy):</strong> Matahari, Bulan, dan Bumi harus berada dalam satu garis lurus atau hampir lurus (posisi Matahari-Bulan-Bumi).</p>
+                        <p>• <strong>Bulan Dekat Node Orbitnya:</strong> Orbit Bulan mengelilingi Bumi sedikit miring terhadap orbit Bumi mengelilingi Matahari. Gerhana hanya terjadi ketika Bulan melintasi "node" (titik persimpangan) orbitnya saat ia sejajar.</p>
+                        <p>• <strong>Bayangan Jatuh ke Bumi:</strong> Bayangan umbra (inti gelap) atau penumbra (inti terang) Bulan harus jatuh ke permukaan Bumi.</p>
+                    </div>
+                </div>
+            </div>
+
+            <h3>Peran Matahari dalam Kehidupan Manusia</h3>
+            <div class="planet-grid">
+                <div class="planet-card">
+                    <h4>Matahari sebagai Sumber Energi Utama</h4>
+                    <div class="planet-info">
+                        <p>Matahari adalah sumber energi paling fundamental bagi hampir semua bentuk kehidupan di Bumi dan proses alamiahnya:</p>
+                        <p>• <strong>Fotosintesis:</strong> Tumbuhan hijau menggunakan energi cahaya Matahari untuk mengubah Karbon Dioksida (CO₂) dan air (H₂O) menjadi glukosa (makanan) dan oksigen (O₂). Ini adalah dasar dari rantai makanan di Bumi.</p>
+                        <p>• <strong>Energi Terbarukan:</strong> Cahaya Matahari dapat langsung diubah menjadi listrik menggunakan panel surya (fotovoltaik) atau panas menggunakan kolektor surya. Ini adalah sumber energi bersih dan berkelanjutan.</p>
+                        <p>• <strong>Pembangkit Listrik Termal Matahari:</strong> Panas Matahari digunakan untuk memanaskan cairan dan menghasilkan uap untuk menggerakkan turbin pembangkit listrik.</p>
+                        <p>• <strong>Pembentukan Bahan Bakar Fosil:</strong> Batu bara, minyak bumi, dan gas alam terbentuk dari sisa-sisa organisme purba yang energi fotosintesisnya berasal dari Matahari.</p>
+                        <p>• <strong>Vitamin D:</strong> Paparan kulit terhadap sinar ultraviolet B (UVB) dari Matahari memicu produksi Vitamin D, yang penting untuk kesehatan tulang dan kekebalan tubuh.</p>
+                    </div>
+                </div>
+                
+                <div class="planet-card">
+                    <h4>Matahari sebagai Pengatur Iklim dan Cuaca</h4>
+                    <div class="planet-info">
+                        <p>Radiasi Matahari adalah pendorong utama sistem iklim dan cuaca di Bumi:</p>
+                        <p>• <strong>Siklus Air (Hidrologi):</strong> Panas Matahari menguapkan air dari lautan, danau, dan daratan, membentuk awan yang kemudian menghasilkan hujan atau salju, melengkapi siklus air penting bagi kehidupan.</p>
+                        <p>• <strong>Pembentukan Angin:</strong> Perbedaan pemanasan permukaan Bumi oleh Matahari menciptakan perbedaan tekanan udara, yang menyebabkan pergerakan udara atau angin.</p>
+                        <p>• <strong>Pembentukan Arus Laut:</strong> Pemanasan air laut yang tidak merata oleh Matahari, bersama dengan angin dan rotasi Bumi, menciptakan arus laut global yang mendistribusikan panas ke seluruh planet.</p>
+                        <p>• <strong>Terjadinya Musim:</strong> Kemiringan poros Bumi dan revolusinya mengelilingi Matahari menyebabkan variasi jumlah energi Matahari yang diterima di berbagai belahan Bumi, yang memicu terjadinya musim.</p>
+                        <p>• <strong>Pengaruh pada Fotosintesis dan Ekosistem:</strong> Variasi musim dan ketersediaan cahaya Matahari menentukan pola pertumbuhan tanaman dan aktivitas ekosistem.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <h4>Fakta Menarik tentang Matahari</h4>
+                <p>• Matahari adalah bintang tipe G2V, diklasifikasikan sebagai "katai kuning", meskipun warnanya sebenarnya putih.</p>
+                <p>• Matahari menghasilkan energi setara dengan sekitar 380 triliun triliun lampu 100 watt setiap detiknya.</p>
+                <p>• Cahaya Matahari membutuhkan waktu sekitar 8 menit 20 detik untuk sampai ke Bumi.</p>
+                <p>• Setiap detik, Matahari mengubah sekitar 600 juta ton hidrogen menjadi helium di intinya.</p>
+                <p>• Matahari sedang bergerak mengelilingi pusat galaksi Bima Sakti dengan kecepatan sekitar 220 km/detik, membutuhkan sekitar 230 juta tahun untuk satu kali orbit galaksi.</p>
+                <p>• Matahari pada akhirnya akan menjadi raksasa merah, menelan Merkurius, Venus, dan mungkin Bumi, sebelum menyusut menjadi katai putih.</p>
+            </div>
+        </div>
+
+<div id="quiz" class="section">
+    <h2>🧠 Kuis Interaktif: Uji Pengetahuanmu!</h2>
+    <p>Ayo, uji pemahamanmu tentang Bumi dan Tata Surya dengan menjawab pertanyaan-pertanyaan berikut!</p>
+    <div id="quizQuestions"></div>
+    <button class="quiz-submit-btn" onclick="submitQuiz()">Periksa Jawaban</button>
+    <div id="quizResult" class="quiz-result" style="display:none;"></div>
+    <p style="text-align: center; margin-top: 20px; color: #666;">Coba lagi untuk mendapatkan skor sempurna!</p>
+</div>
+
+        <div id="galeri-video" class="section">
+            <h2>🎬 Galeri Video Edukasi</h2>
+            <p>Tonton video-video menarik berikut untuk visualisasi materi yang lebih mendalam tentang Bumi dan Tata Surya.</p>
+            
+            <h3>Video: Mengenal Tata Surya Kita</h3>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/2EgP_zSOKN4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <p style="text-align: center; font-style: italic;">Sumber: Marbel - Learning & Kids Song</p>
+
+            <h3>Video: Mengapa Bumi Punya Musim?</h3>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/WgHmqv_-UbQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <p style="text-align: center; font-style: italic;">Sumber: California Academy of Sciences</p>
+
+            <h3>Video: Gerhana Matahari Dijelaskan</h3>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/6ceW7ugIKMs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <p style="text-align: center; font-style: italic;">Sumber: Kok Bisa?</p>
+
+            <h3>Video: Fakta Menarik tentang Bulan</h3>
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/_PdO-a_lL8E" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+            <p style="text-align: center; font-style: italic;">Sumber: Majalah Bobo</p>
+        </div>
+
+        <footer>
+            <p style="text-align: center; color: #e0e0e0; margin-top: 50px; padding-bottom: 20px;">
+                &copy; 2025 Materi IPA SMP: Bumi dan Tata Surya. Dibuat dengan semangat eksplorasi alam semesta.
+            </p>
+        </footer>
+    </div>
+
+<script>
+    // --- JavaScript Section ---
+
+    // Function to show/hide sections
+    function showSection(id) {
+        const sections = document.querySelectorAll('.section');
+        sections.forEach(section => {
+            section.classList.remove('active');
+        });
+        document.getElementById(id).classList.add('active');
+        updateProgressBar();
+        scrollToTop(); // Scroll to top when section changes
+    }
+
+    function scrollToTop() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }
+
+    // Generate stars for background
+    function generateStars() {
+        const starsContainer = document.getElementById('stars');
+        const numStars = 100; // Adjust number of stars
+
+        for (let i = 0; i < numStars; i++) {
+            const star = document.createElement('div');
+            star.classList.add('star');
+            star.style.left = `${Math.random() * 100}vw`;
+            star.style.top = `${Math.random() * 100}vh`;
+            star.style.animationDelay = `${Math.random() * 5}s`;
+            star.style.animationDuration = `${15 + Math.random() * 10}s`; // Vary speed
+            starsContainer.appendChild(star);
+        }
+    }
+
+    // Progress Bar functionality
+    function updateProgressBar() {
+        const sections = document.querySelectorAll('.section');
+        const activeSectionIndex = Array.from(sections).findIndex(section => section.classList.contains('active'));
+        const totalSections = sections.length;
+        const progress = ((activeSectionIndex + 1) / totalSections) * 100;
+        document.getElementById('progressBar').style.width = `${progress}%`;
+    }
+
+    // Quiz Data
+    const quizData = [
+        {
+            question: "Planet manakah yang memiliki cincin paling terlihat dan indah?",
+            options: ["Jupiter", "Saturnus", "Uranus", "Neptunus"],
+            answer: "Saturnus"
+        },
+        {
+            question: "Berapa lama waktu yang dibutuhkan Bumi untuk mengelilingi Matahari satu kali (periode revolusi)?",
+            options: ["24 jam", "27,3 hari", "365,25 hari", "687 hari"],
+            answer: "365,25 hari"
+        },
+        {
+            question: "Apa nama satelit alami Bumi?",
+            options: ["Phobos", "Titan", "Bulan", "Ganymede"],
+            answer: "Bulan"
+        },
+        {
+            question: "Lapisan Matahari yang terlihat sebagai permukaan dan tempat bintik Matahari muncul adalah...",
+            options: ["Inti", "Korona", "Kromosfer", "Fotosfer"],
+            answer: "Fotosfer"
+        },
+        {
+            question: "Fenomena pasang surut air laut di Bumi sebagian besar disebabkan oleh gaya gravitasi...",
+            options: ["Matahari", "Bulan", "Jupiter", "Mars"],
+            answer: "Bulan"
+        },
+        {
+            question: "Planet terpanas di Tata Surya kita adalah...",
+            options: ["Merkurius", "Bumi", "Venus", "Mars"],
+            answer: "Venus"
+        },
+        {
+            question: "Gas utama penyusun atmosfer Bumi adalah...",
+            options: ["Karbon Dioksida", "Helium", "Nitrogen dan Oksigen", "Metana"],
+            answer: "Nitrogen dan Oksigen"
+        },
+        {
+            question: "Gerak semu harian Matahari (Matahari terbit dari timur dan terbenam di barat) disebabkan oleh...",
+            options: ["Revolusi Bumi", "Rotasi Bumi", "Revolusi Bulan", "Gerak Bulan"],
+            answer: "Rotasi Bumi"
+        },
+        {
+            question: "Planet terbesar di Tata Surya kita adalah...",
+            options: ["Bumi", "Saturnus", "Neptunus", "Jupiter"],
+            answer: "Jupiter"
+        },
+        {
+            question: "Gerhana Matahari total terjadi ketika Bulan berada di antara Matahari dan Bumi dan menutupi Matahari secara...",
+            options: ["Sebagian", "Sempurna", "Tidak sama sekali", "Hanya terlihat cincin"],
+            answer: "Sempurna"
+        }
+    ];
+
+    // Function to load quiz questions
+    function loadQuiz() {
+        const quizContainer = document.getElementById('quizQuestions');
+        quizContainer.innerHTML = ''; // Clear previous questions
+        quizData.forEach((q, index) => {
+            const questionDiv = document.createElement('div');
+            questionDiv.classList.add('quiz-question');
+            questionDiv.innerHTML = `<p>${index + 1}. ${q.question}</p><ul class="quiz-options"></ul>`;
+            
+            const optionsList = questionDiv.querySelector('.quiz-options');
+            q.options.forEach(option => {
+                const listItem = document.createElement('li');
+                listItem.classList.add('quiz-option');
+                listItem.textContent = option;
+                listItem.onclick = () => selectOption(listItem, index);
+                optionsList.appendChild(listItem);
+            });
+            quizContainer.appendChild(questionDiv);
+        });
+        // Reset result display
+        document.getElementById('quizResult').style.display = 'none';
+        document.getElementById('quizResult').textContent = '';
+    }
+
+    let selectedAnswers = new Array(quizData.length).fill(null);
+
+    function selectOption(selectedElement, questionIndex) {
+        // Hapus kelas 'selected' dari semua opsi di pertanyaan ini
+        const options = selectedElement.parentNode.querySelectorAll('.quiz-option');
+        options.forEach(option => {
+            option.classList.remove('selected');
+            // Pastikan juga kelas correct/wrong dihapus jika ada dari percobaan sebelumnya
+            option.classList.remove('correct', 'wrong');
+        });
+        
+        // Tambahkan kelas 'selected' ke opsi yang baru diklik
+        selectedElement.classList.add('selected');
+        
+        // Simpan jawaban yang dipilih
+        selectedAnswers[questionIndex] = selectedElement.textContent;
+
+        // Sembunyikan hasil kuis saat ada pilihan baru
+        document.getElementById('quizResult').style.display = 'none';
+    }
+
+    function submitQuiz() {
+        let correctCount = 0;
+        const quizContainer = document.getElementById('quizQuestions');
+        const quizResult = document.getElementById('quizResult');
+        quizResult.style.display = 'block';
+
+        quizData.forEach((q, index) => {
+            const questionDiv = quizContainer.children[index];
+            const options = questionDiv.querySelectorAll('.quiz-option');
+            let isCorrect = false;
+
+            options.forEach(option => {
+                // Hapus kelas 'selected' agar hanya 'correct' atau 'wrong' yang tersisa setelah submit
+                option.classList.remove('selected'); 
+                
+                // Pastikan kelas correct/wrong dihapus sebelum menambahkan yang baru
+                option.classList.remove('correct', 'wrong'); 
+
+                if (option.textContent === q.answer) {
+                    if (selectedAnswers[index] === q.answer) {
+                        option.classList.add('correct');
+                        isCorrect = true;
+                    } else { // Jika jawaban yang benar tidak dipilih, tapi opsi ini adalah jawaban benar
+                        // Tidak perlu menambahkan kelas 'correct' di sini, hanya jika user memilihnya
+                        // Ini akan ditangani oleh blok 'else if (selectedAnswers[index] !== null)' di bawah
+                    }
+                } else if (option.textContent === selectedAnswers[index] && selectedAnswers[index] !== q.answer) {
+                    option.classList.add('wrong');
+                }
+            });
+
+            if (isCorrect) {
+                correctCount++;
+            } else if (selectedAnswers[index] !== null) { // Jika user memilih jawaban yang salah
+                // Temukan jawaban yang benar dan berikan highlight 'correct'
+                options.forEach(option => {
+                    if (option.textContent === q.answer) {
+                        option.classList.add('correct'); // Menandai jawaban yang benar setelah submit jika ada yang salah dipilih
+                    }
+                });
+            }
+        });
+
+        const score = (correctCount / quizData.length) * 100;
+        quizResult.textContent = `Skor Anda: ${correctCount} dari ${quizData.length} (${score.toFixed(2)}%)`;
+        if (score === 100) {
+            quizResult.classList.add('correct-answer');
+            quizResult.classList.remove('wrong-answer');
+            quizResult.innerHTML += '<br>Selamat! Anda adalah Ahli Tata Surya! <span class="achievement-badge">Ahli Tata Surya</span>';
+        } else {
+            quizResult.classList.add('wrong-answer');
+            quizResult.classList.remove('correct-answer');
+            quizResult.innerHTML += '<br>Terus belajar dan coba lagi!';
+        }
+    }
+
+    // Initial setup on page load
+    document.addEventListener('DOMContentLoaded', () => {
+        generateStars();
+        showSection('sistem-tata-surya'); // Show default section
+        loadQuiz(); // Load quiz questions
+    });
+</script>
+</body>
+</html>
