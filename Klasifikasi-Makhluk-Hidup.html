@@ -1,0 +1,2129 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Klasifikasi Makhluk Hidup - IPA SMP</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="icon" href="images/favicon.png" type="image/png">
+    <style>
+        /* --- Variabel Warna dan Font --- */
+        :root {
+            --primary-color: #667eea; /* Biru Ungu */
+            --secondary-color: #764ba2; /* Ungu Lebih Gelap */
+            --accent-color: #ffcc00; /* Kuning Cerah */
+            --text-color: #333;
+            --light-bg: rgba(255, 255, 255, 0.95);
+            --dark-bg: rgba(102, 126, 234, 0.05);
+            --border-color: #e0e0e0;
+            --shadow-light: 0 4px 20px rgba(0, 0, 0, 0.1);
+            --shadow-medium: 0 10px 30px rgba(0, 0, 0, 0.15);
+            --shadow-strong: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        /* --- General Styles --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.7;
+            color: var(--text-color);
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            min-height: 100vh;
+            scroll-behavior: smooth;
+            overflow-x: hidden; /* Mencegah overflow horizontal */
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            color: var(--text-color);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        p {
+            margin-bottom: 1rem;
+            text-align: justify;
+        }
+
+        a {
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--secondary-color);
+        }
+
+        /* --- Header & Navigation --- */
+        .header {
+            background: var(--light-bg);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            box-shadow: var(--shadow-light);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            transition: color 0.3s ease;
+        }
+
+        .logo:hover {
+            color: var(--secondary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-color);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active { /* Class for active navigation link */
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(102, 126, 234, 0.3);
+        }
+
+        .home-btn {
+            background: var(--primary-color);
+            color: white !important;
+            padding: 0.7rem 1.5rem !important;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .home-btn:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        /* --- Hero Section --- */
+        .hero {
+            text-align: center;
+            color: white;
+            margin-bottom: 3rem;
+            padding: 3rem 0;
+        }
+
+        .hero h1 {
+            font-size: 3.8rem; /* Increased font size */
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.4);
+            animation: fadeInUp 1s ease;
+            color: white; /* Ensure heading is white */
+        }
+
+        .hero p {
+            font-size: 1.4rem; /* Increased font size */
+            opacity: 0.9;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .small-text {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-top: -10px;
+        }
+
+        /* --- Content Cards --- */
+        .content-section {
+            background: var(--light-bg);
+            backdrop-filter: blur(10px);
+            margin: 2rem 0;
+            border-radius: 20px;
+            padding: 2.5rem; /* Increased padding */
+            box-shadow: var(--shadow-medium);
+            transition: all 0.3s ease;
+        }
+
+        .content-section:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-strong);
+        }
+
+        .section-title {
+            color: var(--primary-color);
+            font-size: 2.5rem; /* Increased font size */
+            margin-bottom: 1.8rem;
+            text-align: center;
+            position: relative;
+            padding-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px; /* Increased width */
+            height: 4px; /* Increased height */
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            border-radius: 2px;
+        }
+
+        .subsection {
+            margin: 2.5rem 0; /* Increased margin */
+            padding: 2rem; /* Increased padding */
+            background: var(--dark-bg);
+            border-radius: 15px;
+            border-left: 5px solid var(--primary-color); /* Thicker border */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .subsection h3 {
+            color: var(--primary-color);
+            font-size: 1.8rem; /* Increased font size */
+            margin-bottom: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        /* --- Image & Video Styles --- */
+        .image-wrapper {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .section-image {
+            width: 100%;
+            max-width: 700px;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: var(--shadow-light);
+            border: 2px solid var(--border-color);
+        }
+
+        .image-caption {
+            font-style: italic;
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 10px;
+        }
+
+        .image-thumbnail {
+            width: 100%;
+            max-width: 250px;
+            height: 180px; /* Consistent height */
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            margin: 1rem auto; /* Centered for grid */
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end; /* Align caption to bottom */
+            position: relative;
+        }
+
+        .image-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Cover the area */
+            display: block;
+            border-radius: 10px;
+        }
+
+        .image-thumbnail p {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            font-size: 0.8rem;
+            padding: 5px 10px;
+            margin: 0;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            text-align: center;
+        }
+
+        .image-placeholder {
+            width: 100%;
+            min-height: 200px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            margin: 2rem 0;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .image-placeholder::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        .image-placeholder i {
+            margin-bottom: 10px;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            margin: 2.5rem 0;
+            border-radius: 15px;
+            box-shadow: var(--shadow-medium);
+            background-color: #000; /* Fallback for no video */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 15px;
+        }
+
+        .video-container .play-icon {
+            position: absolute;
+            font-size: 5rem;
+            opacity: 0.8;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            pointer-events: none; /* Prevent icon from blocking clicks on iframe */
+        }
+
+        .video-container:hover .play-icon {
+            transform: scale(1.1);
+            opacity: 1;
+        }
+
+        .video-container.playing .play-icon,
+        .video-container.playing span {
+            display: none;
+        }
+
+        .video-container.small-video {
+            padding-bottom: 40%; /* Smaller aspect ratio for embedded videos within kingdom cards */
+            margin: 1.5rem 0;
+            height: 0; /* Reset height */
+            min-height: 150px; /* Minimum height for small video placeholder */
+        }
+
+        /* --- Grids & Cards --- */
+        .characteristic-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem; /* Increased gap */
+            margin: 2.5rem 0;
+        }
+
+        .characteristic-card {
+            background: white;
+            padding: 1.8rem; /* Increased padding */
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .characteristic-card:hover {
+            transform: translateY(-5px); /* Increased transform */
+            border-color: var(--primary-color);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .characteristic-card h4 {
+            color: var(--primary-color);
+            margin-bottom: 0.8rem;
+            font-size: 1.25rem; /* Increased font size */
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            border-left: 4px solid var(--secondary-color);
+        }
+
+        .info-card h4 {
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .example-box {
+            background: rgba(102, 126, 234, 0.1);
+            border-left: 5px solid var(--primary-color);
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .example-box h4 {
+            color: var(--primary-color);
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .code-block {
+            background: #f4f4f4;
+            padding: 1.5rem;
+            border-radius: 8px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.1em;
+            line-height: 1.8;
+            white-space: pre-wrap; /* Preserve whitespace and wrap text */
+            word-break: break-word; /* Break long words */
+        }
+
+        /* --- Taxonomy Hierarchy --- */
+        .taxonomy-tree {
+            background: var(--dark-bg);
+            padding: 2.5rem;
+            border-radius: 15px;
+            margin: 2.5rem 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .taxonomy-level {
+            margin: 1.5rem 0; /* Increased margin */
+            padding: 1.5rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            border-left: 5px solid var(--primary-color);
+            margin-left: calc(var(--level) * 2rem); /* Dynamic indentation */
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .taxonomy-level:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .taxonomy-level::before {
+            content: '';
+            position: absolute;
+            left: -2.5rem; /* Adjust to align with border */
+            top: 50%;
+            width: 1.5rem;
+            height: 3px;
+            background: var(--secondary-color);
+            display: block; /* Always show line */
+            transform: translateY(-50%);
+        }
+
+        .taxonomy-level h4 {
+            color: var(--primary-color);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* --- Kingdom Cards --- */
+        .kingdom-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); /* Larger min-width */
+            gap: 2.5rem; /* Increased gap */
+            margin: 2.5rem 0;
+        }
+
+        .kingdom-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem; /* Increased padding */
+            box-shadow: var(--shadow-medium);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .kingdom-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px; /* Thicker top border */
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+        }
+
+        .kingdom-card:hover {
+            transform: translateY(-8px); /* More pronounced hover */
+            border-color: var(--primary-color);
+            box-shadow: var(--shadow-strong);
+        }
+
+        .kingdom-card h4 {
+            color: var(--primary-color);
+            font-size: 1.6rem; /* Increased font size */
+            margin-bottom: 1.5rem;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        /* Styles for the new kingdom toggle functionality */
+        .kingdom-content {
+            max-height: 0; /* Hidden by default */
+            overflow: hidden;
+            transition: max-height 0.7s ease-out, padding 0.5s ease; /* Added padding transition */
+            padding-bottom: 0;
+            padding-top: 0;
+        }
+
+        .kingdom-content.open {
+            max-height: 2000px; /* A large enough value to accommodate all content */
+            padding-bottom: 1.5rem; /* Re-add original padding when open */
+            padding-top: 1.5rem; /* Re-add original padding when open */
+        }
+
+        .kingdom-toggle {
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 0; /* Reset initial padding-bottom for the h4 */
+            margin-bottom: 1.5rem; /* Add margin below h4 to separate from content below */
+            user-select: none; /* Prevent text selection on click */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+
+        .kingdom-toggle:hover {
+            color: var(--secondary-color); /* Change color on hover for clickable area */
+        }
+
+        .kingdom-toggle .kingdom-arrow {
+            transition: transform 0.3s ease;
+            margin-left: 10px; /* Space between title and arrow */
+        }
+
+        .kingdom-toggle.active .kingdom-arrow {
+            transform: rotate(180deg); /* Rotate arrow when open */
+        }
+
+        .kingdom-card img.kingdom-image {
+            max-width: 100%;
+            height: 220px; /* Consistent height */
+            object-fit: contain; /* Maintain aspect ratio */
+            display: block;
+            margin: 0 auto 1.5rem auto;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .kingdom-card ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+            list-style-type: disc;
+            color: #555;
+        }
+
+        .kingdom-card ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* --- Tables --- */
+        .table-responsive {
+            overflow-x: auto;
+            margin: 2.5rem 0;
+            border-radius: 15px;
+            box-shadow: var(--shadow-medium);
+        }
+
+        .styled-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0;
+            font-size: 0.95em;
+            min-width: 700px; /* Ensure table is readable on smaller screens */
+        }
+
+        .styled-table thead tr {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            text-align: left;
+            border-radius: 15px 15px 0 0;
+        }
+
+        .styled-table th,
+        .styled-table td {
+            padding: 1.2rem 1.5rem; /* Increased padding */
+            border: 1px solid var(--border-color);
+        }
+
+        .styled-table tbody tr {
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .styled-table tbody tr:nth-of-type(even) {
+            background-color: var(--dark-bg);
+        }
+
+        .styled-table tbody tr:last-of-type {
+            border-bottom: 3px solid var(--primary-color);
+        }
+
+        .styled-table tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .styled-table.detail-table th,
+        .styled-table.detail-table td {
+            white-space: nowrap; /* Prevent line breaks in scientific names */
+        }
+
+        .styled-table .result-row td {
+            font-weight: bold;
+            color: var(--secondary-color);
+        }
+
+        /* --- Quiz Section --- */
+        .interactive-quiz {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 3rem; /* Increased padding */
+            border-radius: 20px;
+            margin: 3rem 0;
+            text-align: center;
+            box-shadow: var(--shadow-strong);
+        }
+
+        .quiz-btn {
+            background: white;
+            color: var(--primary-color);
+            padding: 1rem 2.5rem; /* Increased padding */
+            border: none;
+            border-radius: 30px; /* More rounded */
+            font-size: 1.2rem; /* Increased font size */
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 0.8rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .quiz-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        #quiz-area {
+            min-height: 200px; /* Ensure space for quiz */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .quiz-question {
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+            font-weight: bold;
+        }
+
+        .quiz-options button {
+            display: block;
+            width: 80%;
+            margin: 0.8rem auto;
+            padding: 0.8rem 1.5rem;
+            background-color: rgba(255, 255, 255, 0.9);
+            border: 1px solid var(--primary-color);
+            border-radius: 10px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            color: var(--text-color);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .quiz-options button:hover {
+            background-color: var(--accent-color);
+            transform: scale(1.02);
+        }
+
+        .quiz-options button.correct {
+            background-color: #a8e6cf; /* Light green */
+            border-color: #4CAF50;
+            font-weight: bold;
+        }
+
+        .quiz-options button.incorrect {
+            background-color: #ffadad; /* Light red */
+            border-color: #f44336;
+            font-weight: bold;
+        }
+
+        #quiz-result {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-top: 1.5rem;
+            color: var(--accent-color);
+        }
+
+        /* --- Glosarium & FAQ --- */
+        .glossary-grid, .faq-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .glossary-item, .faq-item {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            border-left: 4px solid var(--primary-color);
+            transition: transform 0.3s ease;
+        }
+
+        .glossary-item:hover, .faq-item:hover {
+            transform: translateY(-3px);
+        }
+
+        .glossary-item h4 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .faq-question {
+            cursor: pointer;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0.5rem 0;
+        }
+
+        .faq-question:hover {
+            color: var(--secondary-color);
+        }
+
+        .faq-arrow {
+            transition: transform 0.3s ease;
+        }
+
+        .faq-question.active .faq-arrow {
+            transform: rotate(90deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out;
+            padding-left: 30px;
+        }
+
+        .faq-answer.open {
+            max-height: 200px; /* Adjust as needed, large enough to contain content */
+            padding-top: 10px;
+        }
+
+        /* --- External Resources --- */
+        #resources ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        #resources ul li {
+            margin-bottom: 1rem;
+        }
+
+        #resources ul li a {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.1rem;
+            color: var(--primary-color);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            background: rgba(102, 126, 234, 0.05);
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        #resources ul li a:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        /* --- Footer --- */
+        .footer {
+            background: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .footer p {
+            margin: 0.5rem 0;
+            font-size: 0.95rem;
+            opacity: 0.9;
+        }
+
+        /* --- Scroll to top button --- */
+        .scroll-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: var(--primary-color);
+            color: white;
+            width: 55px; /* Larger size */
+            height: 55px; /* Larger size */
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(100px);
+            font-size: 1.5rem; /* Larger icon */
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .scroll-top:hover {
+            background: var(--secondary-color);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.6);
+        }
+
+        /* --- Loading animation --- */
+        .loading {
+            display: inline-block;
+            width: 30px; /* Larger */
+            height: 30px; /* Larger */
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes shimmer {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+
+        /* --- Responsive Design --- */
+        @media (max-width: 992px) {
+            .container {
+                padding: 1.5rem;
+            }
+
+            .nav-links {
+                gap: 1rem;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .section-title {
+                font-size: 2.2rem;
+            }
+
+            .kingdom-grid {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 0.8rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .content-section {
+                padding: 2rem;
+            }
+
+            .subsection {
+                padding: 1.5rem;
+            }
+
+            .characteristic-grid,
+            .glossary-grid,
+            .faq-container {
+                grid-template-columns: 1fr;
+            }
+
+            .characteristic-card h4,
+            .glossary-item h4 {
+                font-size: 1.1rem;
+            }
+
+            .kingdom-card {
+                padding: 2rem;
+            }
+
+            .styled-table {
+                min-width: unset; /* Allow table to shrink */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .logo {
+                font-size: 1.2rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.6rem;
+            }
+
+            .quiz-options button {
+                width: 95%;
+                font-size: 0.9rem;
+                padding: 0.7rem 1rem;
+            }
+
+            .scroll-top {
+                width: 45px;
+                height: 45px;
+                bottom: 1rem;
+                right: 1rem;
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="logo">
+                <i class="fas fa-microscope"></i>
+                <span>IPA SMP - Klasifikasi</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#makhluk-hidup">Ciri Makhluk Hidup</a></li>
+                <li><a href="#klasifikasi">Klasifikasi</a></li>
+                <li><a href="#taksonomi">Taksonomi</a></li>
+                <li><a href="#quiz">Quiz</a></li>
+                <li><a href="index.html" class="home-btn"><i class="fas fa-home"></i> Beranda</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section class="hero">
+            <h1><i class="fas fa-leaf"></i> Klasifikasi Makhluk Hidup</h1>
+            <p>Mempelajari keanekaragaman makhluk hidup dan cara pengelompokannya</p>
+                <div class="video-container main-intro-video" data-video-id="https://www.youtube.com/embed/wAF7FZabsKA">
+            <i class="fas fa-play-circle fa-4x play-icon"></i>
+            <span>Video Pengantar Klasifikasi Makhluk Hidup</span>
+        </div>
+
+            </div>
+            <p class="small-text"><i>Sumber: Video YouTube Edukasi Klasifikasi</i></p>
+        </section>
+
+        <section id="makhluk-hidup" class="content-section">
+            <h2 class="section-title">
+                <i class="fas fa-heartbeat"></i>
+                1. Makhluk Hidup atau Benda Mati?
+            </h2>
+            
+            <div class="image-wrapper">
+                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh0Nu3ECWL7UlFVY1nGurhQWnJhGSmdPTC94IAJEj9YVHG23UsYsuDbuUzaVdwX0SCy2F8DRgB12gb5IY2LkXaCqk1yb52XDtM7Yx5LokPfdtfboZoWLT06tqJ6jCtcQrzZ3tQ3jQlU04EonRvz9chUDlTapmzByC2kzawaPwVZSQ-zk8xf5-XBEEAbJZ5V/s577/WhatsApp%20Image%202025-05-10%20at%2012.17.54.jpeg" alt="Perbedaan Makhluk Hidup dan Benda Mati" class="section-image">
+                <p class="image-caption"><i>Gambar: perbedaan antara makhluk hidup dan benda mati.</i></p>
+            </div>
+
+            <p style="font-size: 1.1rem; margin-bottom: 2rem; text-align: center; font-style: italic;">
+                Makhluk hidup memiliki ciri-ciri khusus yang membedakannya dari benda mati. 
+                Mari kita pelajari karakteristik unik yang dimiliki oleh setiap makhluk hidup!
+            </p>
+
+            <div class="characteristic-grid">
+                <div class="characteristic-card">
+                    <h4><i class="fas fa-running"></i> a. Kemampuan Bergerak</h4>
+                    <p>Semua makhluk hidup memiliki kemampuan untuk bergerak, meskipun cara geraknya berbeda. Hewan bergerak aktif berpindah tempat untuk mencari makan, menghindari predator, atau mencari pasangan. Contohnya, burung terbang, ikan berenang, dan cheetah berlari. Tumbuhan juga bergerak, namun geraknya pasif dan terbatas, seperti gerakan tumbuh ke arah cahaya (fototropisme) atau daun putri malu yang menguncup saat disentuh (tigmonasti).</p>
+                    <div class="image-thumbnail">
+                        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEixZphg4xbWf5-iChFa6Oa55hrI4ci9vYSQLNDKPzqBPdBkhxgfFIGzcL-Ij26W_E3w32aWdpBE4SCoqqeScY8BDnOD7izhVuzJ0stXjvSBFzCZPqimjTEN8dqQnxCVBs4zId41Qu-g_Vs/s1600/klinci.jpg" alt="Hewan Bergerak">
+                        <p><i>Hewan bergerak aktif</i></p>
+                    </div>
+                    <div class="image-thumbnail">
+                        <img src="https://blue.kumparan.com/image/upload/fl_progressive,fl_lossy,c_fill,f_auto,q_auto:best,w_640/v1609936721/wbn5ixcyl9n3dxo6qxzn.jpg" alt="Tumbuhan Bergerak">
+                        <p><i>Tumbuhan bergerak pasif</i></p>
+                    </div>
+                </div>
+
+                <div class="characteristic-card">
+                    <h4><i class="fas fa-seedling"></i> b. Tumbuh dan Berkembang</h4>
+                    <p>Makhluk hidup mengalami pertumbuhan, yaitu peningkatan ukuran yang tidak dapat kembali ke ukuran semula, seperti bayi yang tumbuh menjadi dewasa atau bibit yang tumbuh menjadi pohon. Selain itu, mereka juga berkembang, yaitu perubahan menuju kedewasaan dan peningkatan fungsi organ. Contohnya, katak yang mengalami metamorfosis dari kecebong hingga menjadi katak dewasa.</p>
+                    <div class="image-thumbnail">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmKronsvWCEU8sxw2iCTPjsM7nZo0ThtQg7w&s" alt="Pertumbuhan Manusia">
+                        <p><i>Pertumbuhan manusia dari bayi hingga dewasa</i></p>
+                    </div>
+                    <div class="image-thumbnail">
+                        <img src="https://id-static.z-dn.net/files/d8f/0838449674472f85707dcfcb95b3a9f1.jpg" alt="Perkembangan Katak">
+                        <p><i>Metamorfosis pada katak</i></p>
+                    </div>
+                </div>
+
+                <div class="characteristic-card">
+                    <h4><i class="fas fa-baby"></i> c. Kemampuan Reproduksi</h4>
+                    <p>Untuk melestarikan jenisnya agar tidak punah, makhluk hidup melakukan reproduksi (berkembang biak). Reproduksi bisa secara seksual (melibatkan sel kelamin jantan dan betina) atau aseksual (tanpa melibatkan sel kelamin). Contoh reproduksi seksual adalah manusia melahirkan, ayam bertelur. Contoh reproduksi aseksual adalah bakteri membelah diri, tunas pada pisang, atau spora pada jamur.</p>
+                    <div class="image-thumbnail">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4Hei-rSrclyq3wQgtsOrpdZO1dNreF0lIng&s" alt="Reproduksi Manusia">
+                        <p><i>Reproduksi seksual pada manusia</i></p>
+                    </div>
+                    <div class="image-thumbnail">
+                        <img src="https://www.researchgate.net/publication/350104189/figure/fig5/AS:1068932928634882@1631864878563/Gambar-43-Empat-fase-fenologi-pohon-pisang-dari-tunas-sampai-dewasa-Wairegi-dkk-2014.png" alt="Reproduksi Tumbuhan Aseksual">
+                        <p><i>Reproduksi tunas pada pisang</i></p>
+                    </div>
+                </div>
+
+                <div class="characteristic-card">
+                    <h4><i class="fas fa-eye"></i> d. Menanggapi Rangsang (Iritabilitas)</h4>
+                    <p>Makhluk hidup memiliki kepekaan terhadap rangsangan (iritabilitas). Rangsangan bisa berupa cahaya, suara, sentuhan, suhu, gravitasi, atau zat kimia. Respon yang diberikan bisa berbeda-beda. Contohnya, pupil mata mengecil saat terkena cahaya terang, daun putri malu menguncup saat disentuh, atau kecoa yang bersembunyi di tempat gelap saat ada cahaya.</p>
+                    <div class="image-thumbnail">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOWxWV6KGJch35wZW6slB6WoPVIDOBASrFGQ&s" alt="Putri Malu">
+                        <p><i>Daun putri malu menguncup</i></p>
+                    </div>
+                    <div class="image-thumbnail">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR67J0dUoVjZFUMZs-g1GxVydr0MNJ5CfIPbQ&s" alt="Pupil Mata">
+                        <p><i>Pupil mata merespons cahaya</i></p>
+                    </div>
+                </div>
+
+                <div class="characteristic-card">
+                    <h4><i class="fas fa-battery-full"></i> e. Mengambil dan Menggunakan Energi (Metabolisme)</h4>
+                    <p>Semua aktivitas hidup memerlukan energi. Proses makhluk hidup mengambil, mengubah, dan menggunakan energi dari lingkungannya disebut metabolisme. Tumbuhan melakukan fotosintesis untuk membuat makanannya sendiri (autotrof). Hewan dan manusia mendapatkan energi dengan memakan organisme lain (heterotrof) melalui proses pencernaan dan respirasi seluler.</p>
+                    <div class="image-thumbnail">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSr1wgoIdoiW1I0701qoKpIUCNo-fcWfiMmQ&s" alt="Fotosintesis">
+                        <p><i>Tumbuhan berfotosintesis</i></p>
+                    </div>
+                    <div class="image-thumbnail">
+                        <img src="https://mesin.uma.ac.id/wp-content/uploads/2021/08/Aliran-energ-1.jpg" alt="Rantai Makanan">
+                        <p><i>Aliran energi dalam ekosistem</i></p>
+                    </div>
+                </div>
+
+                <div class="characteristic-card">
+                    <h4><i class="fas fa-lungs"></i> f. Bernapas (Respirasi)</h4>
+                    <p>Respirasi adalah proses pengambilan oksigen dari lingkungan dan pengeluaran karbon dioksida. Oksigen digunakan untuk membakar sari-sari makanan di dalam sel dan menghasilkan energi. Hewan memiliki organ pernapasan bervariasi seperti paru-paru (mamalia, burung), insang (ikan), trakea (serangga), atau bahkan kulit (cacing tanah). Tumbuhan juga bernapas melalui stomata (daun) dan lentisel (batang).</p>
+                    <div class="image-thumbnail">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4E2rS1cnJ5YC2Vy5dM2Of8kVUu782vzF-Cg&s" alt="Sistem Respirasi Manusia">
+                        <p><i>Sistem pernapasan manusia</i></p>
+                    </div>
+                    <div class="image-thumbnail">
+                        <img src="https://id-static.z-dn.net/files/d69/92b6fc5b823aa9d7a6e98190aec0c2f7.jpg" alt="Insang Ikan">
+                        <p><i>Insang pada ikan</i></p>
+                    </div>
+                </div>
+
+                <div class="characteristic-card">
+                    <h4><i class="fas fa-trash"></i> g. Menghasilkan Zat Sisa (Ekskresi)</h4>
+                    <p>Selama metabolisme, tubuh makhluk hidup menghasilkan zat-zat sisa yang bersifat racun dan harus dikeluarkan. Proses pengeluaran zat sisa ini disebut ekskresi. Contoh zat sisa pada manusia adalah urine, keringat, dan karbon dioksida. Tumbuhan juga mengekskresikan uap air melalui transpirasi dan zat-zat lain yang disimpan dalam vakuola atau gugur bersama daun tua.</p>
+                    <div class="image-thumbnail">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTkrqpgfmoPK6BijiMetBPB6aO2GZaHwWI6g&s" alt="Sistem Ekskresi Manusia">
+                        <p><i>Sistem ekskresi pada manusia</i></p>
+                    </div>
+                    <div class="image-thumbnail">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQcK2DteWPGThqdIIuJy3jSQzPzyM0iT26mTQ&s" alt="Transpirasi Tumbuhan">
+                        <p><i>Transpirasi pada tumbuhan</i></p>
+                    </div>
+                </div>
+
+                <div class="characteristic-card">
+                    <h4><i class="fas fa-cube"></i> h. Tersusun dari Sel</h4>
+                    <p>Semua makhluk hidup, dari yang paling sederhana hingga paling kompleks, tersusun dari unit dasar yang disebut sel. Ada makhluk hidup bersel satu (uniseluler) seperti bakteri dan amoeba, dan ada pula yang bersel banyak (multiseluler) seperti manusia, hewan, dan tumbuhan. Sel adalah unit struktural dan fungsional terkecil kehidupan.</p>
+                    <div class="image-thumbnail">
+                        <img src="https://cdn.medcom.id/dynamic/content/2022/04/14/1413666/ulvOHmXoZz.jpg?w=480" alt="Sel Hewan dan Tumbuhan">
+                        <p><i>Struktur sel hewan dan tumbuhan</i></p>
+                    </div>
+                    <div class="image-thumbnail">
+                        <img src="https://asset.kompas.com/crops/Kjd1XeNlc5np07X4gaAiBtcpGEk=/109x0:4747x3092/1200x800/data/photo/2022/06/04/629b3ec91f2fd.jpg" alt="Bakteri Uniseluler">
+                        <p><i>Bakteri adalah organisme uniseluler</i></p>
+                    </div>
+                </div>
+            </div>
+
+<div class="video-container main-intro-video" data-video-id="https://www.youtube.com/embed/VzoPfyaJaZQ">
+    <i class="fas fa-play-circle fa-3x play-icon"></i>
+    <span>Video: Penjelasan Lengkap Ciri-ciri Makhluk Hidup</span>
+</div>
+            <p class="small-text"><i>Sumber: Video Edukasi Ciri Makhluk Hidup</i></p>
+        </section>
+
+        <section id="klasifikasi" class="content-section">
+            <h2 class="section-title">
+                <i class="fas fa-sitemap"></i>
+                2. Mengapa Makhluk Hidup Dikelompokkan?
+            </h2>
+
+            <div class="subsection">
+                <h3><i class="fas fa-layer-group"></i> A. Klasifikasi</h3>
+                <p>Bumi kita dihuni oleh jutaan jenis makhluk hidup, dari bakteri mikroskopis hingga paus raksasa. Tanpa sistem yang teratur, mempelajari keanekaragaman ini akan sangat sulit. Oleh karena itu, para ilmuwan mengembangkan ilmu taksonomi, yaitu ilmu tentang klasifikasi makhluk hidup.</p>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin: 1.5rem 0;">
+                    <div class="info-card">
+                        <h4 style="color: #667eea; margin-bottom: 0.5rem;"><i class="fas fa-search"></i> Mempermudah Pengenalan</h4>
+                        <p>Klasifikasi memungkinkan kita untuk dengan cepat mengidentifikasi dan mengenal makhluk hidup baru atau yang sudah dikenal.</p>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h4 style="color: #667eea; margin-bottom: 0.5rem;"><i class="fas fa-book-open"></i> Mempermudah Pembelajaran</h4>
+                        <p>Dengan mengelompokkan, materi pembelajaran menjadi lebih terstruktur dan mudah dipahami.</p>
+                    </div>
+                    
+                    <div class="info-card">
+                        <h4 style="color: #667eea; margin-bottom: 0.5rem;"><i class="fas fa-atom"></i> Mengetahui Hubungan Kekerabatan</h4>
+                        <p>Klasifikasi menunjukkan hubungan evolusi dan kekerabatan antara satu spesies dengan spesies lainnya.</p>
+                    </div>
+                    <div class="info-card">
+                        <h4 style="color: #667eea; margin-bottom: 0.5rem;"><i class="fas fa-shield-alt"></i> Pelestarian Keanekaragaman Hayati</h4>
+                        <p>Memahami klasifikasi membantu upaya konservasi spesies yang terancam punah.</p>
+                    </div>
+                </div>
+
+                <div class="image-wrapper">
+                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhb7PBmsgVucmvjv4YBo0Eg_Aaffcb1YYa7WGU6I6VkUZ7JLX5d6R3QV4DAtvFv4phrOnjUUAAmaFcyMe2vDQ9wRo423JkGSd2zBQ5LhTONGc8z6z06VUW1rBmYTm5QgwufIVS2au8pGyyw2HJhyphenhyphenTo1dm0CrrNjAUvuhdptbSZ_9fWDsHT3YQ7te8BkPaA/s651/LKPD%20KLASIFIKASI.png" alt="Tujuan Klasifikasi" class="section-image">
+                    <p class="image-caption"><i>Gambar: Diagram tujuan dan manfaat klasifikasi makhluk hidup.</i></p>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3><i class="fas fa-key"></i> B. Kunci Klasifikasi</h3>
+                <p>Untuk mengidentifikasi makhluk hidup, para ahli biologi menggunakan alat bantu yang disebut <strong>kunci klasifikasi</strong> atau <strong>kunci determinasi</strong>. Kunci ini berisi serangkaian pertanyaan atau pernyataan yang mengarahkan pengguna untuk mengidentifikasi spesies tertentu.</p>
+                
+                <div class="info-card" style="background: white; padding: 1.5rem; border-radius: 10px; margin: 1rem 0; border-left: 4px solid #764ba2;">
+                    <h4 style="color: #764ba2;"><i class="fas fa-list-ol"></i> 1. Kunci Dikotomi</h4>
+                    <p>Kunci dikotomi adalah kunci identifikasi yang paling sering digunakan, di mana setiap langkah terdiri dari dua pilihan (pasangan pernyataan) yang berlawanan dan saling meniadakan. Kita harus memilih salah satu pernyataan yang paling sesuai dengan ciri makhluk hidup yang diamati, lalu diarahkan ke nomor berikutnya atau langsung ke nama spesiesnya.</p>
+                </div>
+                
+                <div class="info-card" style="background: white; padding: 1.5rem; border-radius: 10px; margin: 1rem 0; border-left: 4px solid #764ba2;">
+                    <h4 style="color: #764ba2;"><i class="fas fa-table"></i> 2. Kunci Determinasi Format Tabel</h4>
+                    <p>Versi lain dari kunci determinasi yang disajikan dalam bentuk tabel. Kolom-kolom tabel berisi ciri-ciri yang berbeda, dan baris-baris menunjukkan organisme yang berbeda dengan karakteristik yang dimilikinya. Ini mempermudah perbandingan ciri-ciri secara langsung.</p>
+                </div>
+            </div>
+
+            <div class="subsection">
+                <h3><i class="fas fa-code-branch"></i> C. Contoh Kunci Dikotomi</h3>
+                <div class="example-box">
+                    <h4 style="text-align: center; color: #667eea; margin-bottom: 1.5rem;"><i class="fas fa-search-dollar"></i> Identifikasi Hewan Sederhana</h4>
+                    
+                    <div class="code-block">
+                        <p><strong>1.</strong> a. Hidup di air ............................ (lanjut ke 2)</p>
+                        <p>    b. Hidup di darat ........................ (lanjut ke 3)</p>
+                        <br>
+                        <p><strong>2.</strong> a. Memiliki sirip dan insang ............ <strong>Ikan (Pisces)</strong></p>
+                        <p>    b. Tidak memiliki sirip, bernapas dengan paru-paru, melahirkan ..... <strong>Paus</strong></p>
+                        <br>
+                        <p><strong>3.</strong> a. Memiliki sayap dan bulu .............. <strong>Burung (Aves)</strong></p>
+                        <p>    b. Tidak memiliki sayap dan bulu ....... (lanjut ke 4)</p>
+                        <br>
+                        <p><strong>4.</strong> a. Berkaki empat, menyusui anak ....... <strong>Sapi (Mammalia)</strong></p>
+                        <p>    b. Tubuh bersegmen, berkaki banyak .... <strong>Serangga (Insecta)</strong></p>
+                    </div>
+                </div>
+                <p><i>Contoh di atas adalah kunci dikotomi sederhana untuk mengidentifikasi beberapa hewan umum.</i></p>
+            </div>
+
+            <div class="subsection">
+                <h3><i class="fas fa-table"></i> D. Kunci Determinasi Format Tabel</h3>
+                <div class="table-responsive">
+                    <table class="styled-table">
+                        <thead>
+                            <tr>
+                                <th>Karakteristik</th>
+                                <th>Ayam</th>
+                                <th>Ikan Mas</th>
+                                <th>Katak</th>
+                                <th>Sapi</th>
+                                <th>Cacing Tanah</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Bertulang Belakang</td>
+                                <td>Ya</td>
+                                <td>Ya</td>
+                                <td>Ya</td>
+                                <td>Ya</td>
+                                <td>Tidak</td>
+                            </tr>
+                            <tr>
+                                <td>Penutup Tubuh</td>
+                                <td>Bulu</td>
+                                <td>Sisik</td>
+                                <td>Kulit Licin</td>
+                                <td>Rambut</td>
+                                <td>Kulit Lembap</td>
+                            </tr>
+                            <tr>
+                                <td>Alat Gerak</td>
+                                <td>Kaki, Sayap</td>
+                                <td>Sirip</td>
+                                <td>Kaki</td>
+                                <td>Kaki</td>
+                                <td>Otot Perut</td>
+                            </tr>
+                            <tr>
+                                <td>Habitat Utama</td>
+                                <td>Darat</td>
+                                <td>Air (Tawar)</td>
+                                <td>Darat & Air</td>
+                                <td>Darat</td>
+                                <td>Tanah</td>
+                            </tr>
+                            <tr>
+                                <td>Cara Reproduksi</td>
+                                <td>Bertelur (Ovipar)</td>
+                                <td>Bertelur (Ovipar)</td>
+                                <td>Bertelur (Ovipar)</td>
+                                <td>Melahirkan (Vivipar)</td>
+                                <td>Telur (Hermaprodit)</td>
+                            </tr>
+                            <tr>
+                                <td>Jenis Makanan</td>
+                                <td>Omnivora</td>
+                                <td>Omnivora</td>
+                                <td>Karnivora</td>
+                                <td>Herbivora</td>
+                                <td>Detritivora</td>
+                            </tr>
+                            <tr class="result-row">
+                                <td style="font-weight: bold; color: #764ba2;">Kingdom</td>
+                                <td style="font-weight: bold; color: #764ba2;">Animalia</td>
+                                <td style="font-weight: bold; color: #764ba2;">Animalia</td>
+                                <td style="font-weight: bold; color: #764ba2;">Animalia</td>
+                                <td style="font-weight: bold; color: #764ba2;">Animalia</td>
+                                <td style="font-weight: bold; color: #764ba2;">Animalia</td>
+                            </tr>
+                            <tr class="result-row">
+                                <td style="font-weight: bold; color: #764ba2;">Filum</td>
+                                <td style="font-weight: bold; color: #764ba2;">Chordata</td>
+                                <td style="font-weight: bold; color: #764ba2;">Chordata</td>
+                                <td style="font-weight: bold; color: #764ba2;">Chordata</td>
+                                <td style="font-weight: bold; color: #764ba2;">Chordata</td>
+                                <td style="font-weight: bold; color: #764ba2;">Annelida</td>
+                            </tr>
+                            <tr class="result-row">
+                                <td style="font-weight: bold; color: #764ba2;">Kelas</td>
+                                <td style="font-weight: bold; color: #764ba2;">Aves</td>
+                                <td style="font-weight: bold; color: #764ba2;">Actinopterygii</td>
+                                <td style="font-weight: bold; color: #764ba2;">Amphibia</td>
+                                <td style="font-weight: bold; color: #764ba2;">Mammalia</td>
+                                <td style="font-weight: bold; color: #764ba2;">Clitellata</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="small-text"><i>Tabel ini menunjukkan bagaimana ciri-ciri spesifik digunakan untuk membedakan dan mengelompokkan berbagai hewan.</i></p>
+            </div>
+        </section>
+
+        <section id="taksonomi" class="content-section">
+            <h2 class="section-title">
+                <i class="fas fa-dna"></i>
+                3. Makhluk Hidup Beraneka Ragam
+            </h2>
+
+            <div class="subsection">
+                <h3><i class="fas fa-sitemap"></i> A. Urutan Takson Makhluk Hidup</h3>
+                <p>Sistem klasifikasi menggunakan tingkatan atau hierarki yang disebut takson. Semakin tinggi tingkat taksonnya, semakin banyak anggota yang terkumpul, tetapi semakin sedikit persamaan ciri-cirinya. Sebaliknya, semakin rendah tingkat taksonnya, semakin sedikit anggota yang terkumpul, tetapi semakin banyak persamaan ciri-cirinya.</p>
+                
+                <div class="taxonomy-tree">
+                    <div class="taxonomy-level" style="--level: 0;">
+                        <h4><i class="fas fa-globe"></i> Kingdom (Kerajaan)</h4>
+                        <p>Tingkat takson tertinggi, mencakup kelompok organisme yang sangat besar dengan sedikit kesamaan. Contoh: Kingdom Animalia, Kingdom Plantae.</p>
+                    </div>
+                    <div class="taxonomy-level" style="--level: 1;">
+                        <h4><i class="fas fa-splotch"></i> Phylum (Filum) / Divisio (Divisi)</h4>
+                        <p>Di bawah kingdom. Phylum digunakan untuk hewan, Divisio untuk tumbuhan dan fungi. Anggotanya lebih spesifik dari kingdom.</p>
+                    </div>
+                    <div class="taxonomy-level" style="--level: 2;">
+                        <h4><i class="fas fa-layer-group"></i> Classis (Kelas)</h4>
+                        <p>Kelompok organisme yang memiliki karakteristik umum yang sama dalam filum/divisi.</p>
+                    </div>
+                    <div class="taxonomy-level" style="--level: 3;">
+                        <h4><i class="fas fa-folder"></i> Ordo (Bangsa)</h4>
+                        <p>Mengelompokkan kelas-kelas dengan ciri-ciri yang lebih mirip.</p>
+                    </div>
+                    <div class="taxonomy-level" style="--level: 4;">
+                        <h4><i class="fas fa-users"></i> Familia (Suku/Famili)</h4>
+                        <p>Sekumpulan genus yang memiliki ciri-ciri mirip.</p>
+                    </div>
+                    <div class="taxonomy-level" style="--level: 5;">
+                        <h4><i class="fas fa-paw"></i> Genus (Marga)</h4>
+                        <p>Kelompok spesies yang memiliki kekerabatan sangat dekat.</p>
+                    </div>
+                    <div class="taxonomy-level" style="--level: 6;">
+                        <h4><i class="fas fa-dna"></i> Species (Jenis)</h4>
+                        <p>Tingkat takson terendah dan paling spesifik. Anggota satu spesies dapat saling kawin dan menghasilkan keturunan yang fertil (subur).</p>
+                    </div>
+                </div>
+
+                <div class="image-wrapper">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTEzVsqnKWRVYd6Nu2r1RJHUoAjFtx8_TcXmg&s" alt="Hierarki Taksonomi" class="section-image">
+                    <p class="image-caption"><i>Gambar: Urutan tingkatan takson dari yang paling umum ke paling spesifik.</i></p>
+                </div>
+<div class="video-container main-intro-video" data-video-id="https://www.youtube.com/embed/FnzFjgsyURg">
+    <i class="fas fa-play-circle fa-4x play-icon"></i>
+    <span>Video: Memahami Urutan Taksonomi</span>
+</div>
+
+            <div class="subsection">
+                <h3><i class="fas fa-th-large"></i> B. Klasifikasi Makhluk Hidup Lima Kingdom</h3>
+                <p>Sistem klasifikasi lima kingdom yang diusulkan oleh Robert Whittaker pada tahun 1969 adalah sistem yang paling umum diajarkan di sekolah. Sistem ini membagi makhluk hidup menjadi Monera, Protista, Fungi, Plantae, dan Animalia.</p>
+
+                <div class="kingdom-grid">
+                    <div class="kingdom-card">
+                        <h4 class="kingdom-toggle"><i class="fas fa-bacteria"></i> Kingdom Monera <i class="fas fa-chevron-down kingdom-arrow"></i></h4>
+                        <div class="kingdom-content">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRTwZDUYp-96oZXPeGmmAEYxD84H-Qgj9OYQ&s" alt="Bakteri" class="kingdom-image">
+                            <p>Monera adalah organisme prokariotik (tidak memiliki membran inti sel) dan sebagian besar uniseluler (bersel satu). Mereka adalah organisme tertua dan paling sederhana. Reproduksi utamanya dengan membelah diri.</p>
+                            <p><strong>Contoh:</strong></p>
+                            <ul>
+                                <li><strong>Bakteri:</strong> <i>Escherichia coli</i> (di usus), <i>Lactobacillus bulgaricus</i> (pembuatan yogurt), <i>Salmonella typhi</i> (penyebab tifus).</li>
+                                <li><strong>Alga Hijau-Biru (Sianobakteri):</strong> <i>Anabaena</i>, <i>Nostoc</i> (mampu berfotosintesis).</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="kingdom-card">
+                        <h4 class="kingdom-toggle"><i class="fas fa-microscope"></i> Kingdom Protista <i class="fas fa-chevron-down kingdom-arrow"></i></h4>
+                        <div class="kingdom-content">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPfTFO3DZBZC2V1-qMl6tccjeTK08PffD8bA&s" alt="Amoeba" class="kingdom-image">
+                            <p>Protista adalah organisme eukariotik (memiliki membran inti sel) yang sebagian besar uniseluler, meskipun ada yang multiseluler sederhana. Mereka sangat beragam dan sering disebut "makhluk hidup sisa" karena tidak masuk ke kingdom lain.</p>
+                            <p><strong>Dibagi menjadi 3 kelompok utama:</strong></p>
+                            <ul>
+                                <li><strong>Protozoa (mirip hewan):</strong> Bergerak aktif, heterotrof. Contoh: <i>Amoeba</i>, <i>Paramecium</i>, <i>Euglena</i> (bisa autotrof/heterotrof).</li>
+                                <li><strong>Alga (mirip tumbuhan):</strong> Memiliki klorofil, berfotosintesis. Contoh: Alga merah, alga cokelat, alga hijau (ganggang).</li>
+                                <li><strong>Jamur Lendir & Jamur Air (mirip jamur):</strong> Heterotrof, memiliki spora. Contoh: <i>Physarum polycephalum</i> (jamur lendir).</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="kingdom-card">
+                        <h4 class="kingdom-toggle"><i class="fas fa-fungi"></i> Kingdom Fungi (Jamur) <i class="fas fa-chevron-down kingdom-arrow"></i></h4>
+                        <div class="kingdom-content">
+                            <img src="https://t4.ftcdn.net/jpg/03/00/60/99/360_F_300609989_u7T52hYtBKCrCbrPFc92crmcSjfUcL1N.jpg" alt="Jamur" class="kingdom-image">
+                            <p>Fungi adalah organisme eukariotik yang dapat berupa uniseluler (ragi) atau multiseluler (jamur payung). Mereka heterotrof dan mendapatkan nutrisi dengan menyerap dari lingkungannya (saprofit atau parasit). Dinding selnya tersusun dari kitin.</p>
+                            <p><strong>Contoh:</strong></p>
+                            <ul>
+                                <li><strong>Jamur konsumsi:</strong> Jamur tiram, jamur kancing, jamur kuping.</li>
+                                <li><strong>Ragi:</strong> <i>Saccharomyces cerevisiae</i> (pembuatan roti/alkohol).</li>
+                                <li><strong>Jamur patogen:</strong> Jamur penyebab panu, kurap.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="kingdom-card">
+                        <h4 class="kingdom-toggle"><i class="fas fa-tree"></i> Kingdom Plantae (Tumbuhan) <i class="fas fa-chevron-down kingdom-arrow"></i></h4>
+                        <div class="kingdom-content">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQF3urn1_PwYfitRSQKHCZIW6ca4fVvwnQv1A&s" alt="Hutan" class="kingdom-image">
+                            <p>Plantae adalah organisme eukariotik multiseluler yang memiliki klorofil dan mampu melakukan fotosintesis (autotrof). Mereka memiliki dinding sel yang tersusun dari selulosa. Tumbuhan adalah produsen utama di sebagian besar ekosistem.</p>
+                            <p><strong>Dibagi menjadi beberapa kelompok:</strong></p>
+                            <ul>
+                                <li><strong>Lumut (Bryophyta):</strong> Tanpa akar sejati, hidup di tempat lembap. Contoh: Lumut hati, lumut daun.</li>
+                                <li><strong>Paku-pakuan (Pteridophyta):</strong> Memiliki akar, batang, daun sejati, bereproduksi dengan spora. Contoh: Pakis, suplir.</li>
+                                <li><strong>Tumbuhan Berbiji (Spermatophyta):</strong>
+                                    <ul>
+                                        <li><strong>Gymnospermae (berbiji terbuka):</strong> Pinus, pakis haji.</li>
+                                        <li><strong>Angiospermae (berbiji tertutup):</strong> Mangga, padi, mawar.</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="kingdom-card">
+                        <h4 class="kingdom-toggle"><i class="fas fa-dragon"></i> Kingdom Animalia (Hewan) <i class="fas fa-chevron-down kingdom-arrow"></i></h4>
+                        <div class="kingdom-content">
+                            <img src="https://2.bp.blogspot.com/-tDD-N84erxU/WWL5gWP-PRI/AAAAAAAAGv8/GQvWJltyuQoAp5WMfqMRbEKXXMewhts9ACLcBGAs/s1600/filum%2Bkongdom%2Banimalia.jpg" alt="Keanekaragaman Hewan" class="kingdom-image">
+                            <p>Animalia adalah organisme eukariotik multiseluler yang bersifat heterotrof (mendapatkan makanan dari organisme lain). Mereka umumnya dapat bergerak aktif dan tidak memiliki dinding sel. Kingdom ini adalah yang paling beragam dan familiar bagi kita.</p>
+                            <p><strong>Dibagi menjadi dua kelompok besar:</strong></p>
+                            <ul>
+                                <li><strong>Invertebrata (Tidak Bertulang Belakang):</strong>
+                                    <ul>
+                                        <li><strong>Porifera (Hewan berpori):</strong> Spons.</li>
+                                        <li><strong>Cnidaria (Hewan berongga):</strong> Ubur-ubur, anemon laut.</li>
+                                        <li><strong>Platyhelminthes (Cacing pipih):</strong> Cacing pita.</li>
+                                        <li><strong>Nematoda (Cacing gilig):</strong> Cacing perut.</li>
+                                        <li><strong>Annelida (Cacing bersegmen):</strong> Cacing tanah, lintah.</li>
+                                        <li><strong>Mollusca (Hewan lunak):</strong> Siput, kerang, gurita.</li>
+                                        <li><strong>Arthropoda (Hewan berbuku-buku):</strong> Serangga (kupu-kupu, semut), laba-laba, kepiting.</li>
+                                        <li><strong>Echinodermata (Hewan berkulit duri):</strong> Bintang laut, landak laut.</li>
+                                    </ul>
+                                </li>
+                                <li><strong>Vertebrata (Bertulang Belakang):</strong>
+                                    <ul>
+                                        <li><strong>Pisces (Ikan):</strong> Ikan mas, hiu.</li>
+                                        <li><strong>Amphibia (Amfibi):</strong> Katak, salamander.</li>
+                                        <li><strong>Reptilia (Reptil):</strong> Ular, kadal, buaya.</li>
+                                        <li><strong>Aves (Burung):</strong> Ayam, elang.</li>
+                                        <li><strong>Mammalia (Mamalia):</strong> Sapi, kucing, manusia, paus.</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contoh-klasifikasi-hewan" class="content-section">
+            <h2 class="section-title">
+                <i class="fas fa-atlas"></i>
+                Contoh Klasifikasi Hewan di Bumi
+            </h2>
+            <p>Mari kita lihat bagaimana hewan-hewan yang kita kenal diklasifikasikan dari kingdom hingga spesies.</p>
+
+            <div class="table-responsive">
+                <table class="styled-table detail-table">
+                    <thead>
+                        <tr>
+                            <th>Hewan</th>
+                            <th>Nama Ilmiah (Species)</th>
+                            <th>Kingdom</th>
+                            <th>Filum</th>
+                            <th>Kelas</th>
+                            <th>Ordo</th>
+                            <th>Famili</th>
+                            <th>Genus</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Sapi</td>
+                            <td><i>Bos taurus</i></td>
+                            <td>Animalia</td>
+                            <td>Chordata</td>
+                            <td>Mammalia</td>
+                            <td>Artiodactyla</td>
+                            <td>Bovidae</td>
+                            <td><i>Bos</i></td>
+                        </tr>
+                        <tr>
+                            <td>Kucing</td>
+                            <td><i>Felis catus</i></td>
+                            <td>Animalia</td>
+                            <td>Chordata</td>
+                            <td>Mammalia</td>
+                            <td>Carnivora</td>
+                            <td>Felidae</td>
+                            <td><i>Felis</i></td>
+                        </tr>
+                        <tr>
+                            <td>Anjing</td>
+                            <td><i>Canis lupus familiaris</i></td>
+                            <td>Animalia</td>
+                            <td>Chordata</td>
+                            <td>Mammalia</td>
+                            <td>Carnivora</td>
+                            <td>Canidae</td>
+                            <td><i>Canis</i></td>
+                        </tr>
+                        <tr>
+                            <td>Ayam</td>
+                            <td><i>Gallus gallus domesticus</i></td>
+                            <td>Animalia</td>
+                            <td>Chordata</td>
+                            <td>Aves</td>
+                            <td>Galliformes</td>
+                            <td>Phasianidae</td>
+                            <td><i>Gallus</i></td>
+                        </tr>
+                        <tr>
+                            <td>Ular Kobra</td>
+                            <td><i>Naja naja</i></td>
+                            <td>Animalia</td>
+                            <td>Chordata</td>
+                            <td>Reptilia</td>
+                            <td>Squamata</td>
+                            <td>Elapidae</td>
+                            <td><i>Naja</i></td>
+                        </tr>
+                        <tr>
+                            <td>Ikan Mas</td>
+                            <td><i>Cyprinus carpio</i></td>
+                            <td>Animalia</td>
+                            <td>Chordata</td>
+                            <td>Actinopterygii</td>
+                            <td>Cypriniformes</td>
+                            <td>Cyprinidae</td>
+                            <td><i>Cyprinus</i></td>
+                        </tr>
+                        <tr>
+                            <td>Kupu-kupu</td>
+                            <td><i>Papilio demoleus</i></td>
+                            <td>Animalia</td>
+                            <td>Arthropoda</td>
+                            <td>Insecta</td>
+                            <td>Lepidoptera</td>
+                            <td>Papilionidae</td>
+                            <td><i>Papilio</i></td>
+                        </tr>
+                        <tr>
+                            <td>Cacing Tanah</td>
+                            <td><i>Lumbricus terrestris</i></td>
+                            <td>Animalia</td>
+                            <td>Annelida</td>
+                            <td>Clitellata</td>
+                            <td>Crassiclitellata</td>
+                            <td>Lumbricidae</td>
+                            <td><i>Lumbricus</i></td>
+                        </tr>
+                        <tr>
+                            <td>Udang</td>
+                            <td><i>Penaeus monodon</i></td>
+                            <td>Animalia</td>
+                            <td>Arthropoda</td>
+                            <td>Malacostraca</td>
+                            <td>Decapoda</td>
+                            <td>Penaeidae</td>
+                            <td><i>Penaeus</i></td>
+                        </tr>
+                        <tr>
+                            <td>Gurita</td>
+                            <td><i>Octopus vulgaris</i></td>
+                            <td>Animalia</td>
+                            <td>Mollusca</td>
+                            <td>Cephalopoda</td>
+                            <td>Octopoda</td>
+                            <td>Octopodidae</td>
+                            <td><i>Octopus</i></td>
+                        </tr>
+                        <tr>
+                            <td>Laba-laba</td>
+                            <td><i>Arachnus diadematus</i></td>
+                            <td>Animalia</td>
+                            <td>Arthropoda</td>
+                            <td>Arachnida</td>
+                            <td>Araneae</td>
+                            <td>Araneidae</td>
+                            <td><i>Arachnus</i></td>
+                        </tr>
+                        <tr>
+                            <td>Katak Hijau</td>
+                            <td><i>Hylarana erythraea</i></td>
+                            <td>Animalia</td>
+                            <td>Chordata</td>
+                            <td>Amphibia</td>
+                            <td>Anura</td>
+                            <td>Ranidae</td>
+                            <td><i>Hylarana</i></td>
+                        </tr>
+                        <tr>
+                            <td>Bintang Laut</td>
+                            <td><i>Asterias rubens</i></td>
+                            <td>Animalia</td>
+                            <td>Echinodermata</td>
+                            <td>Asteroidea</td>
+                            <td>Forcipulatida</td>
+                            <td>Asteriidae</td>
+                            <td><i>Asterias</i></td>
+                        </tr>
+                        <tr>
+                            <td>Lebah Madu</td>
+                            <td><i>Apis mellifera</i></td>
+                            <td>Animalia</td>
+                            <td>Arthropoda</td>
+                            <td>Insecta</td>
+                            <td>Hymenoptera</td>
+                            <td>Apidae</td>
+                            <td><i>Apis</i></td>
+                        </tr>
+                        <tr>
+                            <td>Paus Biru</td>
+                            <td><i>Balaenoptera musculus</i></td>
+                            <td>Animalia</td>
+                            <td>Chordata</td>
+                            <td>Mammalia</td>
+                            <td>Cetacea</td>
+                            <td>Balaenopteridae</td>
+                            <td><i>Balaenoptera</i></td>
+                        </tr>
+                        <tr>
+                            <td>Gajah Afrika</td>
+                            <td><i>Loxodonta africana</i></td>
+                            <td>Animalia</td>
+                            <td>Chordata</td>
+                            <td>Mammalia</td>
+                            <td>Proboscidea</td>
+                            <td>Elephantidae</td>
+                            <td><i>Loxodonta</i></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="small-text"><i>Daftar ini hanyalah sebagian kecil dari keanekaragaman Kingdom Animalia. Setiap hewan memiliki klasifikasi ilmiahnya sendiri.</i></p>
+        </section>
+
+
+        <section id="quiz" class="content-section interactive-quiz">
+            <h2 class="section-title" style="color: white;">
+                <i class="fas fa-question-circle"></i>
+                Uji Pemahamanmu!
+            </h2>
+            <p style="color: white; font-size: 1.1rem;">Ayo, coba jawab beberapa pertanyaan untuk menguji pemahamanmu tentang klasifikasi makhluk hidup!</p>
+            
+            <div id="quiz-area">
+                <div class="loading"></div>
+                <p style="color: white; margin-top: 1rem;">Memuat Quiz...</p>
+            </div>
+            <button id="start-quiz-btn" class="quiz-btn"><i class="fas fa-play"></i> Mulai Quiz</button>
+        </section>
+
+        <section id="glosarium" class="content-section">
+            <h2 class="section-title">
+                <i class="fas fa-book-reader"></i>
+                Glosarium Istilah Penting
+            </h2>
+            <div class="glossary-grid">
+                <div class="glossary-item">
+                    <h4><i class="fas fa-tags"></i> Klasifikasi</h4>
+                    <p>Proses pengelompokan makhluk hidup berdasarkan persamaan dan perbedaan ciri.</p>
+                </div>
+                <div class="glossary-item">
+                    <h4><i class="fas fa-tags"></i> Taksonomi</h4>
+                    <p>Ilmu yang mempelajari tentang klasifikasi, tata nama, dan identifikasi makhluk hidup.</p>
+                </div>
+                <div class="glossary-item">
+                    <h4><i class="fas fa-tags"></i> Prokariotik</h4>
+                    <p>Organisme yang tidak memiliki membran inti sel (contoh: bakteri, alga hijau-biru).</p>
+                </div>
+                <div class="glossary-item">
+                    <h4><i class="fas fa-tags"></i> Eukariotik</h4>
+                    <p>Organisme yang memiliki membran inti sel (contoh: protista, fungi, plantae, animalia).</p>
+                </div>
+                <div class="glossary-item">
+                    <h4><i class="fas fa-tags"></i> Autotrof</h4>
+                    <p>Organisme yang dapat membuat makanannya sendiri, biasanya melalui fotosintesis (contoh: tumbuhan).</p>
+                </div>
+                <div class="glossary-item">
+                    <h4><i class="fas fa-tags"></i> Heterotrof</h4>
+                    <p>Organisme yang mendapatkan makanan dari organisme lain (contoh: hewan, jamur).</p>
+                </div>
+                <div class="glossary-item">
+                    <h4><i class="fas fa-tags"></i> Uniseluler</h4>
+                    <p>Organisme yang hanya tersusun dari satu sel.</p>
+                </div>
+                <div class="glossary-item">
+                    <h4><i class="fas fa-tags"></i> Multiseluler</h4>
+                    <p>Organisme yang tersusun dari banyak sel.</p>
+                </div>
+                <div class="glossary-item">
+                    <h4><i class="fas fa-tags"></i> Dikotomi</h4>
+                    <p>Kunci identifikasi yang menggunakan dua pilihan berlawanan pada setiap langkah.</p>
+                </div>
+                <div class="glossary-item">
+                    <h4><i class="fas fa-tags"></i> Spesies</h4>
+                    <p>Tingkat takson terendah, kelompok individu yang dapat saling kawin dan menghasilkan keturunan fertil.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="faq" class="content-section">
+            <h2 class="section-title">
+                <i class="fas fa-question-circle"></i>
+                Pertanyaan yang Sering Diajukan (FAQ)
+            </h2>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <h3 class="faq-question"><i class="fas fa-chevron-right faq-arrow"></i> Mengapa klasifikasi makhluk hidup terus berubah?</h3>
+                    <div class="faq-answer">
+                        <p>Klasifikasi makhluk hidup adalah ilmu yang dinamis. Seiring dengan perkembangan teknologi (misalnya analisis DNA) dan penemuan spesies baru, para ilmuwan terus memperbarui dan menyempurnakan sistem klasifikasi untuk mencerminkan hubungan kekerabatan yang lebih akurat.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question"><i class="fas fa-chevron-right faq-arrow"></i> Apa perbedaan utama antara Kingdom Monera dan Protista?</h3>
+                    <div class="faq-answer">
+                        <p>Perbedaan utama adalah pada keberadaan membran inti sel. Monera adalah prokariotik (tidak memiliki membran inti), sedangkan Protista sudah eukariotik (memiliki membran inti). Selain itu, Protista lebih kompleks dan beragam dibanding Monera.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question"><i class="fas fa-chevron-right faq-arrow"></i> Apakah virus termasuk makhluk hidup? Dan mengapa tidak masuk dalam 5 kingdom?</h3>
+                    <div class="faq-answer">
+                        <p>Status virus sebagai makhluk hidup masih menjadi perdebatan di kalangan ilmuwan karena virus tidak memiliki semua ciri kehidupan secara mandiri (misalnya, tidak bisa bereproduksi tanpa sel inang). Oleh karena itu, virus tidak diklasifikasikan ke dalam sistem 5 kingdom.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <h3 class="faq-question"><i class="fas fa-chevron-right faq-arrow"></i> Bagaimana cara menghafal urutan takson?</h3>
+                    <div class="faq-answer">
+                        <p>Ada berbagai mnemonik atau jembatan keledai untuk menghafal urutan takson. Salah satu yang populer adalah: **K**ing **P**hilip **C**ame **O**ver **F**or **G**ood **S**oup (Kingdom, Phylum, Class, Order, Family, Genus, Species).</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+<section id="resources" class="content-section">
+    <h2 class="section-title">
+        <i class="fas fa-external-link-alt"></i>
+        Sumber Belajar Tambahan
+    </h2>
+    <p>Untuk memperdalam pemahamanmu, kamu bisa mengunjungi sumber-sumber belajar berikut:</p>
+    <ul>
+        <li><a href="https://id.wikipedia.org/wiki/Klasifikasi_ilmiah" target="_blank" rel="noopener noreferrer"><i class="fab fa-wikipedia-w"></i> Wikipedia: Klasifikasi Ilmiah</a></li>
+        <li><a href="https://www.youtube.com/embed/Lyiwj0_0gXE" target="_blank" rel="noopener noreferrer"><i class="fab fa-youtube"></i> Video Pembelajaran Klasifikasi Makhluk Hidup</a></li>
+        <li><a href="https://www.gramedia.com/literasi/sistem-klasifikasi-makhluk-hidup/?srsltid=AfmBOor6u_HxmdCf2Xi5kpt_C2-EB_7J7-JlXaVcmWGRkf7uMohPU_Z5" target="_blank" rel="noopener noreferrer"><i class="fas fa-globe"></i> Artikel Gramedia: Klasifikasi Makhluk Hidup</a></li>
+    </ul>
+</section>
+
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>© 2025 Materi IPA SMP. Dibuat dengan <i class="fas fa-heart"></i> untuk belajar.</p>
+            <p>Desain oleh Gemini AI</p>
+        </div>
+    </footer>
+
+    <div class="scroll-top" id="scrollTopBtn">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. Smooth scrolling for navigation links
+            document.querySelectorAll('nav a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+
+                    const targetSection = document.querySelector(targetId);
+                    if (targetSection) {
+                        const headerOffset = document.querySelector('.header').offsetHeight;
+                        const elementPosition = targetSection.getBoundingClientRect().top + window.pageYOffset;
+                        const offsetPosition = elementPosition - headerOffset - 20;
+
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // 2. Highlight active navigation link based on scroll position (Scroll Spy)
+            const sections = document.querySelectorAll('.content-section[id]');
+            const navLinks = document.querySelectorAll('.nav-links a[href^="#"]');
+            const headerHeight = document.querySelector('.header').offsetHeight;
+
+            const observerOptions = {
+                root: null,
+                rootMargin: `-${headerHeight}px 0px -50% 0px`,
+                threshold: 0
+            };
+
+            const sectionObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        navLinks.forEach(link => {
+                            link.classList.remove('active');
+                        });
+                        const activeLink = document.querySelector(`.nav-links a[href="#${entry.target.id}"]`);
+                        if (activeLink) {
+                            activeLink.classList.add('active');
+                        }
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                sectionObserver.observe(section);
+            });
+
+            // Initial active link check on load
+            const currentHash = window.location.hash;
+            if (currentHash) {
+                const initialActiveLink = document.querySelector(`.nav-links a[href="${currentHash}"]`);
+                if (initialActiveLink) {
+                    initialActiveLink.classList.add('active');
+                    const targetSection = document.querySelector(currentHash);
+                    if (targetSection) {
+                        const headerOffset = document.querySelector('.header').offsetHeight;
+                        const elementPosition = targetSection.getBoundingClientRect().top + window.pageYOffset;
+                        const offsetPosition = elementPosition - headerOffset - 20;
+                        window.scrollTo({ top: offsetPosition, behavior: 'auto' });
+                    }
+                }
+            } else {
+                // If no hash, activate the first section's link by default (if it's in view or near top)
+                if (sections.length > 0) {
+                    const firstSectionLink = document.querySelector(`.nav-links a[href="#${sections[0].id}"]`);
+                    if (firstSectionLink) {
+                        firstSectionLink.classList.add('active');
+                    }
+                }
+            }
+
+            // 3. Scroll to top button functionality
+            const scrollTopBtn = document.getElementById('scrollTopBtn');
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) { // Show button after scrolling 300px
+                    scrollTopBtn.classList.add('visible');
+                } else {
+                    scrollTopBtn.classList.remove('visible');
+                }
+            });
+
+            scrollTopBtn.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
+// 4. Video Embeds (Load YouTube videos on click)
+const videoContainers = document.querySelectorAll('.video-container');
+videoContainers.forEach(container => {
+    container.addEventListener('click', function () {
+        const videoUrl = this.dataset.videoId;
+        if (videoUrl && !this.classList.contains('playing')) {
+            const iframe = document.createElement('iframe');
+            iframe.setAttribute('src', `${videoUrl}?autoplay=1`);
+            iframe.setAttribute('frameborder', '0');
+            iframe.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+            iframe.setAttribute('allowfullscreen', '');
+            iframe.style.width = '100%';
+            iframe.style.height = '100%';
+
+            // Kosongkan konten dalam .video-container dan masukkan iframe
+            this.innerHTML = '';
+            this.classList.add('playing');
+            this.appendChild(iframe);
+        }
+    });
+});
+
+            // 5. Quiz Functionality
+            const quizArea = document.getElementById('quiz-area');
+            const startQuizBtn = document.getElementById('start-quiz-btn');
+
+            const quizQuestions = [
+                {
+                    question: "Makhluk hidup yang tidak memiliki membran inti sel (prokariotik) termasuk dalam kingdom apa?",
+                    options: ["Protista", "Monera", "Fungi", "Plantae"],
+                    answer: "Monera"
+                },
+                {
+                    question: "Hewan yang tergolong dalam kelas Mammalia, bernapas dengan paru-paru, dan melahirkan adalah...",
+                    options: ["Ikan", "Burung", "Sapi", "Kadal"],
+                    answer: "Sapi"
+                },
+                {
+                    question: "Unit terkecil penyusun makhluk hidup adalah...",
+                    options: ["Organ", "Jaringan", "Sistem Organ", "Sel"],
+                    answer: "Sel"
+                },
+                {
+                    question: "Apa tujuan utama dari klasifikasi makhluk hidup?",
+                    options: ["Untuk menyusahkan siswa", "Memperindah nama ilmiah", "Mempermudah pengenalan dan pembelajaran", "Hanya untuk ilmuwan"],
+                    answer: "Mempermudah pengenalan dan pembelajaran"
+                },
+                {
+                    question: "Alga, Amoeba, dan Paramecium termasuk dalam kingdom...",
+                    options: ["Monera", "Fungi", "Protista", "Plantae"],
+                    answer: "Protista"
+                },
+                {
+                    question: "Tingkatan taksonomi paling spesifik di mana anggotanya dapat saling kawin dan menghasilkan keturunan fertil adalah...",
+                    options: ["Famili", "Genus", "Spesies", "Ordo"],
+                    answer: "Spesies"
+                },
+                {
+                    question: "Apa nama ciri makhluk hidup yang menunjukkan kemampuan menanggapi rangsangan?",
+                    options: ["Respirasi", "Ekskresi", "Iritabilitas", "Reproduksi"],
+                    answer: "Iritabilitas"
+                },
+                {
+                    question: "Jamur tidak memiliki klorofil dan mendapatkan makanan dengan menyerap nutrisi dari lingkungannya. Termasuk kingdom apa?",
+                    options: ["Plantae", "Animalia", "Monera", "Fungi"],
+                    answer: "Fungi"
+                },
+                {
+                    question: "Contoh kunci dikotomi selalu memiliki berapa pilihan pada setiap langkah?",
+                    options: ["Satu", "Dua", "Tiga", "Empat"],
+                    answer: "Dua"
+                },
+                {
+                    question: "Makhluk hidup yang mampu membuat makanannya sendiri melalui fotosintesis disebut...",
+                    options: ["Heterotrof", "Autotrof", "Saprofit", "Parasit"],
+                    answer: "Autotrof"
+                }
+            ];
+
+            let currentQuestionIndex = 0;
+            let score = 0;
+
+            function loadQuestion() {
+                quizArea.innerHTML = ''; // Clear previous question
+                if (currentQuestionIndex < quizQuestions.length) {
+                    const q = quizQuestions[currentQuestionIndex];
+                    const questionElement = document.createElement('p');
+                    questionElement.classList.add('quiz-question');
+                    questionElement.textContent = `${currentQuestionIndex + 1}. ${q.question}`;
+                    quizArea.appendChild(questionElement);
+
+                    const optionsDiv = document.createElement('div');
+                    optionsDiv.classList.add('quiz-options');
+                    q.options.forEach(option => {
+                        const button = document.createElement('button');
+                        button.textContent = option;
+                        button.addEventListener('click', () => checkAnswer(option, q.answer, button));
+                        optionsDiv.appendChild(button);
+                    });
+                    quizArea.appendChild(optionsDiv);
+                } else {
+                    showQuizResult();
+                }
+            }
+
+            function checkAnswer(selectedOption, correctAnswer, buttonElement) {
+                // Disable all buttons after an answer is selected
+                const allOptions = buttonElement.parentNode.querySelectorAll('button');
+                allOptions.forEach(btn => btn.disabled = true);
+
+                if (selectedOption === correctAnswer) {
+                    buttonElement.classList.add('correct');
+                    score++;
+                } else {
+                    buttonElement.classList.add('incorrect');
+                    // Highlight the correct answer as well
+                    allOptions.forEach(btn => {
+                        if (btn.textContent === correctAnswer) {
+                            btn.classList.add('correct');
+                        }
+                    });
+                }
+
+                setTimeout(() => {
+                    currentQuestionIndex++;
+                    loadQuestion();
+                }, 1500); // Wait 1.5 seconds before loading next question
+            }
+
+            function showQuizResult() {
+                quizArea.innerHTML = `
+                    <p id="quiz-result" style="color: white;">Skormu: ${score} dari ${quizQuestions.length}</p>
+                    <button id="restart-quiz-btn" class="quiz-btn"><i class="fas fa-redo"></i> Ulangi Quiz</button>
+                `;
+                document.getElementById('restart-quiz-btn').addEventListener('click', restartQuiz);
+            }
+
+            function restartQuiz() {
+                currentQuestionIndex = 0;
+                score = 0;
+                startQuizBtn.style.display = 'inline-block'; // Show start button again
+                quizArea.innerHTML = `
+                    <div class="loading"></div>
+                    <p style="color: white; margin-top: 1rem;">Memuat Quiz...</p>
+                `;
+            }
+
+            startQuizBtn.addEventListener('click', () => {
+                startQuizBtn.style.display = 'none'; // Hide start button
+                loadQuestion();
+            });
+
+            // 6. FAQ Accordion Functionality
+            const faqQuestions = document.querySelectorAll('.faq-question');
+            faqQuestions.forEach(question => {
+                question.addEventListener('click', () => {
+                    const answer = question.nextElementSibling; // Get the next sibling (faq-answer)
+                    const arrow = question.querySelector('.faq-arrow');
+
+                    // Close all other open answers
+                    document.querySelectorAll('.faq-answer.open').forEach(openAnswer => {
+                        if (openAnswer !== answer) {
+                            openAnswer.classList.remove('open');
+                            openAnswer.style.maxHeight = "0";
+                            openAnswer.previousElementSibling.classList.remove('active');
+                            openAnswer.previousElementSibling.querySelector('.faq-arrow').classList.remove('active');
+                        }
+                    });
+
+                    // Toggle current answer
+                    answer.classList.toggle('open');
+                    question.classList.toggle('active');
+                    arrow.classList.toggle('active');
+
+                    // Adjust max-height for smooth transition
+                    if (answer.classList.contains('open')) {
+                        answer.style.maxHeight = answer.scrollHeight + "px"; // Set max-height to content height
+                    } else {
+                        answer.style.maxHeight = "0";
+                    }
+                });
+            });
+
+            // 7. Functionality for Kingdom Cards (Toggle) - INI YANG KITA PERBAIKI
+            const kingdomToggles = document.querySelectorAll('.kingdom-toggle');
+            kingdomToggles.forEach(toggle => {
+                toggle.addEventListener('click', () => {
+                    const kingdomContent = toggle.nextElementSibling; // Get the next sibling (kingdom-content)
+                    const arrow = toggle.querySelector('.kingdom-arrow');
+
+                    // Close all other open kingdom cards
+                    document.querySelectorAll('.kingdom-content.open').forEach(openContent => {
+                        if (openContent !== kingdomContent) {
+                            openContent.classList.remove('open');
+                            openContent.style.maxHeight = "0";
+                            openContent.previousElementSibling.classList.remove('active');
+                            openContent.previousElementSibling.querySelector('.kingdom-arrow').classList.remove('active');
+                        }
+                    });
+
+                    // Toggle current kingdom card
+                    kingdomContent.classList.toggle('open');
+                    toggle.classList.toggle('active');
+                    arrow.classList.toggle('active');
+
+                    // Adjust max-height for smooth transition
+                    if (kingdomContent.classList.contains('open')) {
+                        kingdomContent.style.maxHeight = kingdomContent.scrollHeight + "px";
+                    } else {
+                        kingdomContent.style.maxHeight = "0";
+                    }
+                });
+            });
+
+        }); // Akhir dari DOMContentLoaded
+    </script>
+</body>
+</html>
