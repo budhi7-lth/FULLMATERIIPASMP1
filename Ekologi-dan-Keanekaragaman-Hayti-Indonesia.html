@@ -1,0 +1,1402 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ekologi dan Keanekaragaman Hayati Indonesia - IPA SMP</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%); /* Warna latar belakang lebih cerah */
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Header Styling */
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            position: relative; /* Untuk progress bar */
+        }
+
+        .header h1 {
+            font-family: 'Montserrat', sans-serif;
+            color: #2c3e50;
+            font-size: 3.2em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(45deg, #00b894, #00a085); /* Warna judul cerah */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            font-size: 1.2em;
+            color: #7f8c8d;
+            margin-bottom: 20px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .nav-btn {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+            font-size: 1em;
+            text-transform: uppercase;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(52, 152, 219, 0.4);
+            filter: brightness(1.1);
+        }
+
+        .home-btn {
+            background: linear-gradient(45deg, #e74c3c, #c0392b) !important;
+            box-shadow: 0 5px 15px rgba(231, 76, 60, 0.3) !important;
+        }
+
+        .home-btn:hover {
+            background: linear-gradient(45deg, #c0392b, #e74c3c) !important;
+            box-shadow: 0 8px 25px rgba(231, 76, 60, 0.4) !important;
+        }
+
+        /* Content Section Styling */
+        .content-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            display: none;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        .content-section h2 {
+            font-family: 'Montserrat', sans-serif;
+            color: #2c3e50;
+            font-size: 2.8em;
+            margin-bottom: 20px;
+            text-align: center;
+            background: linear-gradient(45deg, #8e44ad, #9b59b6); /* Warna judul bagian */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #9b59b6;
+            margin-top: 0;
+        }
+
+        .content-section h3 {
+            font-family: 'Montserrat', sans-serif;
+            color: #34495e;
+            font-size: 2em;
+            margin: 25px 0 15px 0;
+            padding-left: 15px;
+            border-left: 5px solid #2ecc71; /* Warna hijau */
+            background: linear-gradient(90deg, rgba(46, 204, 113, 0.05), transparent);
+            padding: 12px 15px;
+            border-radius: 5px;
+        }
+
+        .content-section h4 {
+            font-family: 'Montserrat', sans-serif;
+            color: #2c3e50;
+            font-size: 1.4em;
+            margin: 20px 0 10px 0;
+            padding: 10px 15px;
+            background: linear-gradient(90deg, rgba(52, 152, 219, 0.05), transparent); /* Warna biru muda */
+            border-left: 4px solid #3498db;
+            border-radius: 3px;
+        }
+
+        .content-section p {
+            margin-bottom: 15px;
+            text-align: justify;
+            line-height: 1.8;
+            color: #444;
+            font-size: 1.05em;
+        }
+
+        .content-section ul, .content-section ol {
+            margin: 15px 0 15px 30px;
+            color: #444;
+        }
+
+        .content-section li {
+            margin-bottom: 8px;
+            line-height: 1.7;
+            color: #34495e;
+        }
+
+        /* Image and Video Containers */
+        .image-container, .video-container {
+            text-align: center;
+            margin: 25px auto; /* auto for centering */
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+
+        .image-container {
+            background: linear-gradient(135deg, rgba(52, 152, 219, 0.08), rgba(46, 204, 113, 0.08));
+            border: 2px dashed rgba(52, 152, 219, 0.3);
+        }
+
+        .video-container {
+            background: linear-gradient(135deg, rgba(155, 89, 182, 0.08), rgba(142, 68, 173, 0.08));
+            border: 2px dashed rgba(155, 89, 182, 0.3);
+            position: relative; /* Untuk iframe responsif */
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            border: none;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Custom image placeholders for external links */
+        .img-display {
+            width: 100%;
+            max-width: 600px; /* Adjust as needed */
+            height: 350px; /* Fixed height for consistency */
+            background-size: contain; /* Agar gambar tidak terpotong */
+            background-repeat: no-repeat;
+            background-position: center;
+            border-radius: 10px;
+            margin: 0 auto 15px auto;
+            border: 1px solid #ddd;
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.05);
+            display: flex; /* Untuk memposisikan teks di tengah jika gambar tidak terload */
+            align-items: center;
+            justify-content: center;
+            color: #7f8c8d;
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+
+        .img-display.no-image {
+            background-color: #f0f0f0;
+            content: "Gambar tidak dapat dimuat"; /* Ini tidak akan muncul jika background-image ada */
+        }
+
+
+        .image-container p, .video-container p {
+            font-style: italic;
+            color: #555;
+            margin-top: 10px;
+        }
+
+        /* Info/Warning/Success Boxes */
+        .info-box, .warning-box, .success-box {
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .info-box {
+            background-color: #e3f2fd;
+            border-left: 5px solid #2196f3;
+        }
+
+        .warning-box {
+            background-color: #ffe0b2;
+            border-left: 5px solid #ff9800;
+        }
+
+        .success-box {
+            background-color: #e8f5e9;
+            border-left: 5px solid #4caf50;
+        }
+
+        .info-box h4, .warning-box h4, .success-box h4 {
+            margin-top: 0;
+            color: inherit;
+        }
+
+        /* Ecosystem Diagram / Grids */
+        .ecosystem-diagram, .flora-fauna-grid, .conservation-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Adjusted minmax */
+            gap: 20px;
+            margin: 25px 0;
+        }
+
+        .ecosystem-item, .species-card, .method-card {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+            font-size: 1.05em;
+            line-height: 1.5;
+        }
+
+        .species-card {
+            background: white;
+            color: #333;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            border: 1px solid #eee;
+        }
+
+        .method-card {
+            background: linear-gradient(135deg, #4caf50, #81c784);
+            box-shadow: 0 8px 20px rgba(76, 175, 80, 0.3);
+        }
+
+        .ecosystem-item:hover, .species-card:hover, .method-card:hover {
+            transform: scale(1.03); /* Slight increase on hover */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+        }
+        .species-card:hover {
+             transform: translateY(-5px);
+             box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12);
+        }
+        .method-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(76, 175, 80, 0.4);
+        }
+
+
+        .species-card h4, .method-card h4, .ecosystem-item strong {
+            font-family: 'Montserrat', sans-serif;
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+        .species-card h4 {
+            color: #333;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+        }
+
+
+        /* Quiz Section */
+        .quiz-section {
+            background: rgba(155, 89, 182, 0.05);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 25px 0;
+            border: 1px solid rgba(155, 89, 182, 0.2);
+        }
+
+        .quiz-question {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .quiz-question h4 {
+            margin-top: 0;
+            color: #34495e;
+            font-size: 1.5em;
+            border-left: 4px solid #f39c12; /* Warna kuning */
+            padding-left: 10px;
+            margin-bottom: 15px;
+        }
+
+        .quiz-question p {
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .quiz-options {
+            list-style: none; /* Menghapus bullet default ul */
+            padding: 0;
+            margin: 0;
+        }
+
+        .quiz-options label {
+            display: block;
+            margin: 10px 0;
+            padding: 12px;
+            background: #f8f9fa; /* Warna latar belakang opsi normal */
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid #dee2e6;
+            color: #444;
+            font-size: 1em;
+            position: relative; /* Untuk radio button agar sejajar */
+            padding-left: 35px; /* Memberi ruang untuk radio button */
+        }
+
+        .quiz-options label input[type="radio"] {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            margin: 0; /* Hapus margin default input radio */
+        }
+
+        .quiz-options label:hover {
+            background: #e9ecef;
+            transform: translateX(5px);
+        }
+
+        /* Styling for selected, correct, and wrong answers */
+        .quiz-options label.selected {
+            background: #cce5ff; /* Warna biru muda saat dipilih */
+            border: 2px solid #007bff;
+            color: #004085;
+        }
+
+        .quiz-options label.correct {
+            background: #d4edda !important; /* Hijau untuk jawaban benar */
+            border: 2px solid #28a745 !important;
+            color: #155724 !important;
+        }
+
+        .quiz-options label.wrong {
+            background: #f8d7da !important; /* Merah untuk jawaban salah */
+            border: 2px solid #dc3545 !important;
+            color: #721c24 !important;
+        }
+
+        #quiz-result {
+            margin-top: 25px;
+            padding: 20px;
+            border-radius: 10px;
+            font-size: 1.2em;
+            font-weight: bold;
+            text-align: center;
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
+            display: none; /* Disembunyikan secara default */
+        }
+
+        #quiz-result.correct-answer {
+            background-color: #d4edda;
+            color: #155724;
+            border-color: #28a745;
+        }
+
+        #quiz-result.wrong-answer {
+            background-color: #f8d7da;
+            color: #721c24;
+            border-color: #dc3545;
+        }
+
+        .quiz-submit-btn {
+            background: linear-gradient(45deg, #28a745, #218838);
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            display: block;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            text-transform: uppercase;
+        }
+
+        .quiz-submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Progress Bar */
+        .progress-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: rgba(0,0,0,0.1);
+            border-radius: 5px 5px 0 0;
+            overflow: hidden;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #2ecc71, #3498db);
+            width: 0%;
+            border-radius: 5px 0 0 5px;
+            transition: width 0.4s ease-out;
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.5em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0.8;
+            transition: opacity 0.3s ease-in-out, background-color 0.3s ease;
+            z-index: 1000;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+        }
+
+        .back-to-top:hover {
+            opacity: 1;
+            background-color: rgba(0, 0, 0, 0.8);
+            transform: translateY(-2px);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+
+            .header {
+                padding: 20px;
+                margin-bottom: 20px;
+            }
+
+            .header h1 {
+                font-size: 2.2em;
+            }
+
+            .header p {
+                font-size: 1em;
+                margin-bottom: 15px;
+            }
+
+            .nav-buttons {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 10px;
+            }
+
+            .nav-btn {
+                width: 100%;
+                padding: 10px 20px;
+                border-radius: 20px;
+            }
+
+            .content-section {
+                padding: 20px;
+                margin-bottom: 20px;
+            }
+
+            .content-section h2 {
+                font-size: 2em;
+                margin-bottom: 15px;
+            }
+
+            .content-section h3 {
+                font-size: 1.5em;
+                margin: 20px 0 12px 0;
+                padding-left: 10px;
+                border-left-width: 4px;
+            }
+
+            .flora-fauna-grid,
+            .ecosystem-diagram,
+            .conservation-methods {
+                grid-template-columns: 1fr;
+            }
+
+            .img-display {
+                height: 200px; /* Smaller height on mobile */
+            }
+
+            .video-container {
+                padding-bottom: 75%; /* More square on mobile */
+            }
+
+            .back-to-top {
+                bottom: 15px;
+                right: 15px;
+                width: 40px;
+                height: 40px;
+                font-size: 1.2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🌿 Ekologi dan Keanekaragaman Hayati Indonesia 🦋</h1>
+            <p>Pembelajaran IPA SMP - Memahami Keseimbangan Alam dan Kehidupan</p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="nav-buttons">
+                <a href="index.html" class="nav-btn home-btn">🏠 Beranda</a>
+                <button class="nav-btn" onclick="showSection('pengaruh-lingkungan')">🌍 Pengaruh Lingkungan</button>
+                <button class="nav-btn" onclick="showSection('interaksi-ekosistem')">🔗 Interaksi Ekosistem</button>
+                <button class="nav-btn" onclick="showSection('keanekaragaman-hayati')">🌺 Keanekaragaman Hayati</button>
+                <button class="nav-btn" onclick="showSection('pengaruh-manusia')">👥 Pengaruh Manusia</button>
+                <button class="nav-btn" onclick="showSection('konservasi')">🛡️ Konservasi</button>
+                <button class="nav-btn" onclick="showSection('quiz')">🧠 Kuis Interaktif</button>
+            </div>
+        </div>
+
+        <div id="pengaruh-lingkungan" class="content-section active">
+            <h2>🌍 Bagaimana Pengaruh Lingkungan terhadap Organisme?</h2>
+            
+            <div class="info-box">
+                <h4>💡 Tahukah Kamu?</h4>
+                <p>Setiap organisme di bumi ini tidak dapat hidup sendiri. Mereka selalu berinteraksi dengan lingkungannya untuk bertahan hidup, berkembang biak, dan mempertahankan kelangsungan hidupnya.</p>
+            </div>
+
+            <h3>🏠 Lingkungan Makhluk Hidup</h3>
+            <p>Lingkungan adalah segala sesuatu yang ada di sekitar makhluk hidup yang dapat mempengaruhi kehidupannya. Lingkungan terdiri dari dua komponen utama:</p>
+            
+            <div class="image-container">
+                <div class="img-display" style="background-image: url('https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjXp3j2pDBncrUTHENNhS-LHwLFBm8ivBJC4iN3h6qEEZCov7fkxJ41Q_qdgnsrlSKSBBP9MJM2Apo_u-ZhsbEL1uAnmSWL5HK5wwZLrNv06rR2nXtDadL5x9FBRE631Xu7Xf6r0M8zKtFA/s446/1.JPG');">
+                </div>
+                <p><em>Ilustrasi komponen biotik dan abiotik dalam lingkungan</em></p>
+            </div>
+
+            <h4>🌡️ Lingkungan Abiotik</h4>
+            <p>Lingkungan abiotik adalah komponen lingkungan yang tidak hidup tetapi sangat mempengaruhi kehidupan organisme. Komponen ini meliputi:</p>
+            
+            <ul>
+                <li><strong>Suhu:</strong> Mempengaruhi metabolisme dan aktivitas organisme. Contoh: Penguin hidup di daerah dingin, sedangkan unta hidup di padang pasir yang panas.</li>
+                <li><strong>Cahaya Matahari:</strong> Sumber energi utama untuk fotosintesis tumbuhan. Intensitas cahaya mempengaruhi pertumbuhan dan perkembangan.</li>
+                <li><strong>Air:</strong> Komponen vital untuk semua kehidupan. Ketersediaan air menentukan jenis organisme yang dapat hidup di suatu daerah.</li>
+                <li><strong>Tanah:</strong> Menyediakan nutrisi dan tempat tumbuh bagi tumbuhan, serta habitat bagi berbagai organisme.</li>
+                <li><strong>Udara:</strong> Mengandung oksigen untuk respirasi dan karbon dioksida untuk fotosintesis.</li>
+                <li><strong>pH:</strong> Tingkat keasaman mempengaruhi aktivitas enzim dan ketersediaan nutrisi.</li>
+            </ul>
+
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/V-jQR51Eb4o" allowfullscreen></iframe> <p><em>Video pembelajaran tentang bagaimana faktor abiotik mempengaruhi organisme</em></p>
+            </div>
+
+            <h4>🦋 Lingkungan Biotik</h4>
+            <p>Lingkungan biotik adalah komponen lingkungan yang hidup dan berinteraksi dengan organisme lain. Komponen ini meliputi:</p>
+            
+            <ul>
+                <li><strong>Produsen (Tumbuhan):</strong> Organisme yang dapat membuat makanan sendiri melalui fotosintesis.</li>
+                <li><strong>Konsumen Primer:</strong> Herbivora yang memakan tumbuhan langsung.</li>
+                <li><strong>Konsumen Sekunder:</strong> Karnivora yang memakan herbivora.</li>
+                <li><strong>Konsumen Tersier:</strong> Predator puncak dalam rantai makanan.</li>
+                <li><strong>Dekomposer:</strong> Organisme yang menguraikan bahan organik mati (bakteri, jamur).</li>
+            </ul>
+
+            <div class="ecosystem-diagram">
+                <div class="ecosystem-item interactive-element">
+                    🌱<br><strong>Produsen</strong><br>Tumbuhan hijau
+                </div>
+                <div class="ecosystem-item interactive-element">
+                    🐰<br><strong>Konsumen I</strong><br>Herbivora
+                </div>
+                <div class="ecosystem-item interactive-element">
+                    🦅<br><strong>Konsumen II</strong><br>Karnivora
+                </div>
+                <div class="ecosystem-item interactive-element">
+                    🍄<br><strong>Dekomposer</strong><br>Pengurai
+                </div>
+            </div>
+
+            <div class="success-box">
+                <h4>🎯 Contoh Nyata di Indonesia</h4>
+                <p>Di hutan hujan tropis Kalimantan, orangutan (konsumen primer) bergantung pada buah-buahan dari pohon-pohon besar (produsen). Ketika musim kering tiba dan buah langka, orangutan harus mencari makanan alternatif atau berpindah ke daerah lain.</p>
+            </div>
+        </div>
+
+        <div id="interaksi-ekosistem" class="content-section">
+            <h2>🔗 Interaksi Antara Komponen Penyusun Ekosistem</h2>
+            
+            <h3>🌍 Pengertian Ekosistem</h3>
+            <p>Ekosistem adalah suatu sistem ekologi yang terbentuk oleh hubungan timbal balik antara makhluk hidup dengan lingkungannya. Mari kita pahami hierarki organisasi kehidupan:</p>
+
+            <div class="ecosystem-diagram">
+                <div class="ecosystem-item">
+                    🐛<br><strong>Individu</strong><br>Satu organisme
+                </div>
+                <div class="ecosystem-item">
+                    🐛🐛🐛<br><strong>Populasi</strong><br>Kelompok sejenis
+                </div>
+                <div class="ecosystem-item">
+                    🐛🌸🦋<br><strong>Komunitas</strong><br>Berbagai populasi
+                </div>
+                <div class="ecosystem-item">
+                    🌍<br><strong>Ekosistem</strong><br>Komunitas + abiotik
+                </div>
+                <div class="ecosystem-item">
+                    🌏🌎🌍<br><strong>Biosfer</strong><br>Semua ekosistem
+                </div>
+            </div>
+
+            <div class="info-box">
+                <h4>📍 Habitat vs Mikrohabitat</h4>
+                <p><strong>Habitat</strong> adalah tempat hidup suatu organisme, seperti hutan untuk harimau. <strong>Mikrohabitat</strong> adalah bagian kecil dari habitat dengan kondisi khusus, seperti bawah batu di sungai untuk ikan kecil.</p>
+            </div>
+
+            <h3>⚡ Aliran Energi dalam Ekosistem</h3>
+            <p>Energi mengalir melalui ekosistem dalam satu arah, dari produsen ke konsumen tingkat tertinggi. Proses ini tidak dapat diulang, berbeda dengan daur materi.</p>
+
+            <div class="image-container">
+                <div class="img-display" style="background-image: url('https://imgix2.ruangguru.com/assets/miscellaneous/png_a03phh_4384.png');">
+                    
+                </div>
+                <p><em>Energi matahari → Produsen → Konsumen I → Konsumen II</em></p>
+            </div>
+
+            <div class="warning-box">
+                <h4>⚠️ Aturan 10% dalam Aliran Energi</h4>
+                <p>Hanya sekitar 10% energi yang ditransfer dari satu tingkat trofik ke tingkat berikutnya. 90% energi hilang sebagai panas melalui respirasi dan aktivitas metabolisme.</p>
+            </div>
+
+            <h3>🔄 Daur Biogeokimia</h3>
+            <p>Berbeda dengan energi, materi dalam ekosistem bersifat siklik. Elemen-elemen penting seperti karbon, nitrogen, dan fosfor berputar terus menerus:</p>
+
+            <h4>🌬️ Daur Karbon</h4>
+            <ul>
+                <li>CO₂ di atmosfer digunakan tumbuhan untuk fotosintesis</li>
+                <li>Karbon tersimpan dalam biomassa tumbuhan</li>
+                <li>Respirasi dan dekomposisi mengembalikan CO₂ ke atmosfer</li>
+                <li>Pembakaran bahan bakar fosil menambah CO₂ atmosfer</li>
+            </ul>
+
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/vQHu01MhHFg" allowfullscreen></iframe> <p><em>Animasi proses daur biogeokimia di alam</em></p>
+            </div>
+
+            <h4>🧪 Daur Nitrogen</h4>
+            <ul>
+                <li>Nitrogen di atmosfer (N₂) diikat oleh bakteri pengikat nitrogen</li>
+                <li>Diubah menjadi amonia (NH₃) dan nitrat (NO₃⁻)</li>
+                <li>Diserap tumbuhan dan diubah menjadi protein</li>
+                <li>Dekomposisi mengembalikan nitrogen ke tanah</li>
+                <li>Denitrifikasi mengembalikan N₂ ke atmosfer</li>
+            </ul>
+
+            <h3>🤝 Interaksi Antarkomponen</h3>
+            <p>Dalam ekosistem, berbagai organisme berinteraksi dengan cara yang berbeda:</p>
+
+            <div class="flora-fauna-grid">
+                <div class="species-card">
+                    <h4>🤝 Mutualisme</h4>
+                    <p><strong>Contoh:</strong> Lebah dan bunga</p>
+                    <p>Lebah mendapat nektar, bunga mendapat penyerbukan. Kedua belah pihak diuntungkan.</p>
+                </div>
+                <div class="species-card">
+                    <h4>🏠 Komensalisme</h4>
+                    <p><strong>Contoh:</strong> Anggrek dan pohon</p>
+                    <p>Anggrek mendapat tempat tinggal dan cahaya, pohon tidak dirugikan atau diuntungkan.</p>
+                </div>
+                <div class="species-card">
+                    <h4>🦠 Parasitisme</h4>
+                    <p><strong>Contoh:</strong> Benalu dan pohon</p>
+                    <p>Benalu mendapat nutrisi, pohon dirugikan karena nutrisinya diserap.</p>
+                </div>
+                <div class="species-card">
+                    <h4>⚔️ Kompetisi</h4>
+                    <p><strong>Contoh:</strong> Rumput dan gulma</p>
+                    <p>Keduanya bersaing memperebutkan air, nutrisi, dan cahaya matahari.</p>
+                </div>
+                <div class="species-card">
+                    <h4>🦁 Predasi</h4>
+                    <p><strong>Contoh:</strong> Singa dan zebra</p>
+                    <p>Singa mendapat makanan, zebra menjadi mangsa. Ini mengontrol populasi.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="keanekaragaman-hayati" class="content-section">
+            <h2>🌺 Keanekaragaman Hayati Indonesia</h2>
+            
+            <div class="success-box">
+                <h4>🏆 Indonesia: Negara Megadiversitas</h4>
+                <p>Indonesia adalah salah satu dari 17 negara megadiversitas di dunia dengan kekayaan hayati yang luar biasa. Dengan 17.508 pulau, Indonesia memiliki berbagai ekosistem unik yang mendukung kehidupan jutaan spesies.</p>
+            </div>
+
+            <h3>🗺️ Persebaran Flora dan Fauna di Indonesia</h3>
+            <p>Keanekaragaman hayati Indonesia sangat dipengaruhi oleh letak geografis dan sejarah geologisnya. Garis Wallace dan Weber membagi Indonesia menjadi tiga wilayah biogeografi:</p>
+
+            <div class="flora-fauna-grid">
+                <div class="species-card">
+                    <h4>🌏 Wilayah Oriental (Asiatis)</h4>
+                    <p><strong>Meliputi:</strong> Sumatra, Jawa, Kalimantan, Bali</p>
+                    <p><strong>Flora:</strong> Meranti, jati, rotan, rafflesia</p>
+                    <p><strong>Fauna:</strong> Harimau, orangutan, gajah, badak</p>
+                </div>
+                <div class="species-card">
+                    <h4>🌏 Wilayah Australian (Australis)</h4>
+                    <p><strong>Meliputi:</strong> Papua, Maluku</p>
+                    <p><strong>Flora:</strong> Eucalyptus, akasia, pinus merkusii</p>
+                    <p><strong>Fauna:</strong> Cendrawasih, kanguru pohon, kasuari</p>
+                </div>
+                <div class="species-card">
+                    <h4>🌏 Wilayah Peralihan (Wallace)</h4>
+                    <p><strong>Meliputi:</strong> Sulawesi, Nusa Tenggara</p>
+                    <p><strong>Flora:</strong> Eboni, cendana, lontar</p>
+                    <p><strong>Fauna:</strong> Anoa, babirusa, komodo, maleo</p>
+                </div>
+            </div>
+
+            <div class="image-container">
+                <div class="img-display" style="background-image: url('https://tpn.gurubelajar.org/wp-content/uploads/2021/11/G003-2-1024x724.jpg');">
+                    
+                </div>
+                <p><em>Peta pembagian wilayah biogeografi Indonesia berdasarkan Garis Wallace dan Weber</em></p>
+            </div>
+    
+            <h3>🦋 Keunikan Keanekaragaman Hayati Indonesia</h3>
+            <p>Apa yang membuat Indonesia berbeda dengan belahan dunia lainnya?</p>
+
+            <div class="info-box">
+                <h4>🌟 Fakta Menakjubkan</h4>
+                <ul>
+                    <li>Indonesia memiliki 15% dari total spesies tumbuhan dunia</li>
+                    <li>17% dari total spesies burung dunia tinggal di Indonesia</li>
+                    <li>12% dari total spesies mamalia dunia</li>
+                    <li>25% dari total spesies ikan dunia</li>
+                    <li>Home untuk 50.000+ spesies tumbuhan berbunga</li>
+                </ul>
+            </div>
+
+            <h4>🌸 Spesies Endemik Indonesia</h4>
+            <p>Banyak spesies yang hanya dapat ditemukan di Indonesia, seperti:</p>
+
+            <div class="flora-fauna-grid">
+                <div class="species-card interactive-element">
+                    <h4>🌺 Rafflesia Arnoldii</h4>
+                    <p>Bunga terbesar di dunia dengan diameter hingga 1 meter. Hanya tumbuh di hutan Sumatra dan tidak memiliki daun, batang, atau akar.</p>
+                </div>
+                <div class="species-card interactive-element">
+                    <h4>🦎 Komodo Dragon</h4>
+                    <p>Kadal terbesar di dunia yang hanya ada di Pulau Komodo, Rinca, dan sekitarnya. Dapat tumbuh hingga 3 meter dan berat 70 kg.</p>
+                </div>
+                <div class="species-card interactive-element">
+                    <h4>🐒 Orangutan</h4>
+                    <p>Primata besar yang hanya ada di Sumatra dan Kalimantan. Memiliki kemiripan DNA 97% dengan manusia.</p>
+                </div>
+                <div class="species-card interactive-element">
+                    <h4>🦜 Cendrawasih</h4>
+                    <p>Burung surga Papua dengan bulu yang sangat indah. Ada 43 spesies, 35 di antaranya endemik Papua.</p>
+                </div>
+            </div>
+
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/nf3jcJXJEEE" allowfullscreen></iframe> <p><em>Dokumenter tentang keanekaragaman hayati unik Indonesia</em></p>
+            </div>
+
+            <h3>⚠️ Ancaman Keanekaragaman Hayati di Indonesia</h3>
+            <p>Sayangnya, kekayaan hayati Indonesia menghadapi berbagai ancaman serius:</p>
+
+            <div class="warning-box">
+                <h4>🚨 Ancaman Utama</h4>
+                <ul>
+                    <li><strong>Deforestasi:</strong> Indonesia kehilangan 600.000 hektar hutan per tahun</li>
+                    <li><strong>Perburuan Liar:</strong> Perdagangan ilegal satwa langka</li>
+                    <li><strong>Alih Fungsi Lahan:</strong> Konversi hutan menjadi perkebunan dan permukiman</li>
+                    <li><strong>Pencemaran:</strong> Polusi air, udara, dan tanah</li>
+                    <li><strong>Perubahan Iklim:</strong> Kenaikan suhu dan perubahan pola curah hujan</li>
+                    <li><strong>Spesies Invasif:</strong> Masuknya spesies asing yang mengganggu ekosistem</li>
+                </ul>
+            </div>
+
+            <div class="image-container">
+                <div class="img-display" style="background-image: url('https://saveourborneo.org/liqason/2024/08/Tulisan-Dita.jpeg');">
+                  
+                </div>
+                <p><em>Ilustrasi hilangnya habitat akibat penggundulan hutan</em></p>
+            </div>
+
+            <div class="info-box">
+                <h4>📊 Status Konservasi Spesies Indonesia</h4>
+                <p><strong>Critically Endangered:</strong> Harimau Sumatra (≈400 individu), Orangutan Sumatra (≈14.000), Badak Jawa (≈70)</p>
+                <p><strong>Endangered:</strong> Gajah Sumatra, Orangutan Kalimantan, Penyu Sisik</p>
+                <p><strong>Vulnerable:</strong> Komodo, Anoa, Maleo</p>
+            </div>
+        </div>
+
+        <div id="pengaruh-manusia" class="content-section">
+            <h2>👥 Pengaruh Manusia terhadap Ekosistem</h2>
+            
+            <p>Manusia sebagai bagian dari ekosistem memiliki pengaruh yang sangat besar, baik positif maupun negatif, terhadap keseimbangan alam.</p>
+
+            <h3>🌾 Pertanian dan Produksi Pangan</h3>
+            <p>Aktivitas pertanian manusia telah mengubah wajah bumi secara dramatis:</p>
+
+            <div class="flora-fauna-grid">
+                <div class="species-card">
+                    <h4>✅ Dampak Positif</h4>
+                    <ul>
+                        <li>Menciptakan habitat baru (sawah untuk burung air)</li>
+                        <li>Konservasi varietas lokal</li>
+                        <li>Agroforestri yang berkelanjutan</li>
+                        <li>Pengembangan teknologi ramah lingkungan</li>
+                    </ul>
+                </div>
+                <div class="species-card">
+                    <h4>❌ Dampak Negatif</h4>
+                    <ul>
+                        <li>Monokultur mengurangi keanekaragaman</li>
+                        <li>Penggunaan pestisida berlebihan</li>
+                        <li>Erosi tanah dan degradasi lahan</li>
+                        <li>Pencemaran air akibat pupuk kimia</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="image-container">
+                <div class="img-display" style="background-image: url('https://i.pinimg.com/736x/52/4c/f2/524cf2ec64de535aa00e37bda5022fbd.jpg');">
+                    
+                </div>
+                <p><em>Ilustrasi perbedaan dampak pertanian terhadap lingkungan</em></p>
+            </div>
+
+            <h3>🏠 Kerusakan Habitat</h3>
+            <p>Pertumbuhan populasi manusia menyebabkan kebutuhan lahan yang terus meningkat:</p>
+
+            <div class="warning-box">
+                <h4>🏙️ Urbanisasi dan Pembangunan</h4>
+                <p>Setiap tahun, jutaan hektar habitat alami dikonversi menjadi kota, jalan, dan infrastruktur lainnya. Ini menyebabkan fragmentasi habitat yang memisahkan populasi satwa dan mengganggu pola migrasi alami.</p>
+            </div>
+
+            <h4>🌳 Deforestasi di Indonesia</h4>
+            <ul>
+                <li><strong>Penyebab Utama:</strong> Perkebunan kelapa sawit, logging, pertambangan</li>
+                <li><strong>Dampak:</strong> Hilangnya habitat orangutan, harimau, dan gajah</li>
+                <li><strong>Konsekuensi:</strong> Konflik manusia-satwa semakin meningkat</li>
+                <li><strong>Solusi:</strong> Sertifikasi RSPO, moratorium hutan, reboisasi</li>
+            </ul>
+
+            <h3>🏭 Polusi dan Pencemaran</h3>
+            <p>Aktivitas industri dan konsumsi manusia menghasilkan berbagai jenis polutan:</p>
+
+            <div class="ecosystem-diagram">
+                <div class="ecosystem-item">
+                    💨<br><strong>Polusi Udara</strong><br>CO₂, SO₂, NOₓ
+                </div>
+                <div class="ecosystem-item">
+                    💧<br><strong>Polusi Air</strong><br>Limbah industri, domestik
+                </div>
+                <div class="ecosystem-item">
+                    🌍<br><strong>Polusi Tanah</strong><br>Pestisida, logam berat
+                </div>
+                <div class="ecosystem-item">
+                    🎵<br><strong>Polusi Suara</strong><br>Mengganggu komunikasi satwa
+                </div>
+                <div class="ecosystem-item">
+                    💡<br><strong>Polusi Cahaya</strong><br>Mengganggu siklus alami
+                </div>
+            </div>
+
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/UBw9T6IspVc" allowfullscreen></iframe> <p><em>Dokumenter tentang pencemaran plastik di laut Indonesia</em></p>
+            </div>
+
+            <h4>🌊 Kasus Khusus: Pencemaran Laut Indonesia</h4>
+            <p>Indonesia adalah penghasil sampah plastik laut terbesar kedua di dunia setelah Tiongkok:</p>
+            <ul>
+                <li>3.2 juta ton sampah plastik masuk ke laut setiap tahun</li>
+                <li>Mikroplastik ditemukan dalam ikan konsumsi</li>
+                <li>Terumbu karang rusak akibat sampah dan sedimentasi</li>
+                <li>Penyu dan mamalia laut mati karena memakan plastik</li>
+            </ul>
+
+            <h3>🌡️ Perubahan Iklim Global</h3>
+            <p>Aktivitas manusia telah mengubah komposisi atmosfer bumi, menyebabkan pemanasan global:</p>
+
+            <div class="info-box">
+                <h4>📈 Dampak Perubahan Iklim di Indonesia</h4>
+                <ul>
+                    <li><strong>Kenaikan Permukaan Laut:</strong> Mengancam pulau-pulau kecil dan pesisir</li>
+                    <li><strong>Perubahan Pola Hujan:</strong> Kekeringan dan banjir lebih ekstrem</li>
+                    <li><strong>Peningkatan Suhu:</strong> Stress termal pada terumbu karang</li>
+                    <li><strong>Pergeseran Habitat:</strong> Spesies bermigrasi ke dataran tinggi</li>
+                    <li><strong>Fenomena El Niño/La Niña:</strong> Semakin tidak terprediksi</li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="konservasi" class="content-section">
+            <h2>🛡️ Mengapa Harus Dilakukan Konservasi Keanekaragaman Hayati?</h2>
+
+            <h3>🎯 Manfaat Konservasi</h3>
+            <p>Konservasi keanekaragaman hayati bukan hanya untuk kepentingan alam, tetapi juga untuk kelangsungan hidup manusia:</p>
+
+            <div class="conservation-methods">
+                <div class="method-card">
+                    <h4>🏥 Manfaat Medis</h4>
+                    <p>70% obat-obatan berasal dari senyawa alami. Rosy periwinkle dari Madagaskar menghasilkan obat leukemia anak.</p>
+                </div>
+                <div class="method-card">
+                    <h4>🍯 Manfaat Ekonomi</h4>
+                    <p>Industri ekowisata, hasil hutan non-kayu, dan jasa ekosistem bernilai triliunan rupiah.</p>
+                </div>
+                <div class="method-card">
+                    <h4>🌾 Ketahanan Pangan</h4>
+                    <p>Keanekaragaman genetik tanaman pangan melindungi dari hama dan perubahan iklim.</p>
+                </div>
+                <div class="method-card">
+                    <h4>🌍 Jasa Ekosistem</h4>
+                    <p>Hutan mengatur iklim, mencegah banjir, dan menyediakan air bersih secara gratis.</p>
+                </div>
+                <div class="method-card">
+                    <h4>🎨 Nilai Estetika</h4>
+                    <p>Keindahan alam memberikan inspirasi, rekreasi, dan kesejahteraan spiritual.</p>
+                </div>
+                <div class="method-card">
+                    <h4>⚖️ Nilai Etika</h4>
+                    <p>Setiap spesies memiliki hak untuk hidup dan bagian dari warisan alam untuk generasi mendatang.</p>
+                </div>
+            </div>
+
+            <div class="success-box">
+                <h4>💰 Valuasi Ekonomi Ekosistem Indonesia</h4>
+                <p>Hutan Indonesia memberikan jasa ekosistem senilai lebih dari $234 miliar per tahun, termasuk pengaturan iklim, penyediaan air, dan pencegahan bencana alam.</p>
+            </div>
+
+            <h3>🔧 Metode Konservasi</h3>
+            <p>Ada berbagai pendekatan untuk melindungi keanekaragaman hayati:</p>
+
+            <h4>🏞️ Konservasi In-Situ (Di Habitat Alami)</h4>
+            <div class="flora-fauna-grid">
+                <div class="species-card">
+                    <h4>🏛️ Taman Nasional</h4>
+                    <p><strong>Contoh:</strong> TN Gunung Leuser (Sumatra), TN Komodo (NTT)</p>
+                    <p>Melindungi ekosistem utuh dengan semua komponennya.</p>
+                </div>
+                <div class="species-card">
+                    <h4>🌲 Cagar Alam</h4>
+                    <p><strong>Contoh:</strong> CA Pangandaran, CA Ujung Kulon</p>
+                    <p>Perlindungan ketat untuk spesies dan ekosistem langka.</p>
+                </div>
+                <div class="species-card">
+                    <h4>🏖️ Suaka Margasatwa</h4>
+                    <p><strong>Contoh:</strong> SM Pulau Dua (Banten)</p>
+                    <p>Fokus pada perlindungan satwa dan habitatnya.</p>
+                </div>
+                <div class="species-card">
+                    <h4>🌊 Kawasan Konservasi Laut</h4>
+                    <p><strong>Contoh:</strong> TN Bunaken, TN Wakatobi</p>
+                    <p>Melindungi ekosistem laut dan pesisir.</p>
+                </div>
+            </div>
+
+            <div class="image-container">
+                <div class="img-display" style="background-image: url('https://surajis.wordpress.com/wp-content/uploads/2016/04/peta-kawasan-konservasi.jpg?w=640');">
+                    
+                </div>
+                <p><em>Sebaran taman nasional dan kawasan konservasi di Indonesia</em></p>
+            </div>
+
+            <h4>🏢 Konservasi Ex-Situ (Di Luar Habitat Alami)</h4>
+            <div class="flora-fauna-grid">
+                <div class="species-card">
+                    <h4>🦁 Kebun Binatang</h4>
+                    <p><strong>Contoh:</strong> Ragunan, Taman Safari</p>
+                    <p>Penangkaran, penelitian, dan edukasi masyarakat.</p>
+                </div>
+                <div class="species-card">
+                    <h4>🌺 Kebun Raya</h4>
+                    <p><strong>Contoh:</strong> Kebun Raya Bogor, Purwodadi</p>
+                    <p>Koleksi tumbuhan, penelitian, dan konservasi genetik.</p>
+                </div>
+                <div class="species-card">
+                    <h4>🧬 Bank Gen</h4>
+                    <p><strong>Contoh:</strong> Cryobank di IPB</p>
+                    <p>Menyimpan materi genetik dalam nitrogen cair.</p>
+                </div>
+                <div class="species-card">
+                    <h4>🌱 Pusat Rehabilitasi</h4>
+                    <p><strong>Contoh:</strong> Orangutan Foundation</p>
+                    <p>Merawat dan mengembalikan satwa ke alam.</p>
+                </div>
+            </div>
+
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/GZCNaqCRAQ8" allowfullscreen></iframe> <p><em>Dokumenter program rehabilitasi orangutan di Kalimantan</em></p>
+            </div>
+
+            <h4>👥 Konservasi Berbasis Masyarakat</h4>
+            <p>Melibatkan masyarakat lokal sebagai penjaga utama keanekaragaman hayati:</p>
+
+            <div class="info-box">
+                <h4>🏘️ Contoh Sukses di Indonesia</h4>
+                <ul>
+                    <li><strong>Sasi di Maluku:</strong> Aturan adat untuk mengatur pengambilan hasil laut</li>
+                    <li><strong>Awig-awig di Lombok:</strong> Aturan tradisional pengelolaan hutan</li>
+                    <li><strong>Subak di Bali:</strong> Sistem irigasi tradisional yang menjaga keanekaragaman padi</li>
+                    <li><strong>Hutan Adat:</strong> Pengelolaan hutan oleh masyarakat adat</li>
+                </ul>
+            </div>
+
+            <h3>🌟 Peran Kita dalam Konservasi</h3>
+            <p>Setiap individu dapat berkontribusi dalam konservasi keanekaragaman hayati:</p>
+
+            <div class="conservation-methods">
+                <div class="method-card">
+                    <h4>🛒 Konsumsi Bertanggung Jawab</h4>
+                    <p>Pilih produk ramah lingkungan, kurangi plastik sekali pakai, dukung produk lokal.</p>
+                </div>
+                <div class="method-card">
+                    <h4>📚 Edukasi dan Kesadaran</h4>
+                    <p>Pelajari dan bagikan pengetahuan tentang pentingnya keanekaragaman hayati.</p>
+                </div>
+                <div class="method-card">
+                    <h4>🌱 Aksi Nyata</h4>
+                    <p>Tanam pohon, buat taman kupu-kupu, ikut program sukarelawan konservasi.</p>
+                </div>
+                <div class="method-card">
+                    <h4>🗳️ Partisipasi Politik</h4>
+                    <p>Dukung kebijakan pro-lingkungan, pilih pemimpin yang peduli konservasi.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="quiz" class="content-section">
+            <h2>🧠 Kuis Interaktif: Uji Pemahamanmu!</h2>
+
+            <div class="quiz-section">
+                <div id="quizQuestionsContainer"></div> 
+                <button onclick="submitQuiz()" class="quiz-submit-btn">✅ Periksa Jawaban</button>
+                <div id="quizResult" style="margin-top: 20px;"></div>
+            </div>
+
+            <div class="success-box">
+                <h4>🎓 Tips Belajar Efektif</h4>
+                <p>Untuk memahami ekologi dengan baik, cobalah observasi langsung di lingkungan sekitar. Amati interaksi antara tumbuhan, hewan, dan lingkungan di halaman sekolah atau taman kota!</p>
+            </div>
+        </div>
+
+    </div>
+
+    <button class="back-to-top" id="backToTop">↑</button>
+
+    <script>
+        // Global variables
+        let currentSection = 'pengaruh-lingkungan'; // Default active section
+        const sectionOrder = ['pengaruh-lingkungan', 'interaksi-ekosistem', 'keanekaragaman-hayati', 'pengaruh-manusia', 'konservasi', 'quiz'];
+        
+        // Quiz Data
+        const quizData = [
+            {
+                question: "Apa yang dimaksud dengan faktor abiotik dalam ekosistem?",
+                options: ["Komponen hidup dalam ekosistem", "Komponen tidak hidup yang mempengaruhi organisme", "Interaksi antar makhluk hidup", "Aliran energi dalam rantai makanan"],
+                answer: "Komponen tidak hidup yang mempengaruhi organisme"
+            },
+            {
+                question: "Garis Wallace memisahkan fauna Indonesia menjadi wilayah...",
+                options: ["Oriental dan Australian", "Asiatis dan Peralihan", "Australian dan Peralihan", "Semua jawaban benar"], // Jawaban yang benar adalah Asiatis dan Peralihan
+                answer: "Asiatis dan Peralihan"
+            },
+            {
+                question: "Manakah contoh interaksi mutualisme?",
+                options: ["Benalu pada pohon mangga", "Lebah dan bunga", "Singa memangsa zebra", "Rumput bersaing dengan gulma"],
+                answer: "Lebah dan bunga"
+            },
+            {
+                question: "Berapa persen energi yang ditransfer dari satu tingkat trofik ke tingkat berikutnya menurut aturan 10%?",
+                options: ["50%", "25%", "10%", "5%"],
+                answer: "10%"
+            },
+            {
+                question: "Satwa endemik Indonesia yang hanya ada di Pulau Komodo adalah...",
+                options: ["Orangutan", "Harimau Sumatra", "Komodo Dragon", "Cendrawasih"],
+                answer: "Komodo Dragon"
+            },
+            {
+                question: "Salah satu ancaman terbesar bagi keanekaragaman hayati Indonesia adalah...",
+                options: ["Reboisasi", "Penangkaran", "Deforestasi", "Ekowisata"],
+                answer: "Deforestasi"
+            },
+            {
+                question: "Contoh konservasi In-Situ adalah...",
+                options: ["Kebun Binatang", "Taman Nasional", "Bank Gen", "Pusat Rehabilitasi"],
+                answer: "Taman Nasional"
+            },
+            {
+                question: "Organisme yang mampu membuat makanan sendiri melalui fotosintesis disebut...",
+                options: ["Konsumen", "Dekomposer", "Produsen", "Karnivora"],
+                answer: "Produsen"
+            },
+            {
+                question: "Sistem irigasi tradisional di Bali yang juga menjaga keanekaragaman padi adalah...",
+                options: ["Sasi", "Awig-awig", "Subak", "Hutan Adat"],
+                answer: "Subak"
+            },
+            {
+                question: "Kenaikan permukaan laut akibat perubahan iklim global mengancam...",
+                options: ["Pegunungan", "Gurun", "Pulau-pulau kecil dan pesisir", "Hutan dataran tinggi"],
+                answer: "Pulau-pulau kecil dan pesisir"
+            }
+        ];
+
+        let selectedQuizAnswers = new Array(quizData.length).fill(null); // Variabel untuk menyimpan jawaban kuis yang dipilih
+
+        // Initialize page when DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            showSection(currentSection); // Tampilkan section aktif default
+            updateProgressBar();
+            initializeScrollHandler();
+            loadQuizQuestions(); // Memuat pertanyaan kuis saat halaman dimuat
+        });
+
+        // Function to show specific section
+        function showSection(sectionId) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Show selected section
+            const targetSection = document.getElementById(sectionId);
+            if (targetSection) {
+                targetSection.classList.add('active');
+                currentSection = sectionId; // Update current section
+                updateProgressBar();
+                scrollToTop(); // Gulir ke atas setiap kali section berubah
+            }
+        }
+
+        // Function to update progress bar
+        function updateProgressBar() {
+            const currentIndex = sectionOrder.indexOf(currentSection);
+            let progressPercentage = 0;
+            if (currentIndex >= 0) {
+                progressPercentage = ((currentIndex + 1) / sectionOrder.length) * 100;
+            }
+            const progressFill = document.getElementById('progressFill');
+            if (progressFill) {
+                progressFill.style.width = progressPercentage + '%';
+            }
+        }
+
+        // Function to scroll to top of the page
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Function to handle back to top button visibility
+        function initializeScrollHandler() {
+            const backToTopBtn = document.getElementById('backToTop');
+            
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) { // Tampilkan tombol setelah menggulir 300px
+                    backToTopBtn.style.display = 'flex'; // Menggunakan flex agar icon di tengah
+                } else {
+                    backToTopBtn.style.display = 'none';
+                }
+            });
+
+            backToTopBtn.addEventListener('click', scrollToTop); // Menambahkan event listener ke tombol
+        }
+
+        // Quiz functionality
+        function loadQuizQuestions() {
+            const quizContainer = document.getElementById('quizQuestionsContainer');
+            quizContainer.innerHTML = ''; // Clear previous questions
+
+            quizData.forEach((q, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.classList.add('quiz-question');
+                questionDiv.id = `question${index + 1}`; // ID untuk setiap pertanyaan
+
+                let optionsHtml = '';
+                q.options.forEach((optionText, optionIndex) => {
+                    // Menggunakan label dan input radio
+                    optionsHtml += `
+                        <label>
+                            <input type="radio" name="q${index + 1}" value="${String.fromCharCode(97 + optionIndex)}"> 
+                            ${optionText}
+                        </label>
+                    `;
+                });
+
+                questionDiv.innerHTML = `
+                    <h4>Pertanyaan ${index + 1}</h4>
+                    <p>${q.question}</p>
+                    <div class="quiz-options">
+                        ${optionsHtml}
+                    </div>
+                `;
+                quizContainer.appendChild(questionDiv);
+            });
+
+            // Tambahkan event listener untuk setiap radio button agar mengubah warna label saat dipilih
+            document.querySelectorAll('.quiz-options input[type="radio"]').forEach(radio => {
+                radio.addEventListener('change', function() {
+                    const questionLabels = this.closest('.quiz-options').querySelectorAll('label');
+                    questionLabels.forEach(label => label.classList.remove('selected'));
+                    if (this.checked) {
+                        this.parentNode.classList.add('selected');
+                        // Simpan jawaban yang dipilih ke array selectedQuizAnswers
+                        const questionIndex = parseInt(this.name.substring(1)) - 1; // q1 -> 0, q2 -> 1, dst.
+                        selectedQuizAnswers[questionIndex] = this.value;
+                    }
+                    // Sembunyikan hasil kuis jika ada perubahan jawaban
+                    document.getElementById('quizResult').style.display = 'none';
+                    document.getElementById('quizResult').classList.remove('correct-answer', 'wrong-answer');
+                });
+            });
+
+            // Sembunyikan hasil kuis awal
+            document.getElementById('quizResult').style.display = 'none';
+        }
+
+        function submitQuiz() {
+            let score = 0;
+            const quizResultDiv = document.getElementById('quizResult');
+            quizResultDiv.innerHTML = ''; // Clear previous results
+            quizResultDiv.style.display = 'block'; // Show result area
+
+            quizData.forEach((q, index) => {
+                const questionName = `q${index + 1}`;
+                const questionElement = document.getElementById(`question${index + 1}`);
+                const selectedOptionInput = document.querySelector(`input[name="${questionName}"]:checked`);
+                const optionsLabels = questionElement.querySelectorAll('label');
+
+                // Reset all options' styles first for this question
+                optionsLabels.forEach(label => {
+                    label.classList.remove('selected', 'correct', 'wrong');
+                });
+
+                if (selectedOptionInput) {
+                    const selectedValue = selectedOptionInput.value;
+                    const correctAnswerValue = quizData[index].answer; // Jawaban benar adalah teks, perlu diubah ke value (a,b,c,d)
+
+                    // Mencari 'value' (a,b,c,d) dari jawaban benar
+                    let correctValue = '';
+                    quizData[index].options.forEach((opt, optIdx) => {
+                        if (opt === correctAnswerValue) {
+                            correctValue = String.fromCharCode(97 + optIdx);
+                        }
+                    });
+
+                    if (selectedValue === correctValue) {
+                        score++;
+                        selectedOptionInput.parentNode.classList.add('correct');
+                    } else {
+                        selectedOptionInput.parentNode.classList.add('wrong');
+                        // Highlight the correct answer
+                        optionsLabels.forEach(label => {
+                            if (label.querySelector('input').value === correctValue) {
+                                label.classList.add('correct');
+                            }
+                        });
+                    }
+                } else {
+                    // Jika tidak ada jawaban yang dipilih, highlight jawaban yang benar
+                    optionsLabels.forEach(label => {
+                        let correctValue = '';
+                        quizData[index].options.forEach((opt, optIdx) => {
+                            if (opt === quizData[index].answer) {
+                                correctValue = String.fromCharCode(97 + optIdx);
+                            }
+                        });
+                        if (label.querySelector('input').value === correctValue) {
+                            label.classList.add('correct');
+                        }
+                    });
+                }
+            });
+
+            const totalQuestions = quizData.length;
+            const scorePercentage = (score / totalQuestions) * 100;
+            quizResultDiv.innerHTML = `<p>Skor Anda: <strong>${score}</strong> dari <strong>${totalQuestions}</strong> (${scorePercentage.toFixed(2)}%)</p>`;
+
+            if (scorePercentage === 100) {
+                quizResultDiv.classList.add('correct-answer');
+                quizResultDiv.classList.remove('wrong-answer');
+                quizResultDiv.innerHTML += '<p>Selamat! Anda adalah Ahli Ekologi! 🎉</p>';
+            } else if (scorePercentage >= 60) {
+                quizResultDiv.classList.add('info-box'); // Bisa pakai kelas info-box
+                quizResultDiv.classList.remove('wrong-answer', 'correct-answer');
+                quizResultDiv.innerHTML += '<p>Cukup baik! Terus belajar untuk hasil yang lebih baik.</p>';
+            }
+            else {
+                quizResultDiv.classList.add('wrong-answer');
+                quizResultDiv.classList.remove('correct-answer');
+                quizResultDiv.innerHTML += '<p>Semangat! Jangan menyerah, ayo pelajari lagi dari awal.</p>';
+            }
+            
+            // Scroll to quiz result for better UX
+            quizResultDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    </script>
+</body>
+</html>
