@@ -1,0 +1,2128 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suhu, Kalor, dan Pemuaian - IPA SMP</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script>
+        // Basic MathJax configuration
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        /* General Styling */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start; /* Align content to top, allowing for scroll */
+            padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Container for main content */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            margin-top: 80px; /* Space for fixed home button and header */
+            margin-bottom: 30px;
+        }
+
+        /* Header Styling */
+        .header {
+            padding: 30px;
+            text-align: center;
+            border-bottom: 2px solid #eee;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            color: #2c3e50;
+            font-size: 2.8em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.05);
+            font-weight: 700;
+        }
+
+        .header p {
+            color: #7f8c8d;
+            font-size: 1.3em;
+            font-weight: 400;
+        }
+
+        /* Navigation Styling */
+        .navigation {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 30px;
+        }
+
+        .nav-btn {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 28px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            flex-grow: 1; /* Allow buttons to grow */
+            text-align: center;
+            min-width: 120px; /* Minimum width for buttons */
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 25px rgba(52, 152, 219, 0.4);
+            filter: brightness(1.1);
+        }
+
+        .nav-btn.active {
+            background: linear-gradient(45deg, #e74c3c, #c0392b);
+            box-shadow: 0 8px 18px rgba(231, 76, 60, 0.4);
+            transform: translateY(-2px);
+        }
+
+        /* Home Button */
+        .home-btn {
+            background: linear-gradient(45deg, #27ae60, #2ecc71);
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            border-radius: 50px;
+            padding: 12px 25px;
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .home-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(46, 204, 113, 0.5);
+            filter: brightness(1.1);
+        }
+
+        /* Content Section Styling */
+        .content-section {
+            display: none;
+            padding: 30px;
+            margin-bottom: 30px;
+            transition: all 0.5s ease-in-out;
+        }
+
+        .content-section.active {
+            display: block;
+            animation: fadeIn 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .content-section h2 {
+            color: #2c3e50;
+            font-size: 2.2em;
+            margin-bottom: 25px;
+            border-bottom: 4px solid #3498db;
+            padding-bottom: 15px;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .content-section h3 {
+            color: #34495e;
+            font-size: 1.8em;
+            margin: 30px 0 18px 0;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .content-section h3::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #3498db;
+            font-size: 1.2em;
+            top: -2px;
+        }
+
+        .content-section h4 {
+            color: #7f8c8d;
+            font-size: 1.3em;
+            margin: 25px 0 12px 0;
+            font-weight: 600;
+            border-left: 5px solid #f39c12;
+            padding-left: 10px;
+        }
+
+        .content-section p {
+            margin-bottom: 18px;
+            text-align: justify;
+            font-size: 1.1em;
+            line-height: 1.7;
+            color: #555;
+        }
+
+        .content-section ul {
+            margin-left: 25px;
+            margin-bottom: 20px;
+            list-style-type: disc;
+            color: #555;
+        }
+
+        .content-section ul li {
+            margin-bottom: 8px;
+            font-size: 1.05em;
+        }
+
+        /* Highlight Box */
+        .highlight {
+            background: linear-gradient(120deg, #a8edea 0%, #fed6e3 100%);
+            padding: 25px;
+            border-radius: 18px;
+            margin: 25px 0;
+            border-left: 6px solid #3498db;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            font-style: italic;
+            color: #444;
+            position: relative;
+        }
+
+        .highlight strong {
+            color: #2c3e50;
+        }
+
+        /* Formula Box */
+        .formula-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 18px;
+            margin: 25px 0;
+            text-align: center;
+            font-size: 1.3em;
+            font-weight: bold;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            line-height: 1.8;
+        }
+
+        .formula-box h4 {
+            color: #fff;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+
+        .formula-box p {
+            margin-bottom: 8px;
+            font-size: 1em;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Table Styling */
+        .table-container {
+            overflow-x: auto;
+            margin: 25px 0;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            min-width: 600px; /* Ensure table doesn't get too small */
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+            font-size: 1.05em;
+        }
+
+        th {
+            background: linear-gradient(45deg, #3498db, #2980b9);
+            color: white;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #eef;
+            transition: background-color 0.2s ease;
+        }
+
+        /* Calculator Styling */
+        .calculator {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+            padding: 30px;
+            border-radius: 18px;
+            margin: 30px 0;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .calculator h4 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.6em;
+            border-bottom: 2px dashed #f5576c;
+            padding-bottom: 10px;
+        }
+
+        .calculator label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #444;
+            font-size: 1em;
+        }
+
+        .calc-input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 1.1em;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            outline: none;
+        }
+
+        .calc-input:focus {
+            border-color: #ff6b6b;
+            box-shadow: 0 0 8px rgba(255, 107, 107, 0.4);
+        }
+
+        .calc-btn {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a52);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.1em;
+            font-weight: 600;
+            width: 100%;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .calc-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(238, 90, 82, 0.5);
+            filter: brightness(1.1);
+        }
+
+        .calc-result {
+            background: rgba(255, 255, 255, 0.85);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            font-weight: bold;
+            text-align: center;
+            min-height: 60px;
+            display: flex;
+            flex-direction: column; /* Allow content to stack */
+            align-items: center;
+            justify-content: center;
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.05);
+            color: #333;
+            font-size: 1.15em;
+            line-height: 1.5;
+            word-break: break-word; /* Prevent overflow */
+        }
+
+        .calc-result strong {
+            color: #c0392b;
+        }
+
+        /* Media and Interactive Elements */
+        .image-container, .video-container {
+            text-align: center;
+            margin: 25px 0;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 15px;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ddd;
+            transition: transform 0.3s ease;
+        }
+
+        .image-container img:hover {
+            transform: scale(1.02);
+        }
+
+        .image-container p, .video-container p {
+            margin-top: 10px;
+            font-style: italic;
+            color: #666;
+            font-size: 0.95em;
+        }
+
+        .video-container iframe {
+            width: 100%;
+            max-width: 640px; /* Increased max-width for better viewing */
+            height: 360px; /* Adjusted height for 16:9 aspect ratio */
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+            border: none;
+            transition: transform 0.3s ease;
+        }
+
+        .video-container iframe:hover {
+            transform: scale(1.01);
+        }
+
+        .interactive-element {
+            background: linear-gradient(45deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 25px 0;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            font-size: 1.15em;
+            font-weight: 600;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .interactive-element:hover {
+            transform: translateY(-4px) scale(1.01);
+            box-shadow: 0 10px 25px rgba(245, 87, 108, 0.4);
+            filter: brightness(1.05);
+        }
+
+        .expandable-content {
+            display: none;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px dashed rgba(255, 255, 255, 0.4);
+            color: rgba(255, 255, 255, 0.9);
+            text-align: left;
+            line-height: 1.7;
+            font-weight: 400;
+            font-size: 0.95em;
+        }
+
+        .expandable-content strong {
+            color: #ffe082; /* Lighter yellow for emphasis */
+        }
+
+        .expandable-content p {
+            margin-bottom: 10px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .expandable-content ul {
+            list-style-type: circle;
+            margin-left: 20px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .expandable-content.active {
+            display: block;
+            animation: slideDown 0.4s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Quiz Styling */
+        .quiz-container {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 18px;
+            margin: 30px 0;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .quiz-question {
+            margin-bottom: 25px;
+            font-size: 1.2em;
+            font-weight: 600;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .quiz-question h4 {
+            color: #fff;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+            border-left: 5px solid #2ecc71;
+            padding-left: 10px;
+        }
+
+        .quiz-question p {
+            margin-bottom: 18px;
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 1.1em;
+        }
+
+        .quiz-options {
+            margin-bottom: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .quiz-option {
+            cursor: pointer;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+        }
+
+        .quiz-option:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateX(5px);
+        }
+
+        .quiz-option input[type="radio"] {
+            margin-right: 12px;
+            transform: scale(1.2);
+            accent-color: #2ecc71;
+        }
+
+        /* Quiz Result Specific Styling */
+        .quiz-result {
+            margin-top: 25px;
+            padding: 20px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: left;
+            line-height: 1.7;
+        }
+
+        .quiz-result h4 {
+            color: #2c3e50;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            text-align: center;
+            border-bottom: 2px dashed #667eea;
+            padding-bottom: 10px;
+        }
+
+        .quiz-result p {
+            margin-bottom: 8px;
+            font-size: 1em;
+            color: #444;
+        }
+
+        .quiz-result p strong {
+            color: #2c3e50;
+        }
+
+        .quiz-result .correct {
+            color: #2ecc71; /* Green for correct */
+            font-weight: bold;
+        }
+
+        .quiz-result .incorrect {
+            color: #e74c3c; /* Red for incorrect */
+            font-weight: bold;
+        }
+
+        .quiz-result .unanswered {
+            color: #f39c12; /* Orange for unanswered */
+            font-weight: bold;
+        }
+
+        .quiz-result .final-score {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #2980b9;
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px dashed #ccc;
+        }
+
+        .quiz-result .feedback {
+            margin-top: 15px;
+            font-style: italic;
+            color: #666;
+            text-align: center;
+        }
+
+
+        /* Progress Bar */
+        .progress-bar {
+            width: 100%;
+            height: 12px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 6px;
+            margin-top: 25px;
+            overflow: hidden;
+            box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #27ae60, #2ecc71);
+            width: 0%;
+            transition: width 0.5s ease-out;
+            border-radius: 6px;
+        }
+
+        /* Floating Particles */
+        .floating-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+            animation: float 10s infinite linear;
+            opacity: 0;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) scale(0.5);
+                opacity: 0;
+            }
+            25% {
+                opacity: 0.8;
+            }
+            75% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translateY(-100px) scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        /* Tooltip (Optional, for extra flair) */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+            cursor: help;
+        }
+
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 200px;
+            background-color: #555;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 5px 0;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%; /* Top */
+            left: 50%;
+            margin-left: -100px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 0.85em;
+            line-height: 1.3;
+        }
+
+        .tooltip .tooltiptext::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #555 transparent transparent transparent;
+        }
+
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .header h1 {
+                font-size: 2.2em;
+            }
+            .header p {
+                font-size: 1.1em;
+            }
+            .content-section h2 {
+                font-size: 1.8em;
+            }
+            .content-section h3 {
+                font-size: 1.5em;
+            }
+            .formula-box, .calculator, .quiz-container {
+                padding: 25px;
+            }
+            .nav-btn {
+                padding: 10px 20px;
+                font-size: 1em;
+            }
+            .home-btn {
+                padding: 10px 20px;
+                font-size: 0.9em;
+                top: 15px;
+                left: 15px;
+            }
+            .video-container iframe {
+                height: 280px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            .container {
+                padding: 10px;
+                margin-top: 60px; /* Adjust for smaller fixed header */
+            }
+            .header {
+                padding: 20px;
+                margin-bottom: 20px;
+            }
+            .header h1 {
+                font-size: 1.8em;
+            }
+            .header p {
+                font-size: 1em;
+            }
+            .navigation {
+                flex-direction: column;
+                align-items: center;
+                gap: 10px;
+                margin-bottom: 20px;
+            }
+            .nav-btn {
+                width: 90%;
+                max-width: 300px;
+                font-size: 0.95em;
+            }
+            .home-btn {
+                position: relative;
+                top: auto;
+                left: auto;
+                margin-bottom: 20px;
+                display: block;
+                width: fit-content;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .content-section {
+                padding: 20px;
+            }
+            .content-section h2 {
+                font-size: 1.6em;
+                margin-bottom: 20px;
+                padding-bottom: 10px;
+            }
+            .content-section h3 {
+                font-size: 1.3em;
+                margin: 20px 0 12px 0;
+            }
+            .content-section p, .content-section ul li {
+                font-size: 0.95em;
+            }
+            .highlight, .formula-box, .calculator, .quiz-container, .interactive-element {
+                padding: 20px;
+                margin: 20px 0;
+            }
+            .calc-input, .calc-btn {
+                font-size: 1em;
+                padding: 10px;
+            }
+            .calc-result {
+                min-height: 40px;
+                font-size: 1em;
+            }
+            .video-container iframe {
+                height: 200px;
+            }
+            .quiz-result h4 {
+                font-size: 1.5em;
+            }
+            .quiz-result .final-score {
+                font-size: 1.3em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 1.5em;
+            }
+            .header p {
+                font-size: 0.9em;
+            }
+            .nav-btn {
+                padding: 10px 15px;
+                font-size: 0.9em;
+            }
+            .content-section p, .content-section ul li, .quiz-question p, .quiz-option {
+                font-size: 0.9em;
+            }
+            th, td {
+                padding: 10px;
+                font-size: 0.9em;
+            }
+            .video-container iframe {
+                height: 180px;
+            }
+            .quiz-result h4 {
+                font-size: 1.2em;
+            }
+            .quiz-result .final-score {
+                font-size: 1.1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-particles" id="particles"></div>
+
+    <a href="index.html" class="home-btn">🏠 Beranda</a>
+
+    <div class="container">
+        <div class="header">
+            <h1>🌡️ Suhu, Kalor, dan Pemuaian</h1>
+            <p>Memahami Konsep Dasar Fisika dalam Kehidupan Sehari-hari</p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressBar"></div>
+            </div>
+        </div>
+
+        <div class="navigation">
+            <button class="nav-btn" data-section="suhu">🌡️ Suhu</button>
+            <button class="nav-btn" data-section="kalor">🔥 Kalor</button>
+            <button class="nav-btn" data-section="pemuaian">📏 Pemuaian</button>
+            <button class="nav-btn" data-section="quiz">🧠 Kuis</button>
+        </div>
+
+        <div id="suhu" class="content-section">
+            <h2>🌡️ Suhu: Dasar dari Panas dan Dingin</h2>
+            
+            <h3>a. Jadi, Apa yang Dimaksud Dengan Suhu?</h3>
+            <p><strong>Suhu</strong> adalah besaran fisika yang menyatakan <strong>tingkat panas atau dinginnya</strong> suatu benda. Secara lebih fundamental, suhu adalah ukuran energi kinetik rata-rata partikel-partikel penyusun suatu zat. Semakin tinggi suhu suatu benda, semakin cepat partikel-partikelnya bergerak, dan sebaliknya.</p>
+            
+            <div class="highlight">
+                <strong>Definisi Kunci:</strong> Suhu merupakan besaran pokok yang menunjukkan derajat panas suatu benda, diukur secara kuantitatif menggunakan termometer. Ini bukan energi, melainkan indikator energi kinetik partikel.
+            </div>
+
+            <div class="image-container">
+                <img src="https://cdn1-production-images-kly.akamaized.net/bO-kSOtS9HFrItjZkLnXeI51Elg=/1200x1200/smart/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/3535465/original/029559700_1628496832-termometer.jpg" alt="Termometer mengukur suhu">
+                <p><em>Termometer adalah alat penting untuk mengukur suhu secara akurat.</em></p>
+            </div>
+
+            <p>Bayangkan secangkir teh panas dan es batu. Teh panas memiliki suhu tinggi karena molekul-molekul air di dalamnya bergerak sangat cepat dan bergetar. Sebaliknya, es batu memiliki suhu rendah karena molekul airnya bergerak jauh lebih lambat dan lebih teratur dalam struktur kristal.</p>
+
+            <h3>b. Mengapa Kita Memerlukan Alat Ukur Suhu?</h3>
+            <p>Indera peraba manusia, seperti kulit, tidak dapat memberikan pengukuran suhu yang akurat dan objektif. Indera kita bersifat subjektif dan relatif. Misalnya, air hangat bisa terasa panas setelah memegang es, tapi terasa dingin setelah memegang benda panas. Oleh karena itu, kita memerlukan alat ukur suhu yang presisi, yaitu <strong>termometer</strong>.</p>
+            <ul style="margin-left: 20px; margin-bottom: 15px;">
+                <li><strong>Akurasi dan Objektivitas:</strong> Termometer memberikan nilai numerik yang tepat, tidak terpengaruh oleh kondisi sebelumnya atau perasaan individu.</li>
+                <li><strong>Keperluan Ilmiah dan Industri:</strong> Banyak proses kimia, fisika, dan produksi industri memerlukan kontrol suhu yang sangat ketat.</li>
+                <li><strong>Kesehatan dan Keselamatan:</strong> Pengukuran suhu tubuh penting untuk diagnosis medis, dan pemantauan suhu lingkungan vital untuk keamanan pangan atau penyimpanan bahan berbahaya.</li>
+                <li><strong>Suhu Ekstrem:</strong> Indera manusia tidak mampu merasakan atau bertahan pada suhu yang sangat tinggi (misalnya, lava) atau sangat rendah (misalnya, nitrogen cair).</li>
+            </ul>
+
+            <div class="interactive-element" onclick="toggleExpand('suhu-alat')">
+                <strong>🔍 Jenis-jenis Termometer (Klik untuk melihat lebih detail)</strong>
+                <div id="suhu-alat" class="expandable-content">
+                    <p><strong>1. Termometer Raksa:</strong> Menggunakan prinsip pemuaian raksa. Raksa memuai saat dipanaskan dan menyusut saat didinginkan, sehingga kolom raksa dalam kapiler menunjukkan suhu. Kelemahannya: raksa beracun.</p>
+                    <p><strong>2. Termometer Alkohol:</strong> Mirip dengan termometer raksa, namun menggunakan alkohol berwarna. Lebih aman dan dapat mengukur suhu lebih rendah (titik beku alkohol sangat rendah).</p>
+                    <p><strong>3. Termometer Digital:</strong> Menggunakan sensor elektronik (termistor) yang mengubah perubahan suhu menjadi sinyal listrik yang kemudian ditampilkan dalam bentuk angka. Sangat akurat dan cepat.</p>
+                    <p><strong>4. Termometer Inframerah (Non-kontak):</strong> Mengukur suhu berdasarkan radiasi inframerah yang dipancarkan oleh objek. Sangat berguna untuk mengukur suhu tanpa menyentuh objek, ideal untuk benda bergerak atau sangat panas/dingin.</p>
+                    <p><strong>5. Termometer Bimetal:</strong> Menggunakan dua strip logam berbeda yang direkatkan. Karena koefisien muai panjangnya berbeda, strip akan melengkung saat dipanaskan atau didinginkan, digunakan dalam termostat.</p>
+                </div>
+            </div>
+
+            <h3>c. Mengapa Kita Perlu Mengetahui Skala Suhu?</h3>
+            <p>Skala suhu adalah sistem standar untuk mengukur suhu. Tanpa skala, angka yang diberikan oleh termometer tidak akan memiliki makna universal. Mengetahui skala suhu memungkinkan kita untuk:</p>
+            <ul style="margin-left: 20px; margin-bottom: 15px;">
+                <li><strong>Standardisasi:</strong> Memastikan pengukuran suhu dapat dipahami dan dibandingkan oleh siapa pun di seluruh dunia.</li>
+                <li><strong>Perbandingan:</strong> Dengan skala, kita bisa membandingkan "panas" relatif antara dua benda atau dua lokasi secara objektif.</li>
+                <li><strong>Perhitungan Ilmiah:</strong> Rumus-rumus fisika sering kali memerlukan suhu dalam skala tertentu (terutama Kelvin untuk perhitungan termodinamika).</li>
+                <li><strong>Komunikasi Efektif:</strong> Ketika dokter mengatakan pasien demam 39°C, semua orang memahami tingkat keparahan demam tersebut.</li>
+            </ul>
+
+            <h3>d. Bagaimana Menentukan Skala Suhu?</h3>
+            <p>Skala suhu didasarkan pada dua titik acuan utama yang mudah direproduksi di mana saja di Bumi, yaitu titik beku dan titik didih air murni pada tekanan atmosfer standar (1 atm).</p>
+            <div class="highlight">
+                <strong>Titik Referensi Utama:</strong><br>
+                <strong>Titik Tetap Bawah:</strong> Suhu di mana air murni membeku pada tekanan 1 atmosfer.<br>
+                <strong>Titik Tetap Atas:</strong> Suhu di mana air murni mendidih pada tekanan 1 atmosfer.
+            </div>
+            <p>Antara kedua titik ini, skala dibagi menjadi jumlah interval yang sama. Mari kita lihat skala suhu yang umum:</p>
+
+            <div class="table-container">
+                <table>
+                    <tr>
+                        <th>Skala</th>
+                        <th>Titik Beku Air ($T_b$)</th>
+                        <th>Titik Didih Air ($T_d$)</th>
+                        <th>Jumlah Skala</th>
+                        <th>Keterangan</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Celsius (°C)</strong></td>
+                        <td>0°C</td>
+                        <td>100°C</td>
+                        <td>100</td>
+                        <td>Paling umum digunakan di seluruh dunia (kecuali AS).</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Fahrenheit (°F)</strong></td>
+                        <td>32°F</td>
+                        <td>212°F</td>
+                        <td>180</td>
+                        <td>Umum digunakan di Amerika Serikat.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Kelvin (K)</strong></td>
+                        <td>273.15 K</td>
+                        <td>373.15 K</td>
+                        <td>100</td>
+                        <td>Skala suhu absolut (SI). 0 K adalah titik nol mutlak.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Reamur (°R)</strong></td>
+                        <td>0°R</td>
+                        <td>80°R</td>
+                        <td>80</td>
+                        <td>Kurang umum digunakan, namun masih dipelajari.</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/your_youtube_video_id_1" title="Konsep Suhu dan Skala Suhu - Contoh Video Pembelajaran IPA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <p><em>Video ini menjelaskan konsep dasar suhu dan berbagai skala pengukurannya.</em></p>
+            </div>
+
+            <h3>e. Perbandingan Skala Suhu</h3>
+            <p>Karena adanya berbagai skala suhu, kita sering perlu mengkonversi satu skala ke skala lainnya. Perbandingan antara interval skala Celsius, Fahrenheit, Reamur, dan Kelvin dapat disederhanakan sebagai berikut:</p>
+
+            <div class="formula-box">
+                <h4>Rumus Konversi Suhu (Perbandingan Interval):</h4>
+                <p>($\text{C} : (\text{F} - 32) : \text{R} : (\text{K} - 273.15) = 5 : 9 : 4 : 5$)</p>
+                <h4>Rumus Konversi Umum:</h4>
+                <p>($\text{F} = \frac{9}{5} \times \text{C} + 32$)</p>
+                <p>($\text{K} = \text{C} + 273.15$)</p>
+                <p>($\text{R} = \frac{4}{5} \times \text{C}$)</p>
+                <p>($\text{C} = \frac{5}{9} \times (\text{F} - 32)$)</p>
+                <p>($\text{C} = \text{K} - 273.15$)</p>
+                <p>($\text{C} = \frac{5}{4} \times \text{R}$)</p>
+            </div>
+
+            <div class="calculator">
+                <h4>🧮 Kalkulator Konversi Suhu</h4>
+                <label for="celsius">Masukkan suhu dalam Celsius (°C):</label>
+                <input type="number" id="celsius" class="calc-input" placeholder="Contoh: 25">
+                <button class="calc-btn" onclick="convertTemperature()">Konversi Suhu</button>
+                <div class="calc-result" id="tempResult">Hasil konversi akan muncul di sini</div>
+            </div>
+        </div>
+
+        <div id="kalor" class="content-section">
+            <h2>🔥 Kalor: Energi yang Berpindah</h2>
+            
+            <h3>a. Apakah Kalor Itu Sama dengan Suhu?</h3>
+            <p>Seringkali orang salah mengartikan kalor dan suhu sebagai hal yang sama, padahal keduanya berbeda namun sangat erat kaitannya. Kalor adalah bentuk energi, sedangkan suhu adalah ukuran derajat panas.</p>
+            
+            <div class="highlight">
+                <strong>Perbedaan Mendasar:</strong><br>
+                <strong>Kalor:</strong> Adalah bentuk <strong>energi</strong> yang berpindah dari benda bersuhu lebih tinggi ke benda bersuhu lebih rendah karena adanya perbedaan suhu. Satuan SI untuk kalor adalah <strong>Joule (J)</strong> atau sering juga digunakan kalori (kal).<br><br>
+                <strong>Suhu:</strong> Adalah <strong>ukuran</strong> atau indikator tingkat panas atau dingin suatu benda. Suhu menunjukkan rata-rata energi kinetik partikel. Satuan SI untuk suhu adalah <strong>Kelvin (K)</strong>.
+            </div>
+
+            <div class="table-container">
+                <table>
+                    <tr>
+                        <th>Aspek</th>
+                        <th>Kalor</th>
+                        <th>Suhu</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Definisi</strong></td>
+                        <td>Energi yang berpindah</td>
+                        <td>Tingkat panas/dingin</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Satuan SI</strong></td>
+                        <td>Joule (J)</td>
+                        <td>Kelvin (K)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Jenis Besaran</strong></td>
+                        <td>Energi (skalar)</td>
+                        <td>Besaran Pokok (skalar)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Sifat</strong></td>
+                        <td>Kuantitas energi yang ditransfer</td>
+                        <td>Intensitas energi kinetik partikel</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Pengukuran</strong></td>
+                        <td>Kalorimeter</td>
+                        <td>Termometer</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Ketergantungan</strong></td>
+                        <td>Bergantung pada massa, kalor jenis, dan perubahan suhu</td>
+                        <td>Bergantung pada energi kinetik rata-rata partikel</td>
+                    </tr>
+                </table>
+            </div>
+
+            <p>Contohnya, seember air hangat memiliki kalor lebih banyak daripada secangkir air mendidih, meskipun suhu secangkir air mendidih lebih tinggi. Ini karena ember air memiliki massa yang jauh lebih besar, sehingga total energi termalnya (kalor) juga lebih besar.</p>
+
+            <div class="image-container">
+                <img src="https://www.bromindo.com/wp-content/uploads/2022/12/segitiga-api-1280x720.webp" alt="Api sebagai sumber kalor">
+                <p><em>Api adalah contoh sumber kalor yang memancarkan energi panas.</em></p>
+            </div>
+
+            <h3>b. Kenapa Benda yang Berbeda Nilai Suhunya Tidak Sama Ketika Diberikan Kalor yang Sama?</h3>
+            <p>Fenomena ini dijelaskan oleh konsep <strong>kalor jenis (c)</strong>. Kalor jenis adalah karakteristik intrinsik suatu zat yang menunjukkan seberapa banyak energi kalor yang diperlukan untuk menaikkan suhu 1 kg zat sebesar 1°C atau 1 K. Setiap zat memiliki kalor jenis yang berbeda.</p>
+            <p>Semakin besar kalor jenis suatu zat, semakin banyak kalor yang dibutuhkan untuk menaikkan suhunya, atau dengan kata lain, suhu zat tersebut akan naik lebih lambat dibandingkan zat dengan kalor jenis yang lebih kecil, meskipun diberikan kalor yang sama.</p>
+
+            <div class="formula-box">
+                <h4>Rumus Perhitungan Kalor untuk Perubahan Suhu:</h4>
+                <p>($Q = m \times c \times \Delta T$)</p>
+                <p>Dimana:</p>
+                <p>($Q$) = Kalor yang diserap/dilepaskan (Joule)</p>
+                <p>($m$) = Massa benda (kg)</p>
+                <p>($c$) = Kalor jenis zat (J/kg°C atau J/kg.K)</p>
+                <p>($\Delta T$) = Perubahan suhu (°C atau K), ($\Delta T = T_{akhir} - T_{awal}$)</p>
+            </div>
+
+            <div class="table-container">
+                <h4>Tabel Kalor Jenis Berbagai Zat (pada 25°C dan 1 atm)</h4>
+                <table>
+                    <tr>
+                        <th>Zat</th>
+                        <th>Kalor Jenis (J/kg·K)</th>
+                        <th>Keterangan</th>
+                    </tr>
+                    <tr>
+                        <td>Air (Cair)</td>
+                        <td>4.200</td>
+                        <td>Nilai tinggi, membuat air baik untuk pendingin.</td>
+                    </tr>
+                    <tr>
+                        <td>Es (Padat)</td>
+                        <td>2.100</td>
+                        <td>Kalor jenis es lebih rendah dari air cair.</td>
+                    </tr>
+                    <tr>
+                        <td>Uap Air (Gas)</td>
+                        <td>2.010</td>
+                        <td>Kalor jenis uap air juga berbeda.</td>
+                    </tr>
+                    <tr>
+                        <td>Alkohol Etil</td>
+                        <td>2.400</td>
+                        <td>Digunakan dalam termometer dan sebagai pelarut.</td>
+                    </tr>
+                    <tr>
+                        <td>Aluminium</td>
+                        <td>900</td>
+                        <td>Logam ringan, sering digunakan dalam peralatan masak.</td>
+                    </tr>
+                    <tr>
+                        <td>Besi</td>
+                        <td>450</td>
+                        <td>Umum digunakan, mudah menghantarkan panas.</td>
+                    </tr>
+                    <tr>
+                        <td>Tembaga</td>
+                        <td>390</td>
+                        <td>Konduktor listrik dan panas yang sangat baik.</td>
+                    </tr>
+                    <tr>
+                        <td>Timbal</td>
+                        <td>130</td>
+                        <td>Logam berat dengan kalor jenis rendah.</td>
+                    </tr>
+                    <tr>
+                        <td>Emas</td>
+                        <td>129</td>
+                        <td>Nilai kalor jenis yang sangat rendah.</td>
+                    </tr>
+                    <tr>
+                        <td>Raksa</td>
+                        <td>140</td>
+                        <td>Digunakan dalam termometer.</td>
+                    </tr>
+                    <tr>
+                        <td>Kaca (Umum)</td>
+                        <td>840</td>
+                        <td>Isolator panas yang cukup baik.</td>
+                    </tr>
+                    <tr>
+                        <td>Timbal</td>
+                        <td>2900</td>
+                        <td>Logam berat dengan kalor jenis rendah.</td>
+                    </tr>
+                    <tr>
+                        <td>Kaca Pyrex</td>
+                        <td>840</td>
+                        <td>Kaca tahan panas, koefisien muai sangat kecil.</td>
+                    </tr>
+                    <tr>
+                        <td>Kaca Biasa</td>
+                        <td>840</td>
+                        <td>Jendela, mudah retak jika perubahan suhu drastis.</td>
+                    </tr>
+                    <tr>
+                        <td>Beton</td>
+                        <td>880</td>
+                        <td>Jembatan, bangunan, harus memiliki celah pemuaian.</td>
+                    </tr>
+                    <tr>
+                        <td>Invar</td>
+                        <td>510</td>
+                        <td>Paduan nikel-besi, koefisien muai sangat rendah, untuk alat presisi.</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="calculator">
+                <h4>🧮 Kalkulator Perhitungan Kalor (Q)</h4>
+                <label for="massa">Massa benda (kg):</label>
+                <input type="number" id="massa" class="calc-input" placeholder="Contoh: 2">
+                <label for="kalorJenis">Kalor Jenis zat (J/kg°C):</label>
+                <input type="number" id="kalorJenis" class="calc-input" placeholder="Contoh: 4200 (untuk air)">
+                <label for="deltaT">Perubahan Suhu (°C atau K):</label>
+                <input type="number" id="deltaT" class="calc-input" placeholder="Contoh: 10 (dari 20 ke 30)">
+                <button class="calc-btn" onclick="calculateHeat()">Hitung Kalor (Q)</button>
+                <div class="calc-result" id="heatResult">Hasil perhitungan akan muncul di sini</div>
+            </div>
+
+            <h3>c. Bagaimana Perpindahan Kalor Terjadi?</h3>
+            <p>Kalor selalu berpindah dari daerah bersuhu tinggi ke daerah bersuhu rendah. Ada tiga mekanisme utama perpindahan kalor:</p>
+
+            <div class="interactive-element" onclick="toggleExpand('konduksi')">
+                <strong>🔥 1. Konduksi (Klik untuk detail dan contoh)</strong>
+                <div id="konduksi" class="expandable-content">
+                    <p><strong>Definisi:</strong> Perpindahan kalor melalui zat padat tanpa disertai perpindahan massa/partikel zat tersebut. Kalor ditransfer melalui getaran atom-atom yang bersentuhan.</p>
+                    <p><strong>Contoh:</strong></p>
+                    <ul style="margin-left: 20px;">
+                        <li>Ujung sendok logam menjadi panas ketika ujung lainnya dipanaskan dalam sup.</li>
+                        <li>Panas dari kompor merambat ke bagian bawah panci.</li>
+                        <li>Rasa panas pada setrika yang disentuh.</li>
+                    </ul>
+                    <p><strong>Konduktor vs. Isolator:</strong> Benda yang mudah menghantarkan kalor disebut konduktor (misalnya logam), sedangkan yang sulit menghantarkan kalor disebut isolator (misalnya kayu, plastik, udara).</p>
+                    <p><strong>Rumus Laju Perpindahan Kalor Konduksi (H):</strong></p>
+                    <p>($H = \frac{Q}{t} = k \times A \times \frac{\Delta T}{L}$)</p>
+                    <p>Dimana:</p>
+                    <p>($H$) = Laju perpindahan kalor (J/s atau Watt)</p>
+                    <p>($k$) = Konduktivitas termal bahan (W/m°C atau W/m.K)</p>
+                    <p>($A$) = Luas penampang lintang bahan (m²)</p>
+                    <p>($\Delta T$) = Perbedaan suhu antara dua ujung bahan (°C atau K)</p>
+                    <p>($L$) = Panjang atau tebal bahan (m)</p>
+                </div>
+            </div>
+
+            <div class="interactive-element" onclick="toggleExpand('konveksi')">
+                <strong>🌊 2. Konveksi (Klik untuk detail dan contoh)</strong>
+                <div id="konveksi" class="expandable-content">
+                    <p><strong>Definisi:</strong> Perpindahan kalor melalui aliran fluida (zat cair atau gas) yang disertai dengan perpindahan partikel zat. Partikel fluida yang lebih panas (massa jenis lebih kecil) akan naik, dan partikel yang lebih dingin (massa jenis lebih besar) akan turun, menciptakan arus konveksi.</p>
+                    <p><strong>Contoh:</strong></p>
+                    <ul style="margin-left: 20px;">
+                        <li>Air mendidih di dalam panci (air panas naik, air dingin turun).</li>
+                        <li>Terjadinya angin darat dan angin laut (perbedaan suhu udara di darat dan laut).</li>
+                        <li>Sistem pendingin pada kulkas atau AC.</li>
+                        <li>Asap cerobong pabrik yang membumbung tinggi.</li>
+                    </ul>
+                    <p><strong>Jenis Konveksi:</strong></p>
+                    <ul style="margin-left: 20px;">
+                        <li><strong>Konveksi Alami:</strong> Terjadi karena perbedaan massa jenis akibat perubahan suhu.</li>
+                        <li><strong>Konveksi Paksa:</strong> Melibatkan bantuan eksternal seperti kipas atau pompa untuk mempercepat aliran fluida.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="interactive-element" onclick="toggleExpand('radiasi')">
+                <strong>☀️ 3. Radiasi (Klik untuk detail dan contoh)</strong>
+                <div id="radiasi" class="expandable-content">
+                    <p><strong>Definisi:</strong> Perpindahan kalor tanpa memerlukan medium (zat perantara). Kalor ditransfer dalam bentuk gelombang elektromagnetik (biasanya inframerah).</p>
+                    <p><strong>Contoh:</strong></p>
+                    <ul style="margin-left: 20px;">
+                        <li>Panas matahari sampai ke Bumi meskipun melewati ruang hampa.</li>
+                        <li>Merasa hangat di dekat api unggun atau lampu pijar.</li>
+                        <li>Panas yang dipancarkan dari tubuh manusia.</li>
+                        <li>Penggunaan oven microwave untuk memanaskan makanan.</li>
+                    </ul>
+                    <p>Semua benda yang memiliki suhu di atas nol mutlak akan memancarkan radiasi termal.</p>
+                    <p><strong>Rumus Laju Radiasi Termal (Hukum Stefan-Boltzmann):</strong></p>
+                    <p>($P = e \times \sigma \times A \times T^4$)</p>
+                    <p>Dimana:</p>
+                    <p>($P$) = Daya radiasi atau laju perpindahan kalor (Watt)</p>
+                    <p>($e$) = Emisivitas benda (antara 0 dan 1, 1 untuk benda hitam sempurna)</p>
+                    <p>($\sigma$) = Konstanta Stefan-Boltzmann ($5.67 \times 10^{-8} \text{ W/m}^2\text{K}^4$)</p>
+                    <p>($A$) = Luas permukaan benda yang memancarkan radiasi (m²)</p>
+                    <p>($T$) = Suhu mutlak benda (Kelvin)</p>
+                </div>
+            </div>
+
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/your_youtube_video_id_2" title="Video Penjelasan Perpindahan Kalor (Konduksi, Konveksi, Radiasi)" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <p><em>Pelajari lebih lanjut tentang bagaimana kalor berpindah melalui konduksi, konveksi, dan radiasi.</em></p>
+            </div>
+
+            <div class="calculator">
+                <h4>🧮 Kalkulator Laju Konduksi Kalor</h4>
+                <label for="konduktivitas">Konduktivitas Termal (k) (W/m°C):</label>
+                <input type="number" id="konduktivitas" class="calc-input" placeholder="Contoh: 400 (Tembaga)">
+                <label for="luasKonduksi">Luas Penampang (A) (m²):</label>
+                <input type="number" id="luasKonduksi" class="calc-input" placeholder="Contoh: 0.01">
+                <label for="perbedaanSuhu">Perbedaan Suhu (ΔT) (°C):</label>
+                <input type="number" id="perbedaanSuhu" class="calc-input" placeholder="Contoh: 50">
+                <label for="panjangKonduksi">Panjang/Tebal bahan (L) (m):</label>
+                <input type="number" id="panjangKonduksi" class="calc-input" placeholder="Contoh: 0.1">
+                <button class="calc-btn" onclick="calculateConduction()">Hitung Laju Konduksi</button>
+                <div class="calc-result" id="conductionResult">Hasil perhitungan akan muncul di sini</div>
+            </div>
+        </div>
+
+        <div id="pemuaian" class="content-section">
+            <h2>📏 Pemuaian: Perubahan Ukuran Akibat Suhu</h2>
+            
+            <h3>a. Apakah Pemuaian Itu?</h3>
+            <p><strong>Pemuaian</strong> adalah fenomena fisika di mana terjadi <strong>pertambahan ukuran</strong> (panjang, luas, atau volume) suatu benda akibat pengaruh <strong>kenaikan suhu</strong>. Sebaliknya, ketika suhu benda turun, benda akan mengalami penyusutan (pengurangan ukuran).</p>
+            <p>Prinsip dasarnya adalah ketika suhu benda meningkat, energi kinetik rata-rata partikel penyusun benda juga meningkat. Partikel-partikel ini bergetar dengan amplitudo yang lebih besar dan cenderung menjaga jarak yang lebih jauh satu sama lain, sehingga menghasilkan ekspansi keseluruhan benda.</p>
+
+            <div class="highlight">
+                <strong>Definisi Penting:</strong> Pemuaian adalah perubahan dimensi (panjang, luas, volume) suatu zat yang diakibatkan oleh perubahan suhu. Hal ini terjadi karena peningkatan energi kinetik molekul dan peningkatan jarak antar molekul.
+            </div>
+
+            <div class="image-container">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQD_ZTrY0k-GFP0NwWCq18d8Te01fovnxifEg&s" alt="Rel kereta api dengan celah pemuaian">
+                <p><em>Celah pada rel kereta api adalah contoh nyata aplikasi pemuaian dalam teknik.</em></p>
+            </div>
+
+            <p>Pemuaian dapat diamati dalam kehidupan sehari-hari, mulai dari kabel listrik yang kendur di musim panas hingga termometer yang menunjukkan kenaikan suhu.</p>
+
+            <h3>b. Pemuaian Zat</h3>
+            <p>Pemuaian terjadi pada semua wujud zat: padat, cair, dan gas. Namun, cara dan besarnya pemuaian bervariasi tergantung pada wujud zat tersebut.</p>
+            <ul style="margin-left: 20px; margin-bottom: 15px;">
+                <li><strong>Pemuaian Zat Padat:</strong> Dapat berupa pemuaian panjang, luas, atau volume. Pemuaian ini paling sedikit dibandingkan zat cair dan gas.</li>
+                <li><strong>Pemuaian Zat Cair:</strong> Hanya dapat mengalami pemuaian volume karena tidak memiliki bentuk tetap. Umumnya pemuaian zat cair lebih besar dari zat padat.</li>
+                <li><strong>Pemuaian Zat Gas:</strong> Mengalami pemuaian volume yang paling signifikan dan sangat dipengaruhi oleh perubahan tekanan atau volume.</li>
+            </ul>
+
+            <h3>c. Pemuaian Panjang</h3>
+            <p>Pemuaian panjang adalah pertambahan dimensi panjang pada benda padat yang hanya memiliki satu dimensi dominan (misalnya batang logam, kawat). Pertambahan panjang ini berbanding lurus dengan panjang awal benda, koefisien muai panjang, dan perubahan suhu.</p>
+
+            <div class="formula-box">
+                <h4>Rumus Pemuaian Panjang:</h4>
+                <p>Pertambahan Panjang ($\Delta L$):</p>
+                <p>($\Delta L = L_0 \times \alpha \times \Delta T$)</p>
+                <p>Panjang Akhir ($L$):</p>
+                <p>($L = L_0 + \Delta L$)</p>
+                <p>($L = L_0 (1 + \alpha \times \Delta T)$)</p>
+                <p>Dimana:</p>
+                <p>($\Delta L$) = Pertambahan panjang (m)</p>
+                <p>($L_0$) = Panjang awal benda (m)</p>
+                <p>($L$) = Panjang akhir benda setelah pemuaian (m)</p>
+                <p>($\alpha$) = Koefisien muai panjang (/°C atau /K), nilai ini spesifik untuk setiap jenis bahan.</p>
+                <p>($\Delta T$) = Perubahan suhu (°C atau K), ($\Delta T = T_{akhir} - T_{awal}$)</p>
+            </div>
+
+            <div class="table-container">
+                <h4>Tabel Koefisien Muai Panjang (α) Berbagai Bahan (/°C)</h4>
+                <table>
+                    <tr>
+                        <th>Bahan</th>
+                        <th>Koefisien Muai Panjang (α) (/°C)</th>
+                        <th>Aplikasi / Catatan</th>
+                    </tr>
+                    <tr>
+                        <td>Aluminium</td>
+                        <td>$2.4 \times 10^{-5}$</td>
+                        <td>Digunakan pada kusen jendela, alat masak.</td>
+                    </tr>
+                    <tr>
+                        <td>Besi / Baja</td>
+                        <td>$1.2 \times 10^{-5}$</td>
+                        <td>Rel kereta api, struktur bangunan.</td>
+                    </tr>
+                    <tr>
+                        <td>Tembaga</td>
+                        <td>$1.7 \times 10^{-5}$</td>
+                        <td>Kabel listrik, pipa, komponen elektronik.</td>
+                    </tr>
+                    <tr>
+                        <td>Kuningan</td>
+                        <td>$1.9 \times 10^{-5}$</td>
+                        <td>Paduan tembaga dan seng, digunakan pada bimetal.</td>
+                    </tr>
+                    <tr>
+                        <td>Timbal</td>
+                        <td>$2.9 \times 10^{-5}$</td>
+                        <td>Digunakan pada sambungan pipa.</td>
+                    </tr>
+                    <tr>
+                        <td>Seng</td>
+                        <td>$2.6 \times 10^{-5}$</td>
+                        <td>Lapisan anti karat, atap.</td>
+                    </tr>
+                    <tr>
+                        <td>Kaca Pyrex</td>
+                        <td>$0.3 \times 10^{-5}$</td>
+                        <td>Kaca tahan panas, koefisien muai sangat kecil.</td>
+                    </tr>
+                    <tr>
+                        <td>Kaca Biasa</td>
+                        <td>$0.9 \times 10^{-5}$</td>
+                        <td>Jendela, mudah retak jika perubahan suhu drastis.</td>
+                    </tr>
+                    <tr>
+                        <td>Beton</td>
+                        <td>$1.2 \times 10^{-5}$</td>
+                        <td>Jembatan, bangunan, harus memiliki celah pemuaian.</td>
+                    </tr>
+                    <tr>
+                        <td>Invar</td>
+                        <td>$0.07 \times 10^{-5}$</td>
+                        <td>Paduan nikel-besi, koefisien muai sangat rendah, untuk alat presisi.</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="calculator">
+                <h4>🧮 Kalkulator Pemuaian Panjang</h4>
+                <label for="panjangAwal">Panjang Awal (L₀) (m):</label>
+                <input type="number" id="panjangAwal" class="calc-input" placeholder="Contoh: 10">
+                <label for="koefisienMuai">Koefisien Muai Panjang (α) (/°C):</label>
+                <input type="number" id="koefisienMuai" class="calc-input" placeholder="Contoh: 0.000012 (untuk besi)" step="0.0000001">
+                <label for="perubahanSuhu">Perubahan Suhu (ΔT) (°C):</label>
+                <input type="number" id="perubahanSuhu" class="calc-input" placeholder="Contoh: 50">
+                <button class="calc-btn" onclick="calculateLinearExpansion()">Hitung Pemuaian Panjang</button>
+                <div class="calc-result" id="linearExpansionResult">Hasil perhitungan akan muncul di sini</div>
+            </div>
+
+            <h3>d. Pemuaian Luas</h3>
+            <p>Pemuaian luas adalah pertambahan dimensi luas pada benda padat yang memiliki dua dimensi dominan (misalnya plat, lembaran). Pertambahan luas ini dipengaruhi oleh luas awal, koefisien muai luas, dan perubahan suhu.</p>
+            <p>Koefisien muai luas ($\beta$) adalah dua kali koefisien muai panjang ($\alpha$) untuk bahan yang sama. Jadi, ($\beta = 2\alpha$).</p>
+
+            <div class="formula-box">
+                <h4>Rumus Pemuaian Luas:</h4>
+                <p>Pertambahan Luas ($\Delta A$):</p>
+                <p>($\Delta A = A_0 \times \beta \times \Delta T$)</p>
+                <p>Luas Akhir ($A$):</p>
+                <p>($A = A_0 + \Delta A$)</p>
+                <p>($A = A_0 (1 + \beta \times \Delta T)$)</p>
+                <p>Hubungan ($\beta$) dengan ($\alpha$):</p>
+                <p>($\beta = 2\alpha$)</p>
+                <p>Dimana:</p>
+                <p>($\Delta A$) = Pertambahan luas (m²)</p>
+                <p>($A_0$) = Luas awal benda (m²)</p>
+                <p>($A$) = Luas akhir benda (m²)</p>
+                <p>($\beta$) = Koefisien muai luas (/°C)</p>
+                <p>($\Delta T$) = Perubahan suhu (°C)</p>
+            </div>
+
+            <div class="calculator">
+                <h4>🧮 Kalkulator Pemuaian Luas</h4>
+                <label for="luasAwal">Luas Awal (A₀) (m²):</label>
+                <input type="number" id="luasAwal" class="calc-input" placeholder="Contoh: 5">
+                <label for="koefisienMuaiLuas">Koefisien Muai Panjang (α) bahan (/°C):</label>
+                <input type="number" id="koefisienMuaiLuas" class="calc-input" placeholder="Contoh: 0.000012 (untuk besi)" step="0.0000001">
+                <label for="perubahanSuhuLuas">Perubahan Suhu (ΔT) (°C):</label>
+                <input type="number" id="perubahanSuhuLuas" class="calc-input" placeholder="Contoh: 50">
+                <button class="calc-btn" onclick="calculateAreaExpansion()">Hitung Pemuaian Luas</button>
+                <div class="calc-result" id="areaExpansionResult">Hasil perhitungan akan muncul di sini</div>
+            </div>
+
+            <h3>e. Pemuaian Zat Cair</h3>
+            <p>Zat cair, tidak seperti zat padat, tidak memiliki bentuk tetap, sehingga ketika dipanaskan, mereka hanya mengalami <strong>pemuaian volume</strong>. Pemuaian volume zat cair umumnya jauh lebih besar daripada pemuaian volume zat padat untuk perubahan suhu yang sama.</p>
+            <p>Koefisien muai volume zat cair ($\gamma$) adalah karakteristik masing-masing cairan. Untuk zat padat isotropik (memuai sama ke segala arah), koefisien muai volume ($\gamma$) adalah tiga kali koefisien muai panjang ($\alpha$), atau ($\gamma = 3\alpha$). Namun, untuk zat cair, ($\gamma$) adalah nilai yang ditentukan secara eksperimen.</p>
+
+            <div class="formula-box">
+                <h4>Rumus Pemuaian Volume Zat Cair:</h4>
+                <p>Pertambahan Volume ($\Delta V$):</p>
+                <p>($\Delta V = V_0 \times \gamma \times \Delta T$)</p>
+                <p>Volume Akhir ($V$):</p>
+                <p>($V = V_0 + \Delta V$)</p>
+                <p>($V = V_0 (1 + \gamma \times \Delta T)$)</p>
+                <p>Dimana:</p>
+                <p>($\Delta V$) = Pertambahan volume (m³ atau L)</p>
+                <p>($V_0$) = Volume awal zat cair (m³ atau L)</p>
+                <p>($V$) = Volume akhir zat cair (m³ atau L)</p>
+                <p>($\gamma$) = Koefisien muai volume zat cair (/°C atau /K)</p>
+                <p>($\Delta T$) = Perubahan suhu (°C atau K)</p>
+            </div>
+
+            <div class="table-container">
+                <h4>Tabel Koefisien Muai Volume Zat Cair (γ) (/°C)</h4>
+                <table>
+                    <tr>
+                        <th>Zat Cair</th>
+                        <th>Koefisien Muai Volume (γ) (/°C)</th>
+                        <th>Catatan</th>
+                    </tr>
+                    <tr>
+                        <td>Air</td>
+                        <td>$2.1 \times 10^{-4}$</td>
+                        <td>Memiliki anomali pada 0-4°C.</td>
+                    </tr>
+                    <tr>
+                        <td>Alkohol Etil</td>
+                        <td>$1.1 \times 10^{-3}$</td>
+                        <td>Koefisien muai tinggi, cocok untuk termometer suhu rendah.</td>
+                    </tr>
+                    <tr>
+                        <td>Minyak Tanah</td>
+                        <td>$9.6 \times 10^{-4}$</td>
+                        <td>Bahan bakar umum.</td>
+                    </tr>
+                    <tr>
+                        <td>Bensin</td>
+                        <td>$9.6 \times 10^{-4}$</td>
+                        <td>Bahan bakar kendaraan.</td>
+                    </tr>
+                    <tr>
+                        <td>Raksa</td>
+                        <td>$1.8 \times 10^{-4}$</td>
+                        <td>Digunakan dalam termometer, pemuaiannya cukup linier.</td>
+                    </tr>
+                    <tr>
+                        <td>Gliserin</td>
+                        <td>$4.9 \times 10^{-4}$</td>
+                        <td>Digunakan dalam industri farmasi dan makanan.</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="interactive-element" onclick="toggleExpand('air-anomali')">
+                <strong>💧 Anomali Air: Sifat Unik Air (Klik untuk detail)</strong>
+                <div id="air-anomali" class="expandable-content">
+                    <p><strong>Anomali Air:</strong> Air menunjukkan perilaku yang tidak biasa (anomali) pada rentang suhu 0°C hingga 4°C. Berbeda dengan zat lain yang volumenya akan terus memuai saat dipanaskan dari 0°C, air justru <strong>menyusut</strong> volumenya hingga mencapai volume minimum pada suhu 4°C. Setelah 4°C, barulah air akan memuai seperti zat cair pada umumnya.</p>
+                    <p><strong>Pentingnya Anomali Air:</strong></p>
+                    <ul style="margin-left: 20px;">
+                        <li><strong>Kehidupan Akuatik:</strong> Karena volume air terbesar (dan massa jenis terkecil) ada di suhu 4°C, air di bagian bawah danau akan tetap pada 4°C saat permukaan membeku. Ini memungkinkan kehidupan di bawah es tetap bertahan.</li>
+                        <li><strong>Es Mengapung:</strong> Es (air padat) memiliki massa jenis yang lebih kecil daripada air cair pada suhu 0°C. Ini mengapa es mengapung, yang merupakan anomali karena kebanyakan zat padat lebih padat dari bentuk cairnya.</li>
+                        <li><strong>Pipa Pecah:</strong> Saat air membeku di dalam pipa pada suhu di bawah 0°C, volumenya akan memuai, menyebabkan tekanan besar yang bisa memecahkan pipa.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="calculator">
+                <h4>🧮 Kalkulator Pemuaian Volume Zat Cair</h4>
+                <label for="volumeAwal">Volume Awal (V₀) (m³):</label>
+                <input type="number" id="volumeAwal" class="calc-input" placeholder="Contoh: 0.001">
+                <label for="koefisienMuaiVolume">Koefisien Muai Volume (γ) (/°C):</label>
+                <input type="number" id="koefisienMuaiVolume" class="calc-input" placeholder="Contoh: 0.00021 (untuk air)" step="0.00001">
+                <label for="perubahanSuhuVolume">Perubahan Suhu (ΔT) (°C):</label>
+                <input type="number" id="perubahanSuhuVolume" class="calc-input" placeholder="Contoh: 30">
+                <button class="calc-btn" onclick="calculateVolumeExpansion()">Hitung Pemuaian Volume</button>
+                <div class="calc-result" id="volumeExpansionResult">Hasil perhitungan akan muncul di sini</div>
+            </div>
+
+            <h3>f. Pemuaian Zat Gas</h3>
+            <p>Gas adalah zat yang paling mudah memuai ketika dipanaskan, dan pemuaiannya sangat signifikan dibandingkan zat padat atau cair. Pemuaian gas sangat bergantung pada kondisi tekanan dan volume.</p>
+            <p>Pemuaian gas dijelaskan oleh beberapa hukum gas ideal:</p>
+
+            <div class="formula-box">
+                <h4>Rumus-rumus Pemuaian Gas (Hukum Gas Ideal Sederhana):</h4>
+                <p><strong>1. Hukum Charles (Tekanan Tetap - Isobarik):</strong></p>
+                <p>Jika tekanan gas dijaga konstan, volume gas berbanding lurus dengan suhu mutlaknya.</p>
+                <p>($\frac{V_1}{T_1} = \frac{V_2}{T_2}$)</p>
+                <p><strong>2. Hukum Gay-Lussac (Volume Tetap - Isokhorik):</strong></p>
+                <p>Jika volume gas dijaga konstan, tekanan gas berbanding lurus dengan suhu mutlaknya.</p>
+                <p>($\frac{P_1}{T_1} = \frac{P_2}{T_2}$)</p>
+                <p><strong>3. Hukum Boyle (Suhu Tetap - Isotermal):</strong></p>
+                <p>Jika suhu gas dijaga konstan, tekanan gas berbanding terbalik dengan volumenya.</p>
+                <p>($P_1 V_1 = P_2 V_2$)</p>
+                <p><strong>4. Hukum Boyle-Gay Lussac (Gabungan):</strong></p>
+                <p>Menggabungkan ketiga hukum di atas untuk kasus di mana tidak ada besaran yang tetap.</p>
+                <p>($\frac{P_1 V_1}{T_1} = \frac{P_2 V_2}{T_2}$)</p>
+                <p style="font-size: 0.9em; margin-top: 10px;"><strong>Catatan Penting:</strong> Untuk semua rumus gas, suhu ($T$) harus dalam skala <strong>Kelvin (K)</strong>.</p>
+            </div>
+
+            <div class="calculator">
+                <h4>🧮 Kalkulator Hukum Charles (Volume & Suhu)</h4>
+                <p>Hitung volume akhir gas jika tekanan dijaga konstan.</p>
+                <label for="volume1">Volume Awal (V₁) (m³):</label>
+                <input type="number" id="volume1" class="calc-input" placeholder="Contoh: 2">
+                <label for="suhu1">Suhu Awal (T₁) (°C):</label>
+                <input type="number" id="suhu1" class="calc-input" placeholder="Contoh: 27">
+                <label for="suhu2">Suhu Akhir (T₂) (°C):</label>
+                <input type="number" id="suhu2" class="calc-input" placeholder="Contoh: 127">
+                <button class="calc-btn" onclick="calculateCharlesLaw()">Hitung Volume Akhir</button>
+                <div class="calc-result" id="charlesLawResult">Hasil perhitungan akan muncul di sini</div>
+            </div>
+
+            <div class="calculator">
+                <h4>🧮 Kalkulator Hukum Gay-Lussac (Tekanan & Suhu)</h4>
+                <p>Hitung tekanan akhir gas jika volume dijaga konstan.</p>
+                <label for="pressure1">Tekanan Awal (P₁) (Pa):</label>
+                <input type="number" id="pressure1" class="calc-input" placeholder="Contoh: 100000">
+                <label for="suhu1_gaylussac">Suhu Awal (T₁) (°C):</label>
+                <input type="number" id="suhu1_gaylussac" class="calc-input" placeholder="Contoh: 27">
+                <label for="suhu2_gaylussac">Suhu Akhir (T₂) (°C):</label>
+                <input type="number" id="suhu2_gaylussac" class="calc-input" placeholder="Contoh: 127">
+                <button class="calc-btn" onclick="calculateGayLussacLaw()">Hitung Tekanan Akhir</button>
+                <div class="calc-result" id="gayLussacLawResult">Hasil perhitungan akan muncul di sini</div>
+            </div>
+
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/your_youtube_video_id_3" title="Video Penjelasan Pemuaian Zat Padat, Cair, dan Gas" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <p><em>Saksikan bagaimana pemuaian terjadi pada berbagai wujud zat.</em></p>
+            </div>
+
+            <div class="highlight">
+                <strong>Aplikasi Pemuaian dalam Kehidupan Sehari-hari:</strong>
+                <ul style="margin-left: 20px; margin-top: 10px;">
+                    <li><strong>Pemasangan Rel Kereta Api dan Jembatan:</strong> Diberi celah untuk mengakomodasi pemuaian di siang hari dan penyusutan di malam hari, mencegah kerusakan struktur.</li>
+                    <li><strong>Bimetal pada Termostat & Setrika Otomatis:</strong> Dua logam dengan koefisien muai berbeda direkatkan. Saat panas, bimetal melengkung dan memutuskan sirkuit listrik.</li>
+                    <li><strong>Termometer Raksa dan Alkohol:</strong> Memanfaatkan pemuaian zat cair (raksa atau alkohol) untuk menunjukkan suhu.</li>
+                    <li><strong>Pemasangan Kaca Jendela:</strong> Kaca dipasang agak longgar agar tidak pecah saat memuai di siang hari yang panas.</li>
+                    <li><strong>Pengelingan (Rivet):</strong> Pemasangan paku keling panas yang menyusut saat dingin, mengikat dua pelat dengan erat.</li>
+                    <li><strong>Balon Udara Panas:</strong> Udara di dalam balon dipanaskan, memuai, massa jenisnya berkurang, sehingga balon dapat mengapung.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="quiz" class="content-section">
+            <h2>🧠 Kuis Interaktif: Uji Pemahamanmu!</h2>
+            <p>Yuk, coba jawab beberapa pertanyaan untuk menguji seberapa jauh pemahamanmu tentang Suhu, Kalor, dan Pemuaian!</p>
+            <div class="quiz-container">
+                <div id="quiz1" class="quiz-question">
+                    <h4>Pertanyaan 1:</h4>
+                    <p>Sebuah termometer menunjukkan suhu 50°C. Berapa nilai suhu ini jika dikonversi ke skala Fahrenheit?</p>
+                    <div class="quiz-options">
+                        <label class="quiz-option">
+                            <input type="radio" name="q1" value="a"> 90°F
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q1" value="b"> 122°F
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q1" value="c"> 132°F
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q1" value="d"> 150°F
+                        </label>
+                    </div>
+                </div>
+
+                <div id="quiz2" class="quiz-question">
+                    <h4>Pertanyaan 2:</h4>
+                    <p>Perpindahan kalor yang terjadi tanpa memerlukan medium perantara, seperti panas matahari yang sampai ke Bumi, disebut...</p>
+                    <div class="quiz-options">
+                        <label class="quiz-option">
+                            <input type="radio" name="q2" value="a"> Konduksi
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q2" value="b"> Konveksi
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q2" value="c"> Radiasi
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q2" value="d"> Evaporasi
+                        </label>
+                    </div>
+                </div>
+
+                <div id="quiz3" class="quiz-question">
+                    <h4>Pertanyaan 3:</h4>
+                    <p>Jika koefisien muai panjang suatu bahan adalah ($\alpha$), maka koefisien muai luas ($\beta$) bahan tersebut adalah...</p>
+                    <div class="quiz-options">
+                        <label class="quiz-option">
+                            <input type="radio" name="q3" value="a"> $\alpha$
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q3" value="b"> $2\alpha$
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q3" value="c"> $3\alpha$
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q3" value="d"> $\alpha/2$
+                        </label>
+                    </div>
+                </div>
+
+                <div id="quiz4" class="quiz-question">
+                    <h4>Pertanyaan 4:</h4>
+                    <p>Pada suhu berapa air memiliki volume minimum (dan massa jenis maksimum) yang menjadi dasar anomali air?</p>
+                    <div class="quiz-options">
+                        <label class="quiz-option">
+                            <input type="radio" name="q4" value="a"> 0°C
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q4" value="b"> 4°C
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q4" value="c"> 10°C
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q4" value="d"> 100°C
+                        </label>
+                    </div>
+                </div>
+
+                <div id="quiz5" class="quiz-question">
+                    <h4>Pertanyaan 5:</h4>
+                    <p>Satuan standar internasional (SI) untuk kalor adalah...</p>
+                    <div class="quiz-options">
+                        <label class="quiz-option">
+                            <input type="radio" name="q5" value="a"> Kalori
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q5" value="b"> Joule
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q5" value="c"> Watt
+                        </label>
+                        <label class="quiz-option">
+                            <input type="radio" name="q5" value="d"> Newton
+                        </label>
+                    </div>
+                </div>
+
+                <button class="calc-btn" onclick="checkQuiz()">Periksa Jawaban</button>
+                <div class="quiz-result" id="quizResult">Hasil kuis akan muncul di sini</div>
+            </div>
+
+            <div class="interactive-element" onclick="toggleExpand('fun-facts')">
+                <strong>🎯 Fakta Menarik Seputar Suhu, Kalor, dan Pemuaian (Klik untuk melihat lebih banyak!)</strong>
+                <div id="fun-facts" class="expandable-content">
+                    <p><strong>1. Suhu Terendah di Bumi:</strong> Suhu paling rendah yang pernah tercatat secara alami di permukaan Bumi adalah -89.2°C (-128.6°F) di Stasiun Vostok, Antartika pada tahun 1983.</p>
+                    <p><strong>2. Pemuaian Bangunan Tinggi:</strong> Gedung-gedung pencakar langit, seperti Menara Eiffel, dapat bertambah tinggi beberapa sentimeter di musim panas karena pemuaian termal pada struktur bajanya.</p>
+                    <p><strong>3. Termometer Awal:</strong> Termometer pertama yang handal ditemukan oleh Daniel Gabriel Fahrenheit pada awal abad ke-18, menggunakan raksa sebagai cairan termometrik.</p>
+                    <p><strong>4. Energi Geotermal:</strong> Panas dari dalam Bumi (energi geotermal) adalah contoh besar dari kalor yang tersimpan dan dapat dimanfaatkan sebagai sumber energi bersih.</p>
+                    <p><strong>5. Efek Rumah Kaca:</strong> Gas rumah kaca seperti CO2 menyerap radiasi inframerah yang dipancarkan Bumi, memerangkap kalor dan menyebabkan pemanasan global.</p>
+                    <p><strong>6. Jarak Planet:</strong> Jarak Bumi ke Matahari bervariasi sepanjang tahun, mempengaruhi jumlah radiasi yang diterima dan, pada gilirannya, suhu musiman.</p>
+                    <p><strong>7. Kristal Salju:</strong> Bentuk unik kristal salju sebagian besar ditentukan oleh suhu dan kelembaban di atmosfer saat mereka terbentuk.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Initial state for current section
+        let currentSection = 'suhu';
+
+        // Correct answers for the quiz
+        const quizAnswers = {
+            q1: 'b', // 50°C = 122°F
+            q2: 'c', // Radiasi
+            q3: 'b', // β = 2α
+            q4: 'b', // 4°C
+            q5: 'b'  // Joule
+        };
+
+        /**
+         * Hides all content sections and shows the selected one.
+         * Updates the active state of navigation buttons and the progress bar.
+         * @param {string} sectionName - The ID of the section to display.
+         */
+        function showSection(sectionName) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Remove active class from all navigation buttons
+            const navButtons = document.querySelectorAll('.nav-btn');
+            navButtons.forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Show the selected section
+            document.getElementById(sectionName).classList.add('active');
+            
+            // Add active class to the clicked navigation button or the one matching the sectionName
+            const targetButton = document.querySelector(`.nav-btn[data-section="${sectionName}"]`);
+            if (targetButton) {
+                targetButton.classList.add('active');
+            }
+            
+            // Update the global currentSection variable
+            currentSection = sectionName;
+            updateProgress(); // Update progress bar based on current section
+        }
+
+        /**
+         * Updates the fill width of the progress bar based on the current active section.
+         */
+        function updateProgress() {
+            const sections = ['suhu', 'kalor', 'pemuaian', 'quiz'];
+            const currentIndex = sections.indexOf(currentSection);
+            // Calculate progress percentage
+            const progress = ((currentIndex + 1) / sections.length) * 100;
+            // Apply the width to the progress-fill element
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
+
+        /**
+         * Converts temperature from Celsius to Fahrenheit, Kelvin, and Reamur.
+         * Displays the results in the 'tempResult' div.
+         */
+        function convertTemperature() {
+            const celsiusInput = document.getElementById('celsius');
+            const celsius = parseFloat(celsiusInput.value);
+
+            if (isNaN(celsius)) {
+                document.getElementById('tempResult').innerHTML = '<span style="color: red;">⚠️ Masukkan nilai suhu yang valid (angka)!</span>';
+                celsiusInput.focus();
+                return;
+            }
+
+            const fahrenheit = (9/5) * celsius + 32;
+            const kelvin = celsius + 273.15; // More precise Kelvin conversion
+            const reamur = (4/5) * celsius;
+
+            document.getElementById('tempResult').innerHTML = `
+                <strong>Hasil Konversi:</strong><br>
+                ${celsius}°C = ${fahrenheit.toFixed(2)}°F<br>
+                ${celsius}°C = ${kelvin.toFixed(2)} K<br>
+                ${celsius}°C = ${reamur.toFixed(2)}°R
+            `;
+        }
+
+        /**
+         * Calculates the heat absorbed or released (Q) based on mass, specific heat, and temperature change.
+         * Displays the results in the 'heatResult' div.
+         */
+        function calculateHeat() {
+            const massaInput = document.getElementById('massa');
+            const kalorJenisInput = document.getElementById('kalorJenis');
+            const deltaTInput = document.getElementById('deltaT');
+
+            const massa = parseFloat(massaInput.value);
+            const kalorJenis = parseFloat(kalorJenisInput.value);
+            const deltaT = parseFloat(deltaTInput.value);
+
+            if (isNaN(massa) || isNaN(kalorJenis) || isNaN(deltaT)) {
+                document.getElementById('heatResult').innerHTML = '<span style="color: red;">⚠️ Harap masukkan semua nilai angka yang diperlukan!</span>';
+                if (isNaN(massa)) massaInput.focus();
+                else if (isNaN(kalorJenis)) kalorJenisInput.focus();
+                else if (isNaN(deltaT)) deltaTInput.focus();
+                return;
+            }
+
+            const kalor = massa * kalorJenis * deltaT;
+            const kalorKal = kalor / 4.184; // More precise conversion from Joule to calorie (1 cal = 4.184 J)
+
+            document.getElementById('heatResult').innerHTML = `
+                <strong>Hasil Perhitungan Kalor:</strong><br>
+                Q = m × c × ΔT<br>
+                Q = ${massa} kg × ${kalorJenis} J/kg°C × ${deltaT}°C<br>
+                Q = <strong>${kalor.toFixed(2)} Joule</strong><br>
+                Q = ${kalorKal.toFixed(2)} kalori
+            `;
+        }
+
+        /**
+         * Calculates the rate of heat conduction (H) through a material.
+         * Displays the results in the 'conductionResult' div.
+         */
+        function calculateConduction() {
+            const kInput = document.getElementById('konduktivitas');
+            const AInput = document.getElementById('luasKonduksi');
+            const deltaTInput = document.getElementById('perbedaanSuhu');
+            const LInput = document.getElementById('panjangKonduksi');
+
+            const k = parseFloat(kInput.value);
+            const A = parseFloat(AInput.value);
+            const deltaT = parseFloat(deltaTInput.value);
+            const L = parseFloat(LInput.value);
+
+            if (isNaN(k) || isNaN(A) || isNaN(deltaT) || isNaN(L)) {
+                document.getElementById('conductionResult').innerHTML = '<span style="color: red;">⚠️ Masukkan semua nilai angka dengan benar!</span>';
+                if (isNaN(k)) kInput.focus();
+                else if (isNaN(A)) AInput.focus();
+                else if (isNaN(deltaT)) deltaTInput.focus();
+                else if (isNaN(L)) LInput.focus();
+                return;
+            }
+            if (L === 0) {
+                document.getElementById('conductionResult').innerHTML = '<span style="color: red;">⚠️ Panjang/Tebal bahan (L) tidak boleh nol!</span>';
+                LInput.focus();
+                return;
+            }
+
+            const H = (k * A * deltaT) / L;
+
+            document.getElementById('conductionResult').innerHTML = `
+                <strong>Hasil Perhitungan Laju Konduksi:</strong><br>
+                H = (k × A × ΔT) / L<br>
+                H = (${k} × ${A} × ${deltaT}) / ${L}<br>
+                H = <strong>${H.toFixed(4)} Watt</strong>
+            `;
+        }
+
+        /**
+         * Calculates the change in length and final length due to thermal expansion.
+         * Displays the results in the 'linearExpansionResult' div.
+         */
+        function calculateLinearExpansion() {
+            const L0Input = document.getElementById('panjangAwal');
+            const alphaInput = document.getElementById('koefisienMuai');
+            const deltaTInput = document.getElementById('perubahanSuhu');
+
+            const L0 = parseFloat(L0Input.value);
+            const alpha = parseFloat(alphaInput.value);
+            const deltaT = parseFloat(deltaTInput.value);
+
+            if (isNaN(L0) || isNaN(alpha) || isNaN(deltaT)) {
+                document.getElementById('linearExpansionResult').innerHTML = '<span style="color: red;">⚠️ Masukkan semua nilai angka yang diperlukan!</span>';
+                if (isNaN(L0)) L0Input.focus();
+                else if (isNaN(alpha)) alphaInput.focus();
+                else if (isNaN(deltaT)) deltaTInput.focus();
+                return;
+            }
+
+            const deltaL = L0 * alpha * deltaT;
+            const L = L0 + deltaL;
+
+            document.getElementById('linearExpansionResult').innerHTML = `
+                <strong>Hasil Perhitungan Pemuaian Panjang:</strong><br>
+                ΔL = L₀ × α × ΔT<br>
+                ΔL = ${L0} m × ${alpha} /°C × ${deltaT}°C<br>
+                ΔL = <strong>${deltaL.toExponential(4)} m</strong><br>
+                L = L₀ + ΔL = ${L0} + ${deltaL.toExponential(4)} = <strong>${L.toFixed(6)} m</strong>
+            `;
+        }
+
+        /**
+         * Calculates the change in area and final area due to thermal expansion.
+         * Displays the results in the 'areaExpansionResult' div.
+         */
+        function calculateAreaExpansion() {
+            const A0Input = document.getElementById('luasAwal');
+            const alphaInput = document.getElementById('koefisienMuaiLuas');
+            const deltaTInput = document.getElementById('perubahanSuhuLuas');
+
+            const A0 = parseFloat(A0Input.value);
+            const alpha = parseFloat(alphaInput.value); // User inputs alpha, we calculate beta
+            const deltaT = parseFloat(deltaTInput.value);
+
+            if (isNaN(A0) || isNaN(alpha) || isNaN(deltaT)) {
+                document.getElementById('areaExpansionResult').innerHTML = '<span style="color: red;">⚠️ Masukkan semua nilai angka yang diperlukan!</span>';
+                if (isNaN(A0)) A0Input.focus();
+                else if (isNaN(alpha)) alphaInput.focus();
+                else if (isNaN(deltaT)) deltaTInput.focus();
+                return;
+            }
+
+            const beta = 2 * alpha; // Koefisien muai luas adalah 2 kali koefisien muai panjang
+            const deltaA = A0 * beta * deltaT;
+            const A = A0 + deltaA;
+
+            document.getElementById('areaExpansionResult').innerHTML = `
+                <strong>Hasil Perhitungan Pemuaian Luas:</strong><br>
+                β (koefisien muai luas) = 2α = 2 × ${alpha} = <strong>${beta.toExponential(4)} /°C</strong><br>
+                ΔA = A₀ × β × ΔT<br>
+                ΔA = ${A0} m² × ${beta.toExponential(4)} /°C × ${deltaT}°C<br>
+                ΔA = <strong>${deltaA.toExponential(4)} m²</strong><br>
+                A = A₀ + ΔA = ${A0} + ${deltaA.toExponential(4)} = <strong>${A.toFixed(6)} m²</strong>
+            `;
+        }
+
+        /**
+         * Calculates the change in volume and final volume of a liquid due to thermal expansion.
+         * Displays the results in the 'volumeExpansionResult' div.
+         */
+        function calculateVolumeExpansion() {
+            const V0Input = document.getElementById('volumeAwal');
+            const gammaInput = document.getElementById('koefisienMuaiVolume');
+            const deltaTInput = document.getElementById('perubahanSuhuVolume');
+
+            const V0 = parseFloat(V0Input.value);
+            const gamma = parseFloat(gammaInput.value);
+            const deltaT = parseFloat(deltaTInput.value);
+
+            if (isNaN(V0) || isNaN(gamma) || isNaN(deltaT)) {
+                document.getElementById('volumeExpansionResult').innerHTML = '<span style="color: red;">⚠️ Masukkan semua nilai angka yang diperlukan!</span>';
+                if (isNaN(V0)) V0Input.focus();
+                else if (isNaN(gamma)) gammaInput.focus();
+                else if (isNaN(deltaT)) deltaTInput.focus();
+                return;
+            }
+
+            const deltaV = V0 * gamma * deltaT;
+            const V = V0 + deltaV;
+
+            document.getElementById('volumeExpansionResult').innerHTML = `
+                <strong>Hasil Perhitungan Pemuaian Volume Zat Cair:</strong><br>
+                ΔV = V₀ × γ × ΔT<br>
+                ΔV = ${V0} m³ × ${gamma} /°C × ${deltaT}°C<br>
+                ΔV = <strong>${deltaV.toExponential(4)} m³</strong><br>
+                V = V₀ + ΔV = ${V0} + ${deltaV.toExponential(4)} = <strong>${V.toFixed(6)} m³</strong>
+            `;
+        }
+
+        /**
+         * Calculates the final volume of a gas using Charles's Law (constant pressure).
+         * Displays the results in the 'charlesLawResult' div.
+         */
+        function calculateCharlesLaw() {
+            const V1Input = document.getElementById('volume1');
+            const T1_celsiusInput = document.getElementById('suhu1');
+            const T2_celsiusInput = document.getElementById('suhu2');
+
+            const V1 = parseFloat(V1Input.value);
+            const T1_celsius = parseFloat(T1_celsiusInput.value);
+            const T2_celsius = parseFloat(T2_celsiusInput.value);
+
+            if (isNaN(V1) || isNaN(T1_celsius) || isNaN(T2_celsius)) {
+                document.getElementById('charlesLawResult').innerHTML = '<span style="color: red;">⚠️ Masukkan semua nilai angka yang diperlukan!</span>';
+                if (isNaN(V1)) V1Input.focus();
+                else if (isNaN(T1_celsius)) T1_celsiusInput.focus();
+                else if (isNaN(T2_celsius)) T2_celsiusInput.focus();
+                return;
+            }
+
+            // Convert Celsius to Kelvin for gas laws
+            const T1_kelvin = T1_celsius + 273.15;
+            const T2_kelvin = T2_celsius + 273.15;
+
+            if (T1_kelvin <= 0 || T2_kelvin <= 0) {
+                document.getElementById('charlesLawResult').innerHTML = '<span style="color: red;">⚠️ Suhu harus lebih besar dari -273.15°C (nol mutlak) untuk perhitungan gas ideal!</span>';
+                if (T1_kelvin <= 0) T1_celsiusInput.focus();
+                else if (T2_kelvin <= 0) T2_celsiusInput.focus();
+                return;
+            }
+
+            const V2 = (V1 * T2_kelvin) / T1_kelvin;
+
+            document.getElementById('charlesLawResult').innerHTML = `
+                <strong>Hasil Perhitungan Hukum Charles (Tekanan Konstan):</strong><br>
+                V₁/T₁ = V₂/T₂ ➡️ V₂ = (V₁ × T₂) / T₁<br>
+                V₂ = (${V1} m³ × ${T2_kelvin.toFixed(2)} K) / ${T1_kelvin.toFixed(2)} K<br>
+                V₂ = <strong>${V2.toFixed(4)} m³</strong>
+            `;
+        }
+
+        /**
+         * Calculates the final pressure of a gas using Gay-Lussac's Law (constant volume).
+         * Displays the results in the 'gayLussacLawResult' div.
+         */
+        function calculateGayLussacLaw() {
+            const P1Input = document.getElementById('pressure1');
+            const T1_celsiusInput = document.getElementById('suhu1_gaylussac');
+            const T2_celsiusInput = document.getElementById('suhu2_gaylussac');
+
+            const P1 = parseFloat(P1Input.value);
+            const T1_celsius = parseFloat(T1_celsiusInput.value);
+            const T2_celsius = parseFloat(T2_celsiusInput.value);
+
+            if (isNaN(P1) || isNaN(T1_celsius) || isNaN(T2_celsius)) {
+                document.getElementById('gayLussacLawResult').innerHTML = '<span style="color: red;">⚠️ Masukkan semua nilai angka yang diperlukan!</span>';
+                if (isNaN(P1)) P1Input.focus();
+                else if (isNaN(T1_celsius)) T1_celsiusInput.focus();
+                else if (isNaN(T2_celsius)) T2_celsiusInput.focus();
+                return;
+            }
+
+            // Convert Celsius to Kelvin for gas laws
+            const T1_kelvin = T1_celsius + 273.15;
+            const T2_kelvin = T2_celsius + 273.15;
+
+            if (T1_kelvin <= 0 || T2_kelvin <= 0) {
+                document.getElementById('gayLussacLawResult').innerHTML = '<span style="color: red;">⚠️ Suhu harus lebih besar dari -273.15°C (nol mutlak) untuk perhitungan gas ideal!</span>';
+                if (T1_kelvin <= 0) T1_celsiusInput.focus();
+                else if (T2_kelvin <= 0) T2_celsiusInput.focus();
+                return;
+            }
+
+            const P2 = (P1 * T2_kelvin) / T1_kelvin;
+
+            document.getElementById('gayLussacLawResult').innerHTML = `
+                <strong>Hasil Perhitungan Hukum Gay-Lussac (Volume Konstan):</strong><br>
+                P₁/T₁ = P₂/T₂ ➡️ P₂ = (P₁ × T₂) / T₁<br>
+                P₂ = (${P1} Pa × ${T2_kelvin.toFixed(2)} K) / ${T1_kelvin.toFixed(2)} K<br>
+                P₂ = <strong>${P2.toFixed(2)} Pa</strong>
+            `;
+        }
+
+        /**
+         * Checks the answers submitted in the quiz and displays the score.
+         */
+        function checkQuiz() {
+            let score = 0;
+            let totalQuestions = Object.keys(quizAnswers).length;
+            let resultsHtml = '<h4>Hasil Kuis Anda:</h4>';
+
+            for (let i = 1; i <= totalQuestions; i++) {
+                const questionName = `q${i}`;
+                const selectedOption = document.querySelector(`input[name="${questionName}"]:checked`);
+                
+                let questionElement = document.getElementById(`quiz${i}`);
+                let questionText = questionElement ? questionElement.querySelector('p').textContent : `Pertanyaan ${i}`;
+                let isCorrect = false;
+
+                if (selectedOption) {
+                    if (selectedOption.value === quizAnswers[questionName]) {
+                        score++;
+                        isCorrect = true;
+                    }
+                    resultsHtml += `<p><strong>${questionText}</strong> <span class="${isCorrect ? 'correct' : 'incorrect'}">(${selectedOption.value.toUpperCase()}) ${isCorrect ? '✔ Benar' : '✖ Salah'}</span></p>`;
+                } else {
+                    resultsHtml += `<p><strong>${questionText}</strong> <span class="unanswered">⚠️ Belum dijawab</span></p>`;
+                }
+            }
+
+            resultsHtml += `<p class="final-score"><strong>Skor Akhir Anda: ${score} dari ${totalQuestions}</strong></p>`;
+            
+            let feedback = '';
+            if (score === totalQuestions) {
+                feedback = 'Luar biasa! Kamu menguasai semua materi dengan baik! 🎉';
+            } else if (score >= totalQuestions / 2) {
+                feedback = 'Bagus sekali! Terus tingkatkan pemahamanmu! 💪';
+            } else {
+                feedback = 'Jangan menyerah! Ayo pelajari lagi materi ini dengan lebih saksama. Kamu pasti bisa! 📚';
+            }
+            resultsHtml += `<p class="feedback">${feedback}</p>`;
+            
+            document.getElementById('quizResult').innerHTML = resultsHtml;
+        }
+
+        /**
+         * Toggles the visibility of expandable content sections.
+         * @param {string} id - The ID of the expandable content div.
+         */
+        function toggleExpand(id) {
+            const element = document.getElementById(id);
+            element.classList.toggle('active');
+        }
+
+        /**
+         * Creates floating particles for background animation.
+         */
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const numberOfParticles = 70; // Increased particles for more visual effect
+
+            for (let i = 0; i < numberOfParticles; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                const size = Math.random() * 6 + 2; // 2px to 8px
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.animationDelay = `${Math.random() * 10}s`; // Stagger delay
+                particle.style.animationDuration = `${Math.random() * 15 + 8}s`; // 8s to 23s duration
+                particle.style.opacity = Math.random() * 0.7 + 0.3; // Random initial opacity
+
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Initialize functions on DOMContentLoaded
+        document.addEventListener('DOMContentLoaded', () => {
+            // Event listeners for navigation buttons using data-section attribute
+            document.querySelectorAll('.nav-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    showSection(this.dataset.section);
+                });
+            });
+
+            // Ensure the 'suhu' section is active and its button is highlighted on load
+            showSection('suhu'); // This will also highlight the 'Suhu' button
+
+            updateProgress(); // Initial progress bar update
+            createParticles(); // Start background particle animation
+        });
+
+    </script>
+</body>
+</html>
