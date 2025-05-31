@@ -1,0 +1,1409 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerak dan Gaya - IPA SMP</title>
+    
+    <script>
+        // Basic MathJax configuration
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            svg: {
+                fontCache: 'global'
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        /* CSS Anda */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+
+        h1 {
+            color: #4a5568;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .subtitle {
+            color: #718096;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .nav-btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .beranda-btn {
+            background: linear-gradient(45deg, #ff6b6b, #ee5a52);
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            padding: 10px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .beranda-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+
+        .section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            display: none;
+        }
+
+        .section.active {
+            display: block;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            color: #2d3748;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        h3 {
+            color: #4a5568;
+            font-size: 1.5rem;
+            margin: 20px 0 15px 0;
+            padding: 10px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 10px;
+        }
+
+        p {
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            text-align: justify;
+        }
+
+        .formula-box {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            overflow-x: auto; /* For long formulas */
+        }
+
+        .calculator {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border: 2px solid #667eea;
+        }
+
+        .calculator h4 {
+            color: #2d3748;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .calc-input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .calc-btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            width: 100%;
+            margin: 10px 0;
+            transition: all 0.3s ease;
+        }
+
+        .calc-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .result {
+            background: #48bb78;
+            color: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+            font-weight: bold;
+            text-align: center;
+            display: none;
+        }
+
+        .image-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .physics-img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            margin: 10px;
+        }
+
+        .video-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .physics-video {
+            width: 100%;
+            max-width: 600px;
+            height: 300px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .phet-link {
+            display: inline-block;
+            background: linear-gradient(45deg, #ffa726, #ff7043);
+            color: white;
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: bold;
+            margin: 20px 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .phet-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        .law-box {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border-left: 5px solid #ff7043;
+        }
+
+        .example-box {
+            background: linear-gradient(135deg, #d299c2 0%, #fef9d7 100%);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border-left: 5px solid #667eea;
+        }
+
+        .important-note {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            font-weight: bold;
+            text-align: center;
+            color: #2d3748;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .nav-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .nav-btn {
+                width: 80%;
+                text-align: center;
+            }
+        }
+
+        .quiz-container {
+            background: linear-gradient(135deg, #e3ffe7 0%, #d9e7ff 100%);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border: 2px solid #48bb78;
+        }
+
+        .quiz-question {
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #2d3748;
+        }
+
+        .quiz-option {
+            display: block;
+            margin: 10px 0;
+            padding: 10px;
+            background: white;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .quiz-option:hover {
+            border-color: #667eea;
+            transform: translateX(5px);
+        }
+
+        .quiz-option.correct {
+            background: #48bb78;
+            color: white;
+        }
+
+        .quiz-option.wrong {
+            background: #f56565;
+            color: white;
+        }
+
+        .interactive-demo {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .demo-controls {
+            margin: 15px 0;
+        }
+
+        .demo-slider {
+            width: 80%;
+            margin: 10px;
+        }
+
+        .demo-result {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #2d3748;
+            margin: 15px 0;
+            padding: 10px;
+            background: rgba(255,255,255,0.8);
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <a href="index.html" class="beranda-btn">🏠 Beranda</a>
+
+    <div class="container">
+        <header>
+            <h1>🚀 Gerak dan Gaya</h1>
+            <p class="subtitle">Memahami Konsep Dasar Fisika dalam Kehidupan Sehari-hari</p>
+            <div class="nav-buttons">
+                <button class="nav-btn" onclick="showSection('overview')">📖 Pengantar</button>
+                <button class="nav-btn" onclick="showSection('gerak')">🏃‍♂️ Gerak Benda</button>
+                <button class="nav-btn" onclick="showSection('gaya')">💪 Gaya</button>
+                <button class="nav-btn" onclick="showSection('hukum-newton')">⚖️ Hukum Newton</button>
+                <button class="nav-btn" onclick="showSection('quiz')">🧠 Kuis Interaktif</button>
+                <button class="nav-btn" onclick="showSection('simulasi')">🔬 Simulasi</button>
+            </div>
+        </header>
+
+        <div id="overview" class="section active">
+            <h2>📖 Pengantar Gerak dan Gaya</h2>
+            
+            <div class="image-container">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPZYoY2LMAT8fKyHqOIQQK2U37SOKQJR82vQ&s" alt="Gerak Planet" class="physics-img">
+            </div>
+
+            <p>Selamat datang di dunia yang menakjubkan dari <strong>Gerak dan Gaya</strong>! Tahukah kamu bahwa setiap detik dalam hidupmu, kamu selalu berinteraksi dengan konsep-konsep fisika yang luar biasa?</p>
+
+            <p>Ketika kamu berjalan ke sekolah, berlari mengejar bus, atau bahkan duduk membaca buku ini, kamu sedang mengalami berbagai jenis gerak. Saat kamu mendorong pintu, menarik tas, atau bahkan hanya berdiri, kamu sedang menerapkan dan merasakan berbagai macam gaya.</p>
+
+            <div class="important-note">
+                🌟 Gerak dan Gaya adalah fondasi dari semua fenomena fisika di alam semesta!
+            </div>
+
+            <h3>🎯 Mengapa Mempelajari Gerak dan Gaya Penting?</h3>
+            <p>Pemahaman tentang gerak dan gaya membantu kita memahami:</p>
+            <ul style="margin-left: 20px; margin-bottom: 20px;">
+                <li>Bagaimana kendaraan bergerak dan berhenti dengan aman</li>
+                <li>Mengapa atlet dapat berlari dengan cepat</li>
+                <li>Bagaimana pesawat terbang dapat mengangkasa</li>
+                <li>Mengapa kita tidak terjatuh dari Bumi yang berputar</li>
+                <li>Bagaimana smartphone dapat mendeteksi gerakan kita</li>
+            </ul>
+
+            <div class="video-container">
+                <iframe class="physics-video" src="https://www.youtube.com/embed/Ys0qe5PXFx4" title="Gerak dan Gaya" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+
+            <a href="https://phet.colorado.edu/en/simulations/category/physics/motion" class="phet-link" target="_blank">
+                🔬 Jelajahi Simulasi Gerak di PhET
+            </a>
+        </div>
+
+        <div id="gerak" class="section">
+            <h2>🏃‍♂️ Gerak Benda</h2>
+
+            <div class="image-container">
+                <img src="https://www.shutterstock.com/image-photo/running-sprinting-man-great-speed-260nw-281721011.jpg" alt="Runners in Motion" class="physics-img">
+            </div>
+
+            <h3>a. Perpindahan dan Jarak Tempuh Benda</h3>
+            <p><strong>Jarak tempuh</strong> adalah panjang lintasan yang dilalui benda, sedangkan <strong>perpindahan</strong> adalah perubahan posisi benda dari titik awal ke titik akhir.</p>
+
+            <div class="example-box">
+                <h4>🌟 Contoh Kehidupan Sehari-hari:</h4>
+                <p>Bayangkan kamu berjalan dari rumah ke warung (100m), lalu ke sekolah (200m), kemudian pulang ke rumah. Jarak tempuh total = 100 + 200 = 300m. Namun, jika kamu kembali ke rumah, perpindahanmu = 0m (karena kembali ke posisi awal). Jarak adalah besaran skalar (hanya nilai), perpindahan adalah besaran vektor (nilai dan arah).</p>
+            </div>
+<h3>b. Apakah Kita Semua Bergerak Relatif?</h3>
+<p>Ya! Konsep gerak bersifat <strong>relatif</strong>. Artinya, gerak suatu benda tergantung pada titik acuan atau kerangka referensi yang digunakan.</p>
+
+<div class="example-box">
+    <h4>🚗 Ilustrasi Gerak Relatif:</h4>
+    <p>Ketika kamu duduk di dalam bus yang bergerak, bagi penumpang lain kamu tampak diam. Tetapi bagi orang di pinggir jalan, kamu bergerak dengan kecepatan bus. Bahkan saat kamu "diam" di rumah, sebenarnya kamu bergerak bersama Bumi yang berotasi dengan kecepatan sekitar 1.670 km/jam di khatulistiwa!</p>
+</div>
+
+<h3>c. Kenapa Waktu Tiba Bisa Berbeda?</h3>
+<p>Waktu tempuh bergantung pada kecepatan dan jarak yang ditempuh. Semakin cepat bergerak, semakin singkat waktu yang diperlukan. Faktor lain seperti hambatan udara, kondisi jalan, atau bahkan gaya gesek juga mempengaruhi waktu tempuh.</p>
+
+<div class="formula-box">
+    <strong>Rumus Waktu:</strong><br>
+    $$t = \frac{s}{v}$$
+    Dimana:<br>
+    $t$ = waktu ($\text{sekon/s}$)<br>
+    $s$ = jarak ($\text{meter/m}$)<br>
+    $v$ = kecepatan ($\text{meter per sekon / m/s}$)
+</div>
+
+<div class="calculator">
+    <h4>🧮 Kalkulator Waktu Tempuh</h4>
+    <input type="number" id="jarak1" class="calc-input" placeholder="Masukkan jarak (m)" step="0.1">
+    <input type="number" id="kecepatan1" class="calc-input" placeholder="Masukkan kecepatan (m/s)" step="0.1">
+    <button class="calc-btn" onclick="hitungWaktu()">Hitung Waktu</button>
+    <div id="hasil-waktu" class="result"></div>
+</div>
+
+<h3>d. Apakah Kelajuan Sama Dengan Kecepatan? Kenapa Orang Jarang Menyebutkan Kelajuan?</h3>
+<p>Tidak sama! <strong>Kelajuan</strong> adalah besaran skalar yang hanya menunjukkan seberapa cepat suatu benda bergerak (nilai). Contoh: "mobil itu melaju 60 km/jam".</p>
+<p><strong>Kecepatan</strong> adalah besaran vektor yang menunjukkan seberapa cepat suatu benda bergerak <strong>dan ke arah mana</strong> (nilai dan arah). Contoh: "mobil itu bergerak 60 km/jam ke arah utara".</p>
+
+<div class="important-note">
+    💡 Kelajuan = |Kecepatan|. Speedometer mobil menunjukkan kelajuan, bukan kecepatan! Orang jarang menyebutkan kelajuan karena dalam komunikasi sehari-hari, arah pergerakan seringkali sangat penting untuk memberikan informasi yang lengkap dan akurat. Misal, kamu tidak hanya ingin tahu seberapa cepat bus datang, tetapi juga dari arah mana.
+</div>
+
+<h3>e. Bagaimana Kita Menghitung Kecepatan Sebuah Benda?</h3>
+<p>Kecepatan adalah perpindahan per satuan waktu. Jika benda bergerak pada lintasan lurus dan tidak berubah arah, besar kecepatan sama dengan kelajuan.</p>
+
+<div class="formula-box">
+    <strong>Rumus Kecepatan:</strong><br>
+    $$v = \frac{s}{t}$$
+    Dimana:<br>
+    $v$ = kecepatan ($\text{meter per sekon / m/s}$)<br>
+    $s$ = perpindahan ($\text{meter/m}$)<br>
+    $t$ = waktu ($\text{sekon/s}$)
+</div>
+
+<div class="calculator">
+    <h4>🧮 Kalkulator Kecepatan</h4>
+    <input type="number" id="perpindahan" class="calc-input" placeholder="Masukkan perpindahan (m)" step="0.1">
+    <input type="number" id="waktu2" class="calc-input" placeholder="Masukkan waktu (s)" step="0.1">
+    <button class="calc-btn" onclick="hitungKecepatan()">Hitung Kecepatan</button>
+    <div id="hasil-kecepatan" class="result"></div>
+</div>
+
+<h3>f. Adakah Faktor Lain Dari Gerak Benda Selain Kecepatan?</h3>
+<p>Ya! Selain kecepatan, ada juga <strong>Percepatan</strong>. Percepatan adalah perubahan kecepatan per satuan waktu. Sebuah benda dikatakan mengalami percepatan jika kecepatannya bertambah, berkurang (perlambatan), atau arah geraknya berubah.</p>
+
+<div class="formula-box">
+    <strong>Rumus Percepatan Rata-rata:</strong><br>
+    $$a = \frac{v_2 - v_1}{t} = \frac{\Delta v}{t}$$
+    Dimana:<br>
+    $a$ = percepatan ($\text{meter per sekon kuadrat / m/s²}$)<br>
+    $v_2$ = kecepatan akhir ($\text{m/s}$)<br>
+    $v_1$ = kecepatan awal ($\text{m/s}$)<br>
+    $t$ = selang waktu ($\text{sekon/s}$)
+</div>
+
+<div class="calculator">
+    <h4>🧮 Kalkulator Percepatan</h4>
+    <input type="number" id="v-awal" class="calc-input" placeholder="Kecepatan awal (m/s)" step="0.1">
+    <input type="number" id="v-akhir" class="calc-input" placeholder="Kecepatan akhir (m/s)" step="0.1">
+    <input type="number" id="waktu3" class="calc-input" placeholder="Waktu (s)" step="0.1">
+    <button class="calc-btn" onclick="hitungPercepatan()">Hitung Percepatan</button>
+    <div id="hasil-percepatan" class="result"></div>
+</div>
+
+<div class="interactive-demo">
+    <h4>🎮 Demo Interaktif: Hubungan Kecepatan dan Waktu</h4>
+    <div class="demo-controls">
+        <label>Jarak (m): <input type="range" id="jarak-slider" class="demo-slider" min="10" max="1000" value="100" oninput="updateDemo()"></label>
+        <span id="jarak-value">100</span>m<br>
+        <label>Kecepatan (m/s): <input type="range" id="speed-slider" class="demo-slider" min="1" max="50" value="10" oninput="updateDemo()"></label>
+        <span id="speed-value">10</span>m/s
+    </div>
+    <div class="demo-result" id="demo-result">
+        Waktu tempuh: 10.0 detik
+    </div>
+</div>
+
+<a href="https://phet.colorado.edu/en/simulations/equation-grapher" class="phet-link" target="_blank">
+    📊 Simulasi Grafik Gerak di PhET
+</a>
+</div>
+
+<div id="gaya" class="section">
+<h3>a. Pengertian Gaya</h3>
+<p><strong>Gaya</strong> adalah tarikan atau dorongan yang dapat menyebabkan perubahan pada gerak atau bentuk suatu benda. Gaya adalah besaran vektor, artinya ia memiliki besar (nilai) dan arah.</p>
+
+<div class="example-box">
+    <h4>🌟 Contoh Gaya dalam Kehidupan:</h4>
+    <ul>
+        <li>Mendorong meja hingga bergerak</li>
+        <li>Menarik tali sumur untuk menimba air</li>
+        <li>Gaya gravitasi menarik buah apel jatuh dari pohon</li>
+        <li>Magnet menarik paku besi</li>
+        <li>Angin mendorong daun-daun berguguran</li>
+    </ul>
+</div>
+
+<h3>b. Apakah Gaya Dapat Bernilai Nol?</h3>
+<p>Ya! Gaya dapat bernilai nol, terutama ketika benda berada dalam keadaan <strong>keseimbangan</strong>. Ini tidak berarti tidak ada gaya yang bekerja, tetapi semua gaya yang bekerja pada benda tersebut saling meniadakan atau menyeimbangkan.</p>
+
+<div class="example-box">
+    <h4>⚖️ Contoh Gaya Nol:</h4>
+    <p>Ketika kamu berdiri diam di lantai, ada dua gaya utama yang bekerja padamu: gaya gravitasi yang menarikmu ke bawah, dan gaya normal dari lantai yang mendorongmu ke atas. Karena kedua gaya ini sama besar dan berlawanan arah, resultan gayanya adalah nol, sehingga kamu tetap diam dan tidak melayang atau tenggelam.</p>
+</div>
+
+<h3>c. Apakah Paduan atau Resultan Gaya Itu?</h3>
+<p><strong>Resultan gaya ($\Sigma F$)</strong> adalah total atau jumlah vektor dari semua gaya yang bekerja pada suatu benda. Menghitung resultan gaya sangat penting untuk menentukan bagaimana benda akan bergerak (atau tidak bergerak).</p>
+
+<div class="formula-box">
+    <strong>Rumus Resultan Gaya:</strong><br>
+    • <strong>Gaya Searah:</strong> $$R = F_1 + F_2 + \dots + F_n$$
+    • <strong>Gaya Berlawanan Arah:</strong> $$R = |F_1 - F_2|$$ (Ambil nilai positifnya)<br>
+    • <strong>Gaya Tegak Lurus:</strong> $$R = \sqrt{F_1^2 + F_2^2}$$ (menggunakan teorema Pythagoras)
+</div>
+
+<div class="calculator">
+    <h4>🧮 Kalkulator Resultan Gaya</h4>
+    <input type="number" id="gaya1" class="calc-input" placeholder="Gaya 1 (N)" step="0.1">
+    <input type="number" id="gaya2" class="calc-input" placeholder="Gaya 2 (N)" step="0.1">
+    <select id="arah-gaya" class="calc-input">
+        <option value="searah">Searah</option>
+        <option value="berlawanan">Berlawanan arah</option>
+        <option value="tegak">Tegak lurus</option>
+    </select>
+    <button class="calc-btn" onclick="hitungResultan()">Hitung Resultan</button>
+    <div id="hasil-resultan" class="result"></div>
+</div>
+
+<h3>d. Macam-macam Gaya</h3>
+<div class="law-box">
+    <h4>🔸 1. Gaya Sentuh (membutuhkan sentuhan fisik)</h4>
+    <p>• <strong>Gaya Normal:</strong> Gaya yang bekerja tegak lurus pada permukaan sentuh benda. Contoh: Meja menahan buku yang diletakkan di atasnya.<br>
+    • <strong>Gaya Gesek:</strong> Gaya yang melawan atau menghambat gerak relatif antara dua permukaan yang bersentuhan. Contoh: Ban mobil bergesekan dengan jalan.<br>
+    • <strong>Gaya Pegas:</strong> Gaya pemulih yang timbul pada benda elastis (seperti pegas) ketika diregangkan atau ditekan. Contoh: Busur panah saat ditarik.<br>
+    • <strong>Gaya Tegangan Tali:</strong> Gaya yang bekerja sepanjang tali, kawat, atau rantai saat ditarik. Contoh: Tali yang menahan ember di sumur.</p>
+    
+    <h4>🔸 2. Gaya Tak Sentuh (bekerja tanpa sentuhan fisik)</h4>
+    <p>• <strong>Gaya Gravitasi:</strong> Gaya tarik-menarik antara dua benda yang memiliki massa. Ini adalah gaya yang membuat kita tetap di bumi. Contoh: Buah jatuh dari pohon.<br>
+    • <strong>Gaya Magnet:</strong> Gaya yang ditimbulkan oleh magnet terhadap benda-benda magnetik atau medan listrik yang bergerak. Contoh: Magnet menarik paku.<br>
+    • <strong>Gaya Listrik (Gaya Coulomb):</strong> Gaya tarik-menarik atau tolak-menolak antara dua muatan listrik. Contoh: Sisir plastik menarik potongan kertas kecil setelah digosokkan ke rambut.</p>
+</div>
+
+<h3>e. Kenapa Saat Mendorong Meja atau Sebuah Benda Terasa Sedikit Getaran dan Terdengar Suatu Bunyi?</h3>
+<p>Fenomena ini terjadi karena adanya <strong>gaya gesek</strong> antara permukaan meja dan lantai. Permukaan benda, meskipun terlihat halus, sebenarnya memiliki ketidakrataan mikroskopis. Ketika kamu mendorong meja, ketidakrataan ini saling berinteraksi. Saat meja mulai bergerak, terjadi proses "stick-slip motion" atau gesekan statis dan kinetis yang berulang. Ini menyebabkan:</p>
+<ul style="margin-left: 20px; margin-bottom: 20px;">
+    <li><strong>Getaran:</strong> Pergeseran antara permukaan yang tidak rata menghasilkan getaran pada meja dan lantai.</li>
+    <li><strong>Bunyi:</strong> Getaran ini merambat melalui udara sebagai gelombang suara, yang kemudian kita dengar sebagai bunyi "krek-krek" atau "srret" saat meja didorong.</li>
+</ul>
+
+<div class="important-note">
+    🔊 Bunyi dan getaran saat mendorong meja adalah bukti nyata dari adanya gaya gesek yang sedang bekerja!
+</div>
+
+<h3>f. Kenapa Ketika Mendorong Benda Pertama Kali Terasa Lebih Berat Dibandingkan dengan Ketika Mendorong Saat Benda Sudah Mulai Bergerak?</h3>
+<p>Ini adalah efek dari perbedaan antara <strong>gaya gesek statis</strong> dan <strong>gaya gesek kinetis</strong>.</p>
+<ul style="margin-left: 20px; margin-bottom: 20px;">
+    <li><strong>Gaya Gesek Statis ($f_s$):</strong> Gaya gesek yang bekerja saat benda <strong>diam</strong> dan berusaha untuk bergerak. Nilai gaya gesek statis akan meningkat hingga mencapai nilai maksimum yang dapat menahan benda untuk tetap diam. Kamu harus memberikan gaya dorong yang lebih besar dari gaya gesek statis maksimum agar benda mulai bergerak.</li>
+    <li><strong>Gaya Gesek Kinetis ($f_k$):</strong> Gaya gesek yang bekerja saat benda <strong>sedang bergerak</strong>. Nilai gaya gesek kinetis biasanya lebih kecil daripada gaya gesek statis maksimum.</li>
+</ul>
+<p>Oleh karena itu, setelah benda berhasil kamu gerakkan, kamu hanya perlu memberikan gaya yang lebih kecil untuk mempertahankan gerakannya, karena gaya gesek yang menghambat kini adalah gaya gesek kinetis yang lebih kecil.</p>
+
+<div class="formula-box">
+    <strong>Rumus Gaya Gesek:</strong><br>
+    • <strong>Gaya Gesek Statis:</strong> $$f_s \le \mu_s \times N$$
+    • <strong>Gaya Gesek Kinetis:</strong> $$f_k = \mu_k \times N$$
+    Dimana:<br>
+    $f_s$ = gaya gesek statis<br>
+    $f_k$ = gaya gesek kinetis<br>
+    $\mu_s$ = koefisien gesek statis (umumnya $\mu_s > \mu_k$)<br>
+    $\mu_k$ = koefisien gesek kinetis<br>
+    $N$ = gaya normal (gaya tegak lurus permukaan)
+</div>
+
+<div class="calculator">
+    <h4>🧮 Kalkulator Gaya Gesek Kinetis</h4>
+    <p>Asumsi percepatan gravitasi bumi ($g$) = 9.8 m/s²</p>
+    <input type="number" id="massa-benda" class="calc-input" placeholder="Massa benda (kg)" step="0.1">
+    <input type="number" id="koef-gesek" class="calc-input" placeholder="Koefisien gesek kinetis (μk)" step="0.01">
+    <button class="calc-btn" onclick="hitungGayaGesek()">Hitung Gaya Gesek Kinetis</button>
+    <div id="hasil-gesek" class="result"></div>
+</div>
+
+<h3>g. Apakah Gaya Gesek Menguntungkan?</h3>
+<p>Tentu saja! Gaya gesek sangat penting dan memiliki banyak manfaat dalam kehidupan sehari-hari. Tanpa gaya gesek, banyak aktivitas tidak akan mungkin dilakukan:</p>
+<div class="example-box">
+    <h4>✅ Manfaat Gaya Gesek:</h4>
+    <ul>
+        <li><strong>Memungkinkan berjalan:</strong> Kita bisa berjalan tanpa terpeleset karena ada gesekan antara sepatu dan permukaan tanah.</li>
+        <li><strong>Pengereman:</strong> Kendaraan bisa berhenti dan melambat karena rem menggunakan prinsip gaya gesek.</li>
+        <li><strong>Memegang benda:</strong> Kita bisa menggenggam dan memegang benda karena gesekan antara tangan dan permukaan benda.</li>
+        <li><strong>Menulis:</strong> Pensil dapat meninggalkan jejak di kertas karena gesekan antara grafit dan serat kertas.</li>
+        <li><strong>Menggerakkan mesin:</strong> Sabuk atau rantai pada mesin memerlukan gesekan untuk mentransmisikan daya.</li>
+        <li><strong>Menjaga stabilitas:</strong> Membantu benda tetap di tempatnya dan tidak mudah bergeser.</li>
+    </ul>
+</div>
+
+<h3>h. Apakah Ada Gaya Gesek yang Merugikan?</h3>
+<p>Meskipun banyak manfaatnya, gaya gesek juga dapat menimbulkan kerugian dalam beberapa kasus:</p>
+<div class="example-box">
+    <h4>❌ Kerugian Gaya Gesek:</h4>
+    <ul>
+        <li><strong>Keausan dan kerusakan:</strong> Gesekan dapat menyebabkan permukaan benda menjadi aus dan rusak seiring waktu, seperti ban kendaraan atau komponen mesin.</li>
+        <li><strong>Mengurangi efisiensi energi:</strong> Sebagian energi diubah menjadi panas akibat gesekan, yang berarti energi terbuang dan tidak sepenuhnya digunakan untuk gerak. Ini mengurangi efisiensi mesin.</li>
+        <li><strong>Peningkatan suhu:</strong> Gesekan menghasilkan panas, yang bisa menjadi masalah pada komponen mesin yang bergerak cepat.</li>
+        <li><strong>Menghambat gerak:</strong> Membuat kita harus mengeluarkan lebih banyak energi untuk menggerakkan suatu benda.</li>
+    </ul>
+    <p><strong>Solusi untuk mengurangi gesekan yang merugikan:</strong></p>
+    <ul>
+        <li>Menggunakan pelumas (oli, gemuk) untuk mengurangi kontak langsung antar permukaan.</li>
+        <li>Memasang bantalan (bearing) untuk mengubah gesekan luncur menjadi gesekan gelinding yang lebih kecil.</li>
+        <li>Menghaluskan permukaan benda yang bersentuhan.</li>
+    </ul>
+</div>
+
+<h3>i. Adakah Hukum yang Melandasi Gaya terhadap Benda?</h3>
+<p>Ya! Seluruh fenomena yang melibatkan gaya dan gerak benda dapat dijelaskan dengan sangat baik oleh <strong>Hukum Newton tentang Gerak</strong> yang dirumuskan oleh Sir Isaac Newton. Ada tiga hukum utama yang menjadi fondasi mekanika klasik.</p>
+
+<div class="video-container">
+    <iframe class="physics-video" src="https://www.youtube.com/embed/RKQ4LDHV6KM" title="Newton's Laws Of Motion" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+</div>
+
+<a href="https://phet.colorado.edu/en/simulations/forces-and-motion-basics" class="phet-link" target="_blank">
+    🔬 Simulasi Gaya dan Gerak di PhET
+</a>
+</div>
+
+<div id="hukum-newton" class="section">
+<h2>⚖️ Hukum Newton</h2>
+
+<div class="image-container">
+    <img src="https://miro.medium.com/v2/resize:fit:669/1*tf3TODu8aDAEP2ix_CLVmw.jpeg" alt="Newton's Laws" class="physics-img">
+</div>
+
+<h3>🍎 Hukum I Newton (Hukum Kelembaman / Inertia)</h3>
+<div class="law-box">
+    <h4>📜 Bunyi Hukum Lengkap:</h4>
+    <p><strong>"Setiap benda akan mempertahankan keadaan diam atau gerak lurus beraturan, kecuali ada gaya luar (resultan gaya) yang bekerja padanya untuk mengubah keadaan tersebut."</strong></p>
+    
+    <h4>🎯 Makna Singkat:</h4>
+    <p>Benda yang diam akan cenderung tetap diam, dan benda yang bergerak akan cenderung tetap bergerak dengan kecepatan konstan (lurus dan tidak berubah laju), selama tidak ada gaya bersih (resultan gaya) yang bekerja padanya.</p>
+    
+    <h4>📐 Rumus Matematika:</h4>
+    <div class="formula-box">
+        $$\Sigma F = 0$$
+        (Resultan gaya yang bekerja pada benda adalah nol)<br>
+        Implikasi: $v$ = konstan (termasuk $v=0$ jika benda diam), atau $a = 0$ (percepatan nol)
+    </div>
+</div>
+
+<div class="example-box">
+    <h4>🌟 Contoh dalam Kehidupan Sehari-hari:</h4>
+    <ul>
+        <li><strong>Saat naik bus:</strong> Ketika bus tiba-tiba mengerem, tubuhmu terdorong ke depan. Ini karena tubuhmu cenderung mempertahankan gerak majunya.</li>
+        <li><strong>Menarik taplak meja:</strong> Jika kamu menarik taplak meja dengan sangat cepat dari bawah gelas atau piring, piring atau gelas tersebut cenderung tetap diam dan tidak ikut tertarik.</li>
+        <li><strong>Sabuk pengaman:</strong> Fungsi sabuk pengaman adalah menahan tubuh kita agar tidak terlempar ke depan saat mobil berhenti mendadak.</li>
+        <li><strong>Bola menggelinding di lantai es:</strong> Bola akan terus bergerak jauh dengan kecepatan hampir konstan karena gaya gesek yang sangat kecil.</li>
+    </ul>
+</div>
+
+<h3>🚀 Hukum II Newton (Hukum Percepatan)</h3>
+<div class="law-box">
+    <h4>📜 Bunyi Hukum Lengkap:</h4>
+    <p><strong>"Percepatan suatu benda berbanding lurus dengan gaya total (resultan gaya) yang bekerja padanya dan berbanding terbalik dengan massanya. Arah percepatan sama dengan arah gaya total."</strong></p>
+    
+    <h4>🎯 Makna Singkat:</h4>
+    <p>Semakin besar gaya yang diberikan pada suatu benda, semakin besar percepatannya. Sebaliknya, semakin berat (besar massa) benda, semakin kecil percepatannya jika diberikan gaya yang sama.</p>
+    
+    <h4>📐 Rumus Matematika:</h4>
+    <div class="formula-box">
+        $$F = m \times a$$
+        Dimana:<br>
+        $F$ = gaya total/resultan gaya ($\text{Newton/N}$)<br>
+        $m$ = massa benda ($\text{kilogram/kg}$)<br>
+        $a$ = percepatan benda ($\text{meter per sekon kuadrat / m/s²}$)
+    </div>
+</div>
+
+<div class="calculator">
+    <h4>🧮 Kalkulator Hukum II Newton</h4>
+    <select id="hitung-apa" class="calc-input" onchange="toggleInputs()">
+        <option value="gaya">Hitung Gaya (F)</option>
+        <option value="massa">Hitung Massa (m)</option>
+        <option value="percepatan">Hitung Percepatan (a)</option>
+    </select>
+    
+    <div id="input-gaya">
+        <input type="number" id="massa-f" class="calc-input" placeholder="Massa (kg)" step="0.1">
+        <input type="number" id="percepatan-f" class="calc-input" placeholder="Percepatan (m/s²)" step="0.1">
+    </div>
+    
+    <div id="input-massa" style="display:none;">
+        <input type="number" id="gaya-m" class="calc-input" placeholder="Gaya (N)" step="0.1">
+        <input type="number" id="percepatan-m" class="calc-input" placeholder="Percepatan (m/s²)" step="0.1">
+    </div>
+    
+    <div id="input-percepatan" style="display:none;">
+        <input type="number" id="gaya-a" class="calc-input" placeholder="Gaya (N)" step="0.1">
+        <input type="number" id="massa-a" class="calc-input" placeholder="Massa (kg)" step="0.1">
+    </div>
+    
+    <button class="calc-btn" onclick="hitungNewton2()">Hitung</button>
+    <div id="hasil-newton2" class="result"></div>
+</div>
+
+<div class="example-box">
+    <h4>🌟 Contoh dalam Kehidupan Sehari-hari:</h4>
+    <ul>
+        <li><strong>Menendang bola:</strong> Semakin kuat kamu menendang (gaya besar), semakin cepat bola melaju (percepatan besar).</li>
+        <li><strong>Mendorong mobil vs. sepeda:</strong> Jika kamu mendorong mobil dan sepeda dengan kekuatan yang sama, sepeda akan bergerak lebih cepat karena massanya jauh lebih kecil.</li>
+        <li><strong>Roket:</strong> Mesin roket mengeluarkan gas dengan kecepatan tinggi untuk menciptakan gaya dorong yang sangat besar, menghasilkan percepatan yang cukup untuk lepas dari gravitasi bumi.</li>
+        <li><strong>Lift:</strong> Ketika lift bergerak ke atas, butuh gaya yang lebih besar untuk mengangkat beban yang lebih berat (massa lebih besar).</li>
+    </ul>
+</div>
+
+<h3>⚡ Hukum III Newton (Hukum Aksi-Reaksi)</h3>
+<div class="law-box">
+    <h4>📜 Bunyi Hukum Lengkap:</h4>
+    <p><strong>"Untuk setiap aksi, selalu ada reaksi yang sama besar dan berlawanan arah. Atau, gaya-gaya yang dilakukan oleh dua benda satu sama lain selalu sama besar dan berlawanan arah."</strong></p>
+    
+    <h4>🎯 Makna Singkat:</h4>
+    <p>Gaya selalu muncul berpasangan. Jika benda A memberikan gaya (aksi) pada benda B, maka benda B akan memberikan gaya (reaksi) pada benda A yang besarnya sama tetapi arahnya berlawanan.</p>
+    
+    <h4>📐 Rumus Matematika:</h4>
+    <div class="formula-box">
+        $$F_{aksi} = -F_{reaksi}$$
+        Atau: $$F_{12} = -F_{21}$$
+        (Besar gaya sama, arah berlawanan)
+    </div>
+</div>
+
+<div class="example-box">
+    <h4>🌟 Contoh dalam Kehidupan Sehari-hari:</h4>
+    <ul>
+        <li><strong>Berjalan:</strong> Saat kamu berjalan, kakimu mendorong tanah ke belakang (aksi). Sebagai reaksi, tanah mendorong kakimu ke depan, membuatmu bergerak.</li>
+        <li><strong>Berenang:</strong> Tanganmu mendorong air ke belakang (aksi). Air memberikan gaya dorong ke depan pada tubuhmu (reaksi), membuatmu berenang maju.</li>
+        <li><strong>Menembak:</strong> Ketika peluru melesat ke depan dari senapan (aksi), senapan akan terasa terdorong ke belakang (recoil/reaksi).</li>
+        <li><strong>Duduk di kursi:</strong> Berat tubuhmu menekan kursi ke bawah (aksi). Kursi memberikan gaya dorong ke atas pada tubuhmu (reaksi), sehingga kamu tidak jatuh.</li>
+        <li><strong>Balon yang dilepaskan:</strong> Udara keluar dari lubang balon ke bawah (aksi). Udara mendorong balon ke atas (reaksi), membuat balon terbang.</li>
+    </ul>
+</div>
+
+            <div class="interactive-demo">
+                <h4>🎮 Demo Interaktif: Hukum Newton II</h4>
+                <p>Coba ubah nilai gaya dan massa untuk melihat bagaimana percepatan berubah!</p>
+                
+                <div class="demo-controls">
+                    <label>Massa (kg): <input type="range" id="massa-slider" class="demo-slider" min="1" max="100" value="10" oninput="updateNewtonDemo()"></label>
+                    <span id="massa-demo-value">10</span>kg<br>
+                    <label>Gaya (N): <input type="range" id="gaya-slider" class="demo-slider" min="1" max="500" value="50" oninput="updateNewtonDemo()"></label>
+                    <span id="gaya-demo-value">50</span>N
+                </div>
+                <div class="demo-result" id="newton-demo-result">
+                    Percepatan: 5.0 m/s²
+                </div>
+            </div>
+
+            <div class="video-container">
+                <iframe class="physics-video" src="https://www.youtube.com/embed/RKQ4LDHV6KM" title="Hukum II Newton" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+
+            <a href="https://phet.colorado.edu/en/simulations/forces-and-motion-basics" class="phet-link" target="_blank">
+                🚀 Simulasi Hukum Newton di PhET
+            </a>
+        </div>
+
+        <div id="quiz" class="section">
+            <h2>🧠 Kuis Interaktif</h2>
+
+            <div class="quiz-container">
+                <h3>Pertanyaan 1</h3>
+                <div class="quiz-question">Apa yang terjadi pada benda yang bergerak jika tidak ada gaya luar (resultan gaya) yang bekerja padanya?</div>
+                <div class="quiz-option" onclick="checkAnswer(this, false)">A. Benda akan berhenti secara perlahan</div>
+                <div class="quiz-option" onclick="checkAnswer(this, true)">B. Benda akan terus bergerak dengan kecepatan konstan</div>
+                <div class="quiz-option" onclick="checkAnswer(this, false)">C. Benda akan semakin cepat</div>
+                <div class="quiz-option" onclick="checkAnswer(this, false)">D. Benda akan bergerak zig-zag</div>
+            </div>
+
+            <div class="quiz-container">
+                <h3>Pertanyaan 2</h3>
+                <div class="quiz-question">Jika sebuah mobil bermassa 1000 kg mengalami percepatan 2 m/s², berapa gaya yang bekerja pada mobil tersebut?</div>
+                <div class="quiz-option" onclick="checkAnswer(this, false)">A. 500 N</div>
+                <div class="quiz-option" onclick="checkAnswer(this, true)">B. 2000 N</div>
+                <div class="quiz-option" onclick="checkAnswer(this, false)">C. 1000 N</div>
+                <div class="quiz-option" onclick="checkAnswer(this, false)">D. 3000 N</div>
+            </div>
+
+            <div class="quiz-container">
+                <h3>Pertanyaan 3</h3>
+                <div class="quiz-question">Mengapa ketika kita berjalan, kaki tidak tergelincir ke belakang?</div>
+                <div class="quiz-option" onclick="checkAnswer(this, true)">A. Karena ada gaya gesek antara kaki dan tanah</div>
+                <div class="quiz-option" onclick="checkAnswer(this, false)">B. Karena gravitasi menarik kita ke bawah</div>
+                <div class="quiz-option" onclick="checkAnswer(this, false)">C. Karena kaki kita berat</div>
+                <div class="quiz-option" onclick="checkAnswer(this, false)">D. Karena udara mendorong kita ke depan</div>
+            </div>
+
+            <div class="quiz-container">
+                <h3>Pertanyaan 4</h3>
+                <div class="quiz-question">Contoh penerapan Hukum III Newton dalam kehidupan sehari-hari adalah...</div>
+                <div class="quiz-option" onclick="checkAnswer(this, false)">A. Bola yang dilempar ke atas akan jatuh kembali</div>
+                <div class="quiz-option" onclick="checkAnswer(this, true)">B. Saat berenang, kita mendorong air dan air mendorong kita ke depan</div>
+                <div class="quiz-option" onclick="checkAnswer(this, false)">C. Mobil yang direm akan berhenti</div>
+                <div class="quiz-option" onclick="checkAnswer(this, false)">D. Benda yang dijatuhkan akan jatuh ke bawah</div>
+            </div>
+
+            <div class="quiz-container">
+                <h3>Pertanyaan 5</h3>
+                <div class="quiz-question">Apa perbedaan mendasar antara kelajuan dan kecepatan?</div>
+                <div class="quiz-option" onclick="checkAnswer(this, false)">A. Tidak ada perbedaan, keduanya sama saja.</div>
+                <div class="quiz-option" onclick="checkAnswer(this, true)">B. Kecepatan memiliki arah, sedangkan kelajuan tidak.</div>
+                <div class="quiz-option" onclick="checkAnswer(this, false)">C. Kelajuan diukur dalam km/jam, kecepatan dalam m/s.</div>
+                <div class="quiz-option" onclick="checkAnswer(this, false)">D. Kecepatan hanya berlaku untuk benda bergerak, kelajuan untuk benda diam.</div>
+            </div>
+        </div>
+
+        <div id="simulasi" class="section">
+            <h2>🔬 Simulasi dan Eksperimen Virtual</h2>
+
+            <div class="image-container">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSb9Fz7Suw0Fs8l03XE96a18VhVY-gsQG9b3A&s" alt="Physics Simulation" class="physics-img">
+            </div>
+
+            <h3>🌐 Simulasi Online yang Direkomendasikan</h3>
+
+            <div class="law-box">
+                <h4>🎯 PhET Interactive Simulations</h4>
+                <p>PhET (Physics Education Technology) dari University of Colorado Boulder menyediakan simulasi fisika yang interaktif, menyenangkan, dan sangat membantu dalam memahami konsep-konsep abstrak. Jelajahi tautan di bawah ini untuk belajar lebih lanjut!</p>
+                
+                <a href="https://phet.colorado.edu/en/simulations/forces-and-motion-basics" class="phet-link" target="_blank">
+                    🔬 Forces and Motion: Basics (Gaya dan Gerak: Dasar)
+                </a>
+                
+                <a href="https://phet.colorado.edu/en/simulations/friction" class="phet-link" target="_blank">
+                    🤲 Friction Simulation (Simulasi Gesekan)
+                </a>
+                
+                <a href="https://phet.colorado.edu/en/simulations/the-ramp" class="phet-link" target="_blank">
+                    📐 The Ramp: Forces and Motion (Bidang Miring: Gaya dan Gerak)
+                </a>
+                
+                <a href="https://phet.colorado.edu/en/simulations/projectile-motion" class="phet-link" target="_blank">
+                    🎯 Projectile Motion (Gerak Proyektil)
+                </a>
+                <p>Ada banyak lagi simulasi menarik di situs PhET, jadi jangan ragu untuk menjelajahinya!</p>
+            </div>
+
+            <div class="interactive-demo">
+                <h4>🎮 Simulasi Mini: Efek Gaya pada Percepatan</h4>
+                <p>Coba ubah nilai gaya yang diberikan dan massa benda untuk melihat bagaimana percepatan benda berubah. Ingat rumus $F = m \times a$!</p>
+                
+                <div class="demo-controls">
+                    <label>Gaya (N): <input type="range" id="sim-gaya" class="demo-slider" min="10" max="200" value="100" oninput="updateSimulation()"></label>
+                    <span id="sim-gaya-value">100</span>N<br>
+                    
+                    <label>Massa (kg): <input type="range" id="sim-massa" class="demo-slider" min="5" max="50" value="20" oninput="updateSimulation()"></label>
+                    <span id="sim-massa-value">20</span>kg
+                </div>
+                
+                <div class="demo-result">
+                    <div id="sim-percepatan-result">Percepatan: 5.0 m/s²</div>
+                    <div id="sim-interpretasi">Interpretasi: Percepatan sedang</div>
+                </div>
+                
+                <canvas id="physics-canvas" width="400" height="200" style="border: 2px solid #667eea; border-radius: 10px; margin: 20px auto; display: block; background: white;"></canvas>
+            </div>
+
+            <h3>🔍 Eksperimen Sederhana yang Bisa Dicoba di Rumah</h3>
+
+            <div class="example-box">
+                <h4>🧪 Eksperimen 1: Hukum I Newton (Inersia)</h4>
+                <p><strong>Alat:</strong> Gelas kaca kosong, selembar kertas HVS atau kartu remi, dan satu koin (misal Rp500 atau Rp1000).</p>
+                <p><strong>Cara:</strong></p>
+                <ol>
+                    <li>Letakkan selembar kertas di atas mulut gelas. Pastikan kertas menutupi seluruh mulut gelas.</li>
+                    <li>Letakkan koin tepat di tengah-tengah kertas.</li>
+                    <li>Dengan satu jari, pukul atau tarik kertas dengan sangat cepat dan kuat secara horizontal (mendatar).</li>
+                    <li>Amati apa yang terjadi pada koin.</li>
+                </ol>
+                <p><strong>Hasil:</strong> Kertas akan melesat pergi, tetapi koin akan jatuh langsung ke dalam gelas! Ini menunjukkan sifat inersia koin yang cenderung mempertahankan keadaan diamnya.</p>
+            </div>
+
+            <div class="example-box">
+                <h4>🧪 Eksperimen 2: Hukum III Newton (Aksi-Reaksi)</h4>
+                <p><strong>Alat:</strong> Sebuah balon tiup, dan benang/tali sepanjang 2-3 meter, sedotan plastik, lakban.</p>
+                <p><strong>Cara:</strong></p>
+                <ol>
+                    <li>Tiup balon hingga besar, tetapi jangan diikat. Jepit ujungnya agar udara tidak keluar.</li>
+                    <li>Selipkan sedotan plastik pada benang/tali.</li>
+                    <li>Tempelkan balon yang sudah ditiup ke sedotan dengan lakban.</li>
+                    <li>Rentangkan benang/tali secara horizontal di antara dua tiang atau kursi.</li>
+                    <li>Lepaskan ujung balon.</li>
+                    <li>Amati arah gerakan balon dan arah semburan udara.</li>
+                </ol>
+                <p><strong>Hasil:</strong> Udara akan menyembur keluar dari balon ke belakang (aksi), dan sebagai reaksinya, balon akan meluncur ke depan sepanjang tali! Ini adalah prinsip dasar roket.</p>
+            </div>
+
+            <div class="example-box">
+                <h4>🧪 Eksperimen 3: Gaya Gesek</h4>
+                <p><strong>Alat:</strong> Sebuah buku, berbagai jenis permukaan datar (misal: meja kayu halus, karpet, lantai keramik, kain kasar).</p>
+                <p><strong>Cara:</strong></p>
+                <ol>
+                    <li>Letakkan buku di atas permukaan meja kayu yang halus. Dorong buku perlahan hingga bergerak. Rasakan seberapa besar gaya yang kamu butuhkan.</li>
+                    <li>Ulangi langkah pertama di atas karpet.</li>
+                    <li>Ulangi lagi di atas lantai keramik.</li>
+                    <li>Terakhir, coba di atas kain kasar.</li>
+                    <li>Bandingkan gaya yang diperlukan untuk menggerakkan buku di setiap permukaan.</li>
+                </ol>
+                <p><strong>Hasil:</strong> Kamu akan merasakan bahwa buku paling mudah digerakkan di permukaan halus (seperti keramik atau kayu) dan paling sulit di permukaan kasar (seperti karpet atau kain kasar). Ini menunjukkan bagaimana kekasaran permukaan mempengaruhi besarnya gaya gesek.</p>
+            </div>
+
+            <div class="video-container">
+                <iframe class="physics-video" src="https://www.youtube.com/embed/bWRkcDblpt8" title="Praktikum Sederhana" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentSection = 'overview';
+
+        function showSection(sectionId) {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                section.classList.remove('active');
+            });
+
+            document.getElementById(sectionId).classList.add('active');
+            currentSection = sectionId;
+            window.scrollTo(0, 0);
+
+            // Ensure MathJax typesets the new active section content
+            if (typeof MathJax !== 'undefined') {
+                MathJax.typesetPromise([document.getElementById(sectionId)]).catch(err => console.log('MathJax typeset error:', err));
+            }
+            // Re-render the simulation canvas if it's the simulation section
+            if (sectionId === 'simulasi') {
+                updateSimulation(); // Call this to re-initialize and draw the simulation
+            } else if (sectionId === 'hukum-newton') {
+                updateNewtonDemo(); // Call this to re-initialize and draw Newton's 2nd law demo
+            }
+        }
+
+        // Calculator functions
+        function hitungWaktu() {
+            const jarak = parseFloat(document.getElementById('jarak1').value);
+            const kecepatan = parseFloat(document.getElementById('kecepatan1').value);
+            
+            const hasilElement = document.getElementById('hasil-waktu');
+            
+            if (!isNaN(jarak) && !isNaN(kecepatan) && kecepatan > 0) {
+                const waktu = jarak / kecepatan;
+                hasilElement.innerHTML = `⏱️ Waktu tempuh: ${waktu.toFixed(2)} detik<br>Rumus: $$t = \\frac{s}{v} = \\frac{${jarak}\\text{m}}{${kecepatan}\\text{m/s}} = ${waktu.toFixed(2)} \\text{ s}$$`;
+                hasilElement.style.display = 'block';
+                if (typeof MathJax !== 'undefined') {
+                    MathJax.typesetPromise([hasilElement]).catch(err => console.log('MathJax typeset error:', err));
+                }
+            } else {
+                alert('Masukkan nilai jarak dan kecepatan yang valid (kecepatan harus > 0)!');
+                hasilElement.style.display = 'none';
+            }
+        }
+
+        function hitungKecepatan() {
+            const perpindahan = parseFloat(document.getElementById('perpindahan').value);
+            const waktu = parseFloat(document.getElementById('waktu2').value);
+            
+            const hasilElement = document.getElementById('hasil-kecepatan');
+
+            if (!isNaN(perpindahan) && !isNaN(waktu) && waktu > 0) {
+                const kecepatan = perpindahan / waktu;
+                hasilElement.innerHTML = `🚀 Kecepatan: ${kecepatan.toFixed(2)} m/s<br>Rumus: $$v = \\frac{s}{t} = \\frac{${perpindahan}\\text{m}}{${waktu}\\text{s}} = ${kecepatan.toFixed(2)} \\text{ m/s}$$`;
+                hasilElement.style.display = 'block';
+                if (typeof MathJax !== 'undefined') {
+                    MathJax.typesetPromise([hasilElement]).catch(err => console.log('MathJax typeset error:', err));
+                }
+            } else {
+                alert('Masukkan nilai perpindahan dan waktu yang valid (waktu harus > 0)!');
+                hasilElement.style.display = 'none';
+            }
+        }
+
+        function hitungPercepatan() {
+            const vAwal = parseFloat(document.getElementById('v-awal').value);
+            const vAkhir = parseFloat(document.getElementById('v-akhir').value);
+            const waktu = parseFloat(document.getElementById('waktu3').value);
+            
+            const hasilElement = document.getElementById('hasil-percepatan');
+
+            if (!isNaN(vAwal) && !isNaN(vAkhir) && !isNaN(waktu) && waktu > 0) {
+                const percepatan = (vAkhir - vAwal) / waktu;
+                hasilElement.innerHTML = `⚡ Percepatan: ${percepatan.toFixed(2)} m/s²<br>Rumus: $$a = \\frac{v_2 - v_1}{t} = \\frac{(${vAkhir}\\text{m/s} - ${vAwal}\\text{m/s})}{${waktu}\\text{s}} = ${percepatan.toFixed(2)} \\text{ m/s}^2$$<br>${percepatan > 0.01 ? '📈 Dipercepat' : percepatan < -0.01 ? '📉 Diperlambat' : '➖ Kecepatan konstan'}`;
+                hasilElement.style.display = 'block';
+                if (typeof MathJax !== 'undefined') {
+                    MathJax.typesetPromise([hasilElement]).catch(err => console.log('MathJax typeset error:', err));
+                }
+            } else {
+                alert('Masukkan nilai kecepatan awal, kecepatan akhir, dan waktu yang valid (waktu harus > 0)!');
+                hasilElement.style.display = 'none';
+            }
+        }
+
+        function hitungResultan() {
+            const gaya1 = parseFloat(document.getElementById('gaya1').value);
+            const gaya2 = parseFloat(document.getElementById('gaya2').value);
+            const arah = document.getElementById('arah-gaya').value;
+            
+            const hasilElement = document.getElementById('hasil-resultan');
+
+            if (!isNaN(gaya1) && !isNaN(gaya2)) {
+                let resultan;
+                let keterangan;
+                
+                if (arah === 'searah') {
+                    resultan = gaya1 + gaya2;
+                    keterangan = `$$R = F_1 + F_2 = ${gaya1}\\text{N} + ${gaya2}\\text{N} = ${resultan} \\text{ N}$$`;
+                } else if (arah === 'berlawanan') {
+                    resultan = Math.abs(gaya1 - gaya2);
+                    keterangan = `$$R = |F_1 - F_2| = |${gaya1}\\text{N} - ${gaya2}\\text{N}| = ${resultan} \\text{ N}$$`;
+                } else { // tegak lurus
+                    resultan = Math.sqrt(gaya1*gaya1 + gaya2*gaya2);
+                    keterangan = `$$R = \\sqrt{F_1^2 + F_2^2} = \\sqrt{${gaya1}^2 + ${gaya2}^2} = ${resultan.toFixed(2)} \\text{ N}$$`;
+                }
+                
+                hasilElement.innerHTML = `💪 Resultan Gaya: ${resultan.toFixed(2)} N<br>Rumus: ${keterangan}`;
+                hasilElement.style.display = 'block';
+                if (typeof MathJax !== 'undefined') {
+                    MathJax.typesetPromise([hasilElement]).catch(err => console.log('MathJax typeset error:', err));
+                }
+            } else {
+                alert('Masukkan nilai gaya yang valid!');
+                hasilElement.style.display = 'none';
+            }
+        }
+
+        function hitungGayaGesek() {
+            const massa = parseFloat(document.getElementById('massa-benda').value);
+            const koefisien = parseFloat(document.getElementById('koef-gesek').value);
+            const g = 9.8; // percepatan gravitasi bumi
+            
+            const hasilElement = document.getElementById('hasil-gesek');
+
+            if (!isNaN(massa) && massa >= 0 && !isNaN(koefisien) && koefisien >= 0) {
+                const gayaNormal = massa * g; 
+                const gayaGesek = koefisien * gayaNormal;
+                
+                hasilElement.innerHTML = `🤲 Gaya Gesek Kinetis: ${gayaGesek.toFixed(2)} N<br>Rumus: $$f_k = \\mu_k \\times N = ${koefisien} \\times ${gayaNormal.toFixed(2)}\\text{N} = ${gayaGesek.toFixed(2)} \\text{ N}$$<br>Gaya Normal ($N$) = $$m \\times g = ${massa}\\text{kg} \\times 9.8\\text{m/s}^2 = ${gayaNormal.toFixed(2)} \\text{ N}$$`;
+                hasilElement.style.display = 'block';
+                if (typeof MathJax !== 'undefined') {
+                    MathJax.typesetPromise([hasilElement]).catch(err => console.log('MathJax typeset error:', err));
+                }
+            } else {
+                alert('Masukkan nilai massa dan koefisien gesek yang valid (nilai harus non-negatif)!');
+                hasilElement.style.display = 'none';
+            }
+        }
+
+        function toggleInputs() {
+            const pilihan = document.getElementById('hitung-apa').value;
+            const inputGaya = document.getElementById('input-gaya');
+            const inputMassa = document.getElementById('input-massa');
+            const inputPercepatan = document.getElementById('input-percepatan');
+            
+            inputGaya.style.display = 'none';
+            inputMassa.style.display = 'none';
+            inputPercepatan.style.display = 'none';
+            
+            if (pilihan === 'gaya') {
+                inputGaya.style.display = 'block';
+            } else if (pilihan === 'massa') {
+                inputMassa.style.display = 'block';
+            } else { // percepatan
+                inputPercepatan.style.display = 'block';
+            }
+            document.getElementById('hasil-newton2').style.display = 'none'; // Hide previous result
+        }
+
+        document.addEventListener('DOMContentLoaded', toggleInputs);
+
+
+        function hitungNewton2() {
+            const pilihan = document.getElementById('hitung-apa').value;
+            let hasil, rumus, isValid = true;
+            
+            const hasilElement = document.getElementById('hasil-newton2');
+
+            if (pilihan === 'gaya') {
+                const massa = parseFloat(document.getElementById('massa-f').value);
+                const percepatan = parseFloat(document.getElementById('percepatan-f').value);
+                
+                if (!isNaN(massa) && !isNaN(percepatan)) {
+                    hasil = massa * percepatan;
+                    rumus = `$$F = m \\times a = ${massa}\\text{kg} \\times ${percepatan}\\text{m/s}^2 = ${hasil.toFixed(2)} \\text{ N}$$`;
+                } else {
+                    isValid = false;
+                }
+            } else if (pilihan === 'massa') {
+                const gaya = parseFloat(document.getElementById('gaya-m').value);
+                const percepatan = parseFloat(document.getElementById('percepatan-m').value);
+                
+                if (!isNaN(gaya) && !isNaN(percepatan) && percepatan !== 0) {
+                    hasil = gaya / percepatan;
+                    rumus = `$$m = \\frac{F}{a} = \\frac{${gaya}\\text{N}}{${percepatan}\\text{m/s}^2} = ${hasil.toFixed(2)} \\text{ kg}$$`;
+                } else {
+                    isValid = false;
+                }
+            } else { // percepatan
+                const gaya = parseFloat(document.getElementById('gaya-a').value);
+                const massa = parseFloat(document.getElementById('massa-a').value);
+                
+                if (!isNaN(gaya) && !isNaN(massa) && massa !== 0) {
+                    hasil = gaya / massa;
+                    rumus = `$$a = \\frac{F}{m} = \\frac{${gaya}\\text{N}}{${massa}\\text{kg}} = ${hasil.toFixed(2)} \\text{ m/s}^2$$`;
+                } else {
+                    isValid = false;
+                }
+            }
+            
+            if (isValid && hasil !== undefined) {
+                hasilElement.innerHTML = `⚖️ Hasil: ${rumus}<br>Hukum II Newton: $$F = m \\times a$$`;
+                hasilElement.style.display = 'block';
+                if (typeof MathJax !== 'undefined') {
+                    MathJax.typesetPromise([hasilElement]).catch(err => console.log('MathJax typeset error:', err));
+                }
+            } else {
+                alert('Masukkan nilai yang valid! Pastikan pembagi tidak nol.');
+                hasilElement.style.display = 'none';
+            }
+        }
+
+        // Interactive demo functions
+        function updateDemo() {
+            const jarak = parseFloat(document.getElementById('jarak-slider').value);
+            const kecepatan = parseFloat(document.getElementById('speed-slider').value);
+            
+            document.getElementById('jarak-value').textContent = jarak;
+            document.getElementById('speed-value').textContent = kecepatan;
+
+            if (kecepatan > 0) {
+                const waktu = jarak / kecepatan;
+                document.getElementById('demo-result').textContent = `Waktu tempuh: ${waktu.toFixed(1)} detik`;
+            } else {
+                document.getElementById('demo-result').textContent = `Waktu tempuh: Tak terbatas (kecepatan harus > 0)`;
+            }
+        }
+        document.addEventListener('DOMContentLoaded', updateDemo);
+
+
+        function updateNewtonDemo() {
+            const massa = parseFloat(document.getElementById('massa-slider').value);
+            const gaya = parseFloat(document.getElementById('gaya-slider').value);
+            
+            document.getElementById('massa-demo-value').textContent = massa;
+            document.getElementById('gaya-demo-value').textContent = gaya;
+
+            let percepatan;
+            let interpretasi;
+
+            if (massa > 0) {
+                percepatan = gaya / massa;
+                if (percepatan > 10) {
+                    interpretasi = "Percepatan sangat tinggi!";
+                } else if (percepatan > 5) {
+                    interpretasi = "Percepatan tinggi.";
+                } else if (percepatan > 1) {
+                    interpretasi = "Percepatan sedang.";
+                } else {
+                    interpretasi = "Percepatan rendah.";
+                }
+            } else {
+                percepatan = 0; 
+                interpretasi = "Massa tidak boleh nol.";
+            }
+            
+            document.getElementById('newton-demo-result').textContent = `Percepatan: ${percepatan.toFixed(1)} m/s²`;
+            document.getElementById('sim-interpretasi').textContent = `Interpretasi: ${interpretasi}`;
+            
+            drawPhysicsCanvas(massa, gaya, percepatan);
+        }
+
+        document.addEventListener('DOMContentLoaded', updateNewtonDemo);
+
+
+        // Quiz function
+        function checkAnswer(element, isCorrect) {
+            const parent = element.parentElement;
+            const options = parent.querySelectorAll('.quiz-option');
+            options.forEach(opt => {
+                opt.style.pointerEvents = 'none'; 
+            });
+
+            if (isCorrect) {
+                element.classList.add('correct');
+            } else {
+                element.classList.add('wrong');
+                const correctAnswer = Array.from(options).find(opt => opt.onclick.toString().includes('true'));
+                if (correctAnswer) {
+                    correctAnswer.classList.add('correct');
+                }
+            }
+        }
+
+        // Canvas for simulation
+        const canvas = document.getElementById('physics-canvas');
+        const ctx = canvas.getContext('2d');
+
+        let objectX = 50;
+        let objectInitialPosition = 50; // Initial position of the object
+        let animationFrameIdSimulasi; // Use a distinct ID for the simulation canvas animation
+        let lastTimeSimulasi = 0; // For tracking time in the canvas animation
+
+        // Function to draw the physics simulation on canvas
+        function drawPhysicsCanvas(massa, gaya, percepatan) {
+            cancelAnimationFrame(animationFrameIdSimulasi); // Stop any previous animation
+
+            // Reset object state
+            objectX = objectInitialPosition;
+            let currentObjectSpeed = 0; // Speed starts from 0 for each new simulation run
+
+            // Initial clear and draw for static state or start of animation
+            ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear for redraw
+            drawStaticElements(massa, gaya, percepatan, currentObjectSpeed);
+
+            // Animate only if there's acceleration
+            if (percepatan !== 0) {
+                lastTimeSimulasi = performance.now(); // Initialize last time for the new animation
+                animateSimulation(massa, gaya, percepatan, objectInitialPosition, currentObjectSpeed);
+            }
+        }
+
+        // Helper function to draw static elements on canvas
+        function drawStaticElements(massa, gaya, percepatan, currentSpeed) {
+            ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear canvas
+
+            // Draw ground
+            ctx.fillStyle = '#ccc';
+            ctx.fillRect(0, canvas.height - 30, canvas.width, 30);
+
+            // Draw object
+            ctx.fillStyle = '#ff6b6b';
+            ctx.fillRect(objectX, canvas.height - 80, 50, 50);
+
+            // Draw force arrow
+            ctx.strokeStyle = '#007bff';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.moveTo(objectX + 25, canvas.height - 80 - 20);
+            const arrowLength = Math.min(gaya / 2, 80); // Max arrow length 80px
+            ctx.lineTo(objectX + 25 + arrowLength, canvas.height - 80 - 20);
+            ctx.stroke();
+            
+            ctx.fillStyle = '#333';
+            ctx.font = '12px Arial';
+            ctx.fillText(`F = ${gaya}N`, objectX + 30 + arrowLength, canvas.height - 80 - 25);
+            
+            // Display mass and acceleration near object
+            ctx.fillText(`m = ${massa}kg`, objectX + 5, canvas.height - 90);
+            ctx.fillText(`a = ${percepatan.toFixed(1)}m/s²`, objectX + 5, canvas.height - 105);
+            ctx.fillText(`v = ${currentSpeed.toFixed(1)} m/s`, objectX - 20, canvas.height - 120);
+        }
+
+        // Animation loop for the canvas
+        function animateSimulation(massa, gaya, percepatan, initialX, initialSpeed) {
+            let currentSpeed = initialSpeed;
+            let currentX = initialX;
+
+            function frame(time) {
+                const deltaTime = (time - lastTimeSimulasi) / 1000; // time elapsed in seconds
+                lastTimeSimulasi = time;
+
+                // Update speed and position based on acceleration
+                // v = v0 + a*t
+                currentSpeed += percepatan * deltaTime;
+                // x = x0 + v0*t + 0.5*a*t^2 (we're integrating speed, so more like x = x_prev + v*dt)
+                currentX += currentSpeed * deltaTime;
+
+                // Keep object within canvas bounds
+                if (currentX >= canvas.width - 50) {
+                    currentX = canvas.width - 50;
+                    currentSpeed = 0; // Stop moving when it hits the edge
+                    drawStaticElements(massa, gaya, percepatan, currentSpeed); // Draw final state
+                    cancelAnimationFrame(animationFrameIdSimulasi);
+                    return; // Stop the animation
+                } else if (currentX < 0) { // Should not happen with positive forces from slider
+                    currentX = 0;
+                    currentSpeed = 0;
+                    drawStaticElements(massa, gaya, percepatan, currentSpeed); // Draw final state
+                    cancelAnimationFrame(animationFrameIdSimulasi);
+                    return; // Stop the animation
+                }
+
+                objectX = currentX; // Update global objectX for drawing
+
+                drawStaticElements(massa, gaya, percepatan, currentSpeed); // Redraw
+                
+                animationFrameIdSimulasi = requestAnimationFrame(frame);
+            }
+            animationFrameIdSimulasi = requestAnimationFrame(frame);
+        }
+
+        // Initial setup for the first section and demos
+        document.addEventListener('DOMContentLoaded', () => {
+            showSection('overview'); 
+        });
+
+        // This ensures the initial simulation state is drawn when the page loads
+        // (even if the simulasi section isn't active immediately).
+        // It's called again by showSection if you navigate to 'simulasi'.
+        document.addEventListener('DOMContentLoaded', updateSimulation);
+
+        // This ensures the initial Newton demo state is drawn when the page loads
+        document.addEventListener('DOMContentLoaded', updateNewtonDemo);
+
+
+        // Specific update for the simulation canvas (different from newton-demo)
+        // This function needs to be called when the sliders for 'simulasi' section change
+        function updateSimulation() {
+            const gaya = parseFloat(document.getElementById('sim-gaya').value);
+            const massa = parseFloat(document.getElementById('sim-massa').value);
+
+            document.getElementById('sim-gaya-value').textContent = gaya;
+            document.getElementById('sim-massa-value').textContent = massa;
+
+            let percepatan;
+            let interpretasi;
+
+            if (massa > 0) {
+                percepatan = gaya / massa;
+                if (percepatan > 10) {
+                    interpretasi = "Percepatan sangat tinggi!";
+                } else if (percepatan > 5) {
+                    interpretasi = "Percepatan tinggi.";
+                } else if (percepatan > 1) {
+                    interpretasi = "Percepatan sedang.";
+                } else {
+                    interpretasi = "Percepatan rendah.";
+                }
+            } else {
+                percepatan = 0;
+                interpretasi = "Massa tidak boleh nol.";
+            }
+
+            document.getElementById('sim-percepatan-result').textContent = `Percepatan: ${percepatan.toFixed(1)} m/s²`;
+            document.getElementById('sim-interpretasi').textContent = `Interpretasi: ${interpretasi}`;
+
+            drawPhysicsCanvas(massa, gaya, percepatan);
+        }
+
+    </script>
+</body>
+</html>
